@@ -1,7 +1,5 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const SALES_EMAIL = "Alexxissmiki@gmail.com";
 const FROM_EMAIL = process.env.QUOTE_FROM_EMAIL || "onboarding@resend.dev";
 const BRAND_NAME = "Fetanled";
@@ -199,6 +197,8 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   try {
     const body = (await req.json()) as Partial<QuotePayload>;
