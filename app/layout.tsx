@@ -3,6 +3,7 @@ import { Barlow_Condensed, Geist, Geist_Mono } from "next/font/google";
 
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
+import { LoadingScreen } from "@/components/layout/loading-screen";
 import { COMPANY_NAME, COMPANY_TAGLINE } from "@/lib/constants/navigation";
 
 import "./globals.css";
@@ -81,6 +82,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${barlowCondensed.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full bg-black font-sans text-white">
+        <LoadingScreen />
         <Navbar />
         <main>{children}</main>
         <Footer />

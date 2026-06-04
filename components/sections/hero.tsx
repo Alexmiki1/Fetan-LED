@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
 
 import { Button } from "@/components/ui/button";
 import { HERO_STATS } from "@/lib/constants/stats";
@@ -16,12 +15,6 @@ const fadeUp = {
 };
 
 export function Hero() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    videoRef.current?.play().catch(() => {});
-  }, []);
-
   return (
     <section
       id="services"
@@ -30,12 +23,11 @@ export function Hero() {
     >
       {/* Background Video */}
       <video
-        ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
         poster="/images/hero-poster.jpg"
         className="absolute inset-0 h-full w-full object-cover"
       >
