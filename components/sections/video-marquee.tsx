@@ -40,6 +40,7 @@ export function VideoMarquee() {
       <video
         ref={videoRef}
         src={isVisible ? VIDEO_SRC : undefined}
+        autoPlay
         muted
         loop
         playsInline

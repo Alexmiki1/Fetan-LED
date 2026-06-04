@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Root path for Turbopack resolution when multiple lockfiles exist
+  turbopack: {
+    root: __dirname,
+  },
+
   // Image optimization
   images: {
     formats: ["image/avif", "image/webp"],
@@ -39,15 +44,6 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/videos/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
-        source: "/_next/static/:path*",
         headers: [
           {
             key: "Cache-Control",
