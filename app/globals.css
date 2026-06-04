@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
 
 :root {
   --background: #000000;
@@ -40,8 +40,6 @@
     transform: translateX(-50%);
   }
 }
-
-/* ── Brand gradients (#1d74ff → black) ── */
 
 .bg-hero-panel-left {
   background:
@@ -132,68 +130,6 @@
     ellipse 110% 70% at 50% 100%,
     rgba(var(--brand-blue-rgb), 0.55) 0%,
     rgba(var(--brand-blue-rgb), 0.28) 25%,
-    rgba(var(--brand-blue-rgb), 0.12) 45%,
-    transparent 72%
+    rgba(var(--brand-blue-rgb), 0.12)
   );
-}
-
-.bg-card-gradient {
-  background: linear-gradient(
-    145deg,
-    rgba(var(--brand-blue-rgb), 0.2) 0%,
-    rgba(10, 45, 102, 0.08) 35%,
-    #0a0a0a 55%,
-    #000000 100%
-  );
-}
-
-.bg-card-gradient-hover {
-  background: linear-gradient(
-    145deg,
-    rgba(var(--brand-blue-rgb), 0.32) 0%,
-    rgba(var(--brand-blue-rgb), 0.12) 40%,
-    #0a0a0a 60%,
-    #000000 100%
-  );
-}
-
-.bg-form-card {
-  background: linear-gradient(
-    160deg,
-    rgba(var(--brand-blue-rgb), 0.14) 0%,
-    rgba(8, 20, 40, 0.95) 40%,
-    #000000 100%
-  );
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: 'Poppins', sans-serif;
-}
-
-::selection {
-  background: rgba(var(--brand-blue-rgb), 0.35);
-  color: #ffffff;
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #000000;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(var(--brand-blue-rgb), 0.45);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(var(--brand-blue-rgb), 0.65);
 }
