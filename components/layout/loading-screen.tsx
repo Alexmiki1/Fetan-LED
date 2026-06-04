@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useVideoLoading } from "@/lib/contexts/video-loading";
 
 const containerVariants = {
   hidden: { opacity: 1 },
@@ -41,29 +42,20 @@ const loadingDotVariants = {
 export function LoadingScreen() {
   const [isVisible, setIsVisible] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
+  const { heroVideoReady } = useVideoLoading();
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   useEffect(() => {
-    if (!isMounted) return;
+    if (!isMounted || !heroVideoReady) return;
 
-    // Hide loading screen when page is fully loaded
-    const handlePageLoad = () => {
-      setTimeout(() => {
-        setIsVisible(false);
-      }, 500);
-    };
-
-    // Check if page is already loaded
-    if (document.readyState === "complete") {
-      handlePageLoad();
-    } else {
-      window.addEventListener("load", handlePageLoad);
-      return () => window.removeEventListener("load", handlePageLoad);
-    }
-  }, [isMounted]);
+    // Hide loading screen after hero video is ready
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 500);
+  }, [isMounted, heroVideoReady]);
 
   // Don't render on server
   if (!isMounted || !isVisible) return null;

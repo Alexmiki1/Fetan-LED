@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useRef, useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
+import { useVideoLoading } from "@/lib/contexts/video-loading";
 import { HERO_STATS } from "@/lib/constants/stats";
 
 const fadeUp = {
@@ -10,11 +12,28 @@ const fadeUp = {
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.15, duration: 0.7, ease: "easeOut" as const },
+    transition: { delay: i * 0.15, duration: 0.7 },
   }),
 };
 
 export function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const { setHeroVideoReady } = useVideoLoading();
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleCanPlay = () => {
+      setHeroVideoReady(true);
+    };
+
+    video.addEventListener("canplay", handleCanPlay);
+
+    return () => {
+      video.removeEventListener("canplay", handleCanPlay);
+    };
+  }, [setHeroVideoReady]);
   return (
     <section
       id="services"
@@ -23,6 +42,7 @@ export function Hero() {
     >
       {/* Background Video */}
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
