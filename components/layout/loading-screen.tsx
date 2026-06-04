@@ -42,6 +42,7 @@ const loadingDotVariants = {
 export function LoadingScreen() {
   const [isVisible, setIsVisible] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
+  const [fallbackReady, setFallbackReady] = useState(false);
   const { heroVideoReady } = useVideoLoading();
 
   useEffect(() => {
@@ -49,13 +50,22 @@ export function LoadingScreen() {
   }, []);
 
   useEffect(() => {
-    if (!isMounted || !heroVideoReady) return;
+    const timer = window.setTimeout(() => {
+      setFallbackReady(true);
+    }, 2500);
 
-    // Hide loading screen after hero video is ready
-    setTimeout(() => {
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted || !(heroVideoReady || fallbackReady)) return;
+
+    const timeout = window.setTimeout(() => {
       setIsVisible(false);
     }, 500);
-  }, [isMounted, heroVideoReady]);
+
+    return () => window.clearTimeout(timeout);
+  }, [isMounted, heroVideoReady, fallbackReady]);
 
   // Don't render on server
   if (!isMounted || !isVisible) return null;

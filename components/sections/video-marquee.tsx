@@ -14,11 +14,12 @@ export function VideoMarquee() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          videoRef.current?.load();
           videoRef.current?.play().catch(() => {});
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: "200px" }
     );
 
     if (containerRef.current) {
@@ -44,7 +45,7 @@ export function VideoMarquee() {
         muted
         loop
         playsInline
-        preload="none"
+        preload={isVisible ? "auto" : "none"}
         poster="/images/marquee-poster.jpg"
         className="h-28 w-full object-cover sm:h-40 md:h-52 lg:h-60 bg-black"
       />
