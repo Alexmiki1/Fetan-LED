@@ -20,16 +20,12 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  BUDGET_RANGES,
-  PROJECT_TYPES,
   QUOTE_STEPS,
-  SERVICE_OPTIONS,
 } from "@/lib/constants/quote";
 import {
   quoteFormSchema,
   type QuoteFormValues,
 } from "@/lib/validations/quote-form";
-import { cn } from "@/lib/utils";
 
 function FormField({
   label,
@@ -55,12 +51,14 @@ function FormField({
 
 export function QuoteForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
     handleSubmit,
     setValue,
     watch,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<QuoteFormValues>({
     resolver: zodResolver(quoteFormSchema),
@@ -70,28 +68,55 @@ export function QuoteForm() {
       company: "",
       email: "",
       phone: "",
-      projectType: "",
-      budget: "",
-      services: [],
-      message: "",
+      venueEnvironment: "",
+      screenWidth: "",
+      screenHeight: "",
+      contentTypeVideo: false,
+      contentTypeLiveFeed: false,
+      contentTypeStatic: false,
+      contentTypeScoreboard: false,
+      additionalNotes: "",
     },
   });
 
   const serviceType = watch("serviceType");
-  const selectedServices = watch("services");
-
-  const toggleService = (service: string) => {
-    const current = selectedServices ?? [];
-    const updated = current.includes(service)
-      ? current.filter((s) => s !== service)
-      : [...current, service];
-    setValue("services", updated, { shouldValidate: true });
-  };
 
   const onSubmit = async (data: QuoteFormValues) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("Quote request submitted:", data);
-    setSubmitted(true);
+    setSubmitError(null);
+
+    if (!data.name || !data.email || !data.company) {
+      setSubmitError("Please fill in your name, company, and email before submitting.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const json = (await response.json().catch(() => null)) as
+          | { error?: string }
+          | null;
+        setSubmitError(
+          json?.error ||
+            "We couldn’t send your request right now. Please try again in a moment."
+        );
+        return;
+      }
+
+      reset();
+      setSubmitted(true);
+    } catch (error) {
+      console.error("Quote form submission failed", error);
+      setSubmitError(
+        "We couldn’t send your request right now. Please check your connection and try again."
+      );
+    }
   };
 
   return (
@@ -118,7 +143,7 @@ export function QuoteForm() {
                   transition={{ delay: i * 0.1, duration: 0.5 }}
                   className="flex gap-5"
                 >
-                  <span className="font-display text-3xl font-light text-brand-blue/60">
+                  <span className="font-display text-3xl font-light text-white/60">
                     {step.step}
                   </span>
                   <div>
@@ -140,20 +165,20 @@ export function QuoteForm() {
             className="border border-white/10 bg-form-card p-6 backdrop-blur-sm sm:p-8"
           >
             <h3 className="font-display text-xl font-bold uppercase tracking-wide text-white">
-              Request a Proposal
+              REQUEST A PROPOSAL
             </h3>
 
             {submitted ? (
               <div className="mt-8 flex flex-col items-center justify-center py-12 text-center">
                 <div className="flex h-16 w-16 items-center justify-center border border-brand-blue bg-brand-blue/10">
-                  <span className="text-2xl text-brand-blue">✓</span>
+                  <span className="text-2xl text-white">✓</span>
                 </div>
                 <p className="mt-6 font-display text-lg font-bold uppercase text-white">
                   Request Received
                 </p>
                 <p className="mt-2 max-w-sm text-sm text-white/50">
                   Our team will review your project details and respond within
-                  24 hours.
+                  4 hours.
                 </p>
               </div>
             ) : (
@@ -172,137 +197,190 @@ export function QuoteForm() {
                 >
                   <TabsList className="w-full">
                     <TabsTrigger value="sales" className="flex-1">
-                      Sales & Installation
+                      SALES & INSTALLATION
                     </TabsTrigger>
                     <TabsTrigger value="rentals" className="flex-1">
-                      Event Rentals
+                      EVENT RENTAL
                     </TabsTrigger>
                   </TabsList>
                   <TabsContent value={serviceType} />
                 </Tabs>
 
                 <div className="grid gap-5 sm:grid-cols-2">
-                  <FormField label="Name" error={errors.name?.message}>
+                  <FormField label="FULL NAME" error={errors.name?.message}>
                     <Input
                       {...register("name")}
-                      placeholder="John Smith"
+                      placeholder="Your name"
                       aria-invalid={!!errors.name}
                     />
                   </FormField>
-                  <FormField label="Company" error={errors.company?.message}>
+                  <FormField label="COMPANY" error={errors.company?.message}>
                     <Input
                       {...register("company")}
-                      placeholder="Acme Corp"
+                      placeholder="Organisation"
                       aria-invalid={!!errors.company}
                     />
                   </FormField>
                 </div>
 
                 <div className="grid gap-5 sm:grid-cols-2">
-                  <FormField label="Email" error={errors.email?.message}>
+                  <FormField label="EMAIL" error={errors.email?.message}>
                     <Input
                       type="email"
                       {...register("email")}
-                      placeholder="john@company.com"
+                      placeholder="work@company.com"
                       aria-invalid={!!errors.email}
                     />
                   </FormField>
-                  <FormField label="Phone" error={errors.phone?.message}>
+                  <FormField label="PHONE" error={errors.phone?.message}>
                     <Input
                       type="tel"
                       {...register("phone")}
-                      placeholder="+1 (555) 000-0000"
+                      placeholder="+251 ____"
                       aria-invalid={!!errors.phone}
                     />
                   </FormField>
                 </div>
 
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <FormField
-                    label="Project Type"
-                    error={errors.projectType?.message}
-                  >
-                    <Select
-                      value={watch("projectType")}
-                      onValueChange={(v) =>
-                        setValue("projectType", v, { shouldValidate: true })
-                      }
-                    >
-                      <SelectTrigger aria-invalid={!!errors.projectType}>
-                        <SelectValue placeholder="Select type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {PROJECT_TYPES.map((type) => (
-                          <SelectItem key={type} value={type}>
-                            {type}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormField>
-                  <FormField label="Budget" error={errors.budget?.message}>
-                    <Select
-                      value={watch("budget")}
-                      onValueChange={(v) =>
-                        setValue("budget", v, { shouldValidate: true })
-                      }
-                    >
-                      <SelectTrigger aria-invalid={!!errors.budget}>
-                        <SelectValue placeholder="Select budget" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {BUDGET_RANGES.map((range) => (
-                          <SelectItem key={range} value={range}>
-                            {range}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormField>
-                </div>
-
                 <FormField
-                  label="Service Requirements"
-                  error={errors.services?.message}
+                  label="VENUE / ENVIRONMENT"
+                  error={errors.venueEnvironment?.message}
                 >
-                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                    {SERVICE_OPTIONS.map((service) => (
-                      <label
-                        key={service}
-                        className={cn(
-                          "flex cursor-pointer items-center gap-2 border border-white/10 p-3 text-xs transition-colors hover:border-brand-blue/40",
-                          selectedServices?.includes(service) &&
-                            "border-brand-blue/40 bg-brand-blue/5"
-                        )}
+                  <Select
+                    value={watch("venueEnvironment")}
+                    onValueChange={(v) =>
+                      setValue("venueEnvironment", v, {
+                        shouldValidate: true,
+                      })
+                    }
+                  >
+                    <SelectTrigger aria-invalid={!!errors.venueEnvironment}>
+                      <SelectValue placeholder="Select environment" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="indoor">Indoor</SelectItem>
+                      <SelectItem value="outdoor">Outdoor</SelectItem>
+                      <SelectItem value="stadium">Stadium</SelectItem>
+                      <SelectItem value="studio">Studio</SelectItem>
+                      <SelectItem value="hall">Hall</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormField>
+
+                <FormField label="ESTIMATED SCREEN DIMENSIONS (METERS)" error={undefined}>
+                  <div className="flex items-center gap-3">
+                    <Input
+                      {...register("screenWidth")}
+                      placeholder="Width (m)"
+                      aria-invalid={!!errors.screenWidth}
+                      className="flex-1"
+                    />
+                    <span className="text-white/50">x</span>
+                    <Input
+                      {...register("screenHeight")}
+                      placeholder="Height (m)"
+                      aria-invalid={!!errors.screenHeight}
+                      className="flex-1"
+                    />
+                  </div>
+                </FormField>
+
+                <FormField label="CONTENT TYPE (SELECT ALL THAT APPLY)" error={undefined}>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <div className="flex items-center gap-3">
+                      <Checkbox
+                        id="contentTypeVideo"
+                        checked={watch("contentTypeVideo")}
+                        onCheckedChange={(checked) =>
+                          setValue("contentTypeVideo", checked === true)
+                        }
+                      />
+                      <Label
+                        htmlFor="contentTypeVideo"
+                        className="cursor-pointer font-normal text-white/80"
                       >
-                        <Checkbox
-                          checked={selectedServices?.includes(service)}
-                          onCheckedChange={() => toggleService(service)}
-                        />
-                        <span className="text-white/70">{service}</span>
-                      </label>
-                    ))}
+                        Video / Animation
+                      </Label>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Checkbox
+                        id="contentTypeStatic"
+                        checked={watch("contentTypeStatic")}
+                        onCheckedChange={(checked) =>
+                          setValue("contentTypeStatic", checked === true)
+                        }
+                      />
+                      <Label
+                        htmlFor="contentTypeStatic"
+                        className="cursor-pointer font-normal text-white/80"
+                      >
+                        Static Imagery
+                      </Label>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Checkbox
+                        id="contentTypeLiveFeed"
+                        checked={watch("contentTypeLiveFeed")}
+                        onCheckedChange={(checked) =>
+                          setValue("contentTypeLiveFeed", checked === true)
+                        }
+                      />
+                      <Label
+                        htmlFor="contentTypeLiveFeed"
+                        className="cursor-pointer font-normal text-white/80"
+                      >
+                        Live Feed
+                      </Label>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Checkbox
+                        id="contentTypeScoreboard"
+                        checked={watch("contentTypeScoreboard")}
+                        onCheckedChange={(checked) =>
+                          setValue("contentTypeScoreboard", checked === true)
+                        }
+                      />
+                      <Label
+                        htmlFor="contentTypeScoreboard"
+                        className="cursor-pointer font-normal text-white/80"
+                      >
+                        Scoreboard / Data
+                      </Label>
+                    </div>
                   </div>
                 </FormField>
 
                 <FormField
-                  label="Project Details"
-                  error={errors.message?.message}
+                  label="ADDITIONAL NOTES"
+                  error={errors.additionalNotes?.message}
                 >
                   <Textarea
-                    {...register("message")}
-                    placeholder="Tell us about your project requirements, timeline, and any specific needs..."
-                    aria-invalid={!!errors.message}
+                    {...register("additionalNotes")}
+                    placeholder="Describe your project, budget range, timeline, or any specific technical requirements..."
+                    aria-invalid={!!errors.additionalNotes}
+                    rows={4}
                   />
                 </FormField>
 
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Sending..." : "Send Request"}
-                </Button>
+                <div className="space-y-4">
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "SUBMIT PROPOSAL REQUEST →"}
+                  </Button>
+                  {submitError && (
+                    <p className="text-xs text-red-400" role="alert">
+                      {submitError}
+                    </p>
+                  )}
+                  <div className="space-y-1 text-center text-xs text-white/50">
+                    <p>We typically respond within 4 business hours.</p>
+                    <p>No obligations – just a clear, itemised proposal.</p>
+                  </div>
+                </div>
               </form>
             )}
           </motion.div>

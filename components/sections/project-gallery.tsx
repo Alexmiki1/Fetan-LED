@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { useState } from "react";
 
 import { SectionHeading } from "@/components/shared/section-heading";
@@ -13,6 +14,8 @@ const CATEGORY_LABELS: Record<Exclude<ProjectCategory, "all">, string> = {
   outdoor: "AD",
   stage: "Stage",
 };
+
+import Link from "next/link";
 
 function ProjectCard({
   project,
@@ -32,7 +35,7 @@ function ProjectCard({
       transition={{ duration: 0.5, delay: index * 0.08 }}
       whileHover={{ scale: 1.02 }}
       className={cn(
-        "group relative overflow-hidden border border-white/10 bg-card-gradient transition-all duration-500 hover:border-brand-blue/50 hover:bg-card-gradient-hover hover:shadow-[0_0_40px_rgba(36,46,167,0.2)]",
+        "group relative overflow-hidden border border-white/10 bg-card-gradient transition-all duration-500 hover:border-brand-blue/50 hover:bg-card-gradient-hover hover:shadow-[0_0_40px_rgba(29,116,255,0.22)]",
         isLarge
           ? "col-span-1 row-span-2 min-h-[280px] sm:min-h-[400px] lg:col-span-2 lg:row-span-2 lg:min-h-[480px]"
           : project.span === "medium"
@@ -40,12 +43,28 @@ function ProjectCard({
             : "min-h-[180px] sm:min-h-[200px]"
       )}
     >
-      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(36,46,167,0.08)_0%,transparent_50%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(36,46,167,0.12)_0%,transparent_50%)]" />
+      {/* Absolute Clickable Link Overlay */}
+      <Link href={`/projects/${project.id}`} className="absolute inset-0 z-30" aria-label={`View ${project.title} case study`} />
+
+      {/* Background image */}
+      {project.image && (
+        <div className="absolute inset-0">
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            className="object-cover opacity-40 transition-opacity duration-500 group-hover:opacity-60"
+          />
+        </div>
+      )}
+
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(29,116,255,0.1)_0%,transparent_50%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(29,116,255,0.14)_0%,transparent_50%)]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
       <div className="relative flex h-full flex-col justify-between p-5 sm:p-6">
         <div className="flex items-start justify-between">
-          <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-blue">
+          <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/70">
             {CATEGORY_LABELS[project.category]}
           </span>
           {project.size && (
@@ -65,6 +84,9 @@ function ProjectCard({
             {project.title}
           </h3>
           <p className="mt-2 text-xs text-white/50 sm:text-sm">{project.subtitle}</p>
+          <span className="mt-4 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-brand-blue opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            View Case Study →
+          </span>
         </div>
       </div>
     </motion.article>

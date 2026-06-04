@@ -1,12 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { Logo } from "@/components/shared/logo";
 import { Button } from "@/components/ui/button";
 import { NAV_LINKS } from "@/lib/constants/navigation";
 import { cn } from "@/lib/utils";
+
+const MotionLink = motion.create(Link);
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -44,19 +47,19 @@ export function Navbar() {
         <ul className="hidden items-center gap-8 lg:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
                 className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70 transition-colors hover:text-white"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
         <div className="hidden lg:block">
           <Button asChild size="sm">
-            <a href="#contact">Request a Quote</a>
+            <Link href="/contact">Request a Quote</Link>
           </Button>
         </div>
 
@@ -100,7 +103,7 @@ export function Navbar() {
       >
         <div className="flex h-full flex-col items-center justify-center gap-8">
           {NAV_LINKS.map((link, i) => (
-            <motion.a
+            <MotionLink
               key={link.href}
               href={link.href}
               onClick={() => setMobileOpen(false)}
@@ -110,12 +113,12 @@ export function Navbar() {
               className="font-display text-2xl font-bold uppercase tracking-wider text-white"
             >
               {link.label}
-            </motion.a>
+            </MotionLink>
           ))}
           <Button asChild className="mt-4">
-            <a href="#contact" onClick={() => setMobileOpen(false)}>
+            <Link href="/contact" onClick={() => setMobileOpen(false)}>
               Request a Quote
-            </a>
+            </Link>
           </Button>
         </div>
       </motion.div>

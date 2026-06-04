@@ -13,6 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Link from "next/link";
 import { SPEC_PRODUCTS } from "@/lib/constants/specs";
 
 export function SpecSheets() {
@@ -38,9 +39,9 @@ export function SpecSheets() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <Card className="group flex h-full flex-col transition-all duration-500 hover:border-brand-blue/40 hover:shadow-[0_0_50px_rgba(36,46,167,0.18)]">
+              <Card className="group flex h-full flex-col transition-all duration-500 hover:border-brand-blue/40 hover:shadow-[0_0_50px_rgba(29,116,255,0.2)]">
                 <CardHeader>
-                  <CardTitle className="text-brand-blue">{product.name}</CardTitle>
+                  <CardTitle className="text-white">{product.name}</CardTitle>
                   <CardDescription>{product.tagline}</CardDescription>
                 </CardHeader>
                 <CardContent className="flex-1">
@@ -63,13 +64,13 @@ export function SpecSheets() {
                 <CardFooter>
                   <Button
                     variant="outline"
-                    className="w-full group-hover:border-brand-blue group-hover:text-brand-blue"
+                    className="w-full group-hover:border-brand-blue group-hover:text-white"
                     asChild
                   >
-                    <a href="#" download>
-                      Download Spec Sheet
+                    <Link href={`/specs/${product.id}`}>
+                      View Datasheet
                       <ArrowDownToLine className="h-4 w-4" />
-                    </a>
+                    </Link>
                   </Button>
                 </CardFooter>
               </Card>

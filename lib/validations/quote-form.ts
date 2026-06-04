@@ -1,6 +1,7 @@
 import { z } from "zod";
 
-export const quoteFormSchema = z.object({
+export const quoteFormSchema = z
+  .object({
   serviceType: z.enum(["sales", "rentals"]),
   name: z
     .string()
@@ -11,19 +12,19 @@ export const quoteFormSchema = z.object({
     .min(2, "Company name must be at least 2 characters")
     .max(100, "Company name must be under 100 characters"),
   email: z.string().email("Please enter a valid email address"),
-  phone: z
+  phone: z.string().max(20, "Phone number is too long").optional().or(z.literal("")),
+  venueEnvironment: z.string().optional().or(z.literal("")),
+  screenWidth: z.string().optional().or(z.literal("")),
+  screenHeight: z.string().optional().or(z.literal("")),
+  contentTypeVideo: z.boolean().optional(),
+  contentTypeLiveFeed: z.boolean().optional(),
+  contentTypeStatic: z.boolean().optional(),
+  contentTypeScoreboard: z.boolean().optional(),
+  additionalNotes: z
     .string()
-    .min(10, "Please enter a valid phone number")
-    .max(20, "Phone number is too long"),
-  projectType: z.string().min(1, "Please select a project type"),
-  budget: z.string().min(1, "Please select a budget range"),
-  services: z
-    .array(z.string())
-    .min(1, "Please select at least one service"),
-  message: z
-    .string()
-    .min(10, "Please provide more details about your project")
-    .max(2000, "Message must be under 2000 characters"),
-});
+    .max(2000, "Additional notes must be under 2000 characters")
+    .optional()
+    .or(z.literal("")),
+  });
 
 export type QuoteFormValues = z.infer<typeof quoteFormSchema>;

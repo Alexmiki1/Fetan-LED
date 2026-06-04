@@ -1,10 +1,10 @@
 import type { NavLink } from "@/types";
 
 export const NAV_LINKS: NavLink[] = [
-  { label: "Projects", href: "#projects" },
-  { label: "Services", href: "#services" },
-  { label: "Specs", href: "#specs" },
-  { label: "Contact", href: "#contact" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Services", href: "/services" },
+  { label: "Specs", href: "/#specs" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const COMPANY_NAME = "FETAN LED";

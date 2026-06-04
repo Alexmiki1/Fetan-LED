@@ -16,6 +16,7 @@ export const PROJECTS: Project[] = [
     size: "60 SQM",
     featured: true,
     span: "large",
+    image: "/images/projects/indoor-wall.jpg",
   },
   {
     id: "2",
@@ -23,6 +24,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Flagship store — dynamic product showcase",
     category: "indoor",
     span: "small",
+    image: "/images/projects/retail-display.jpg",
   },
   {
     id: "3",
@@ -30,6 +32,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Outdoor concert — 4K resolution main screen",
     category: "stage",
     span: "medium",
+    image: "/images/projects/festival-stage.jpg",
   },
   {
     id: "4",
@@ -37,6 +40,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Multi-panel setup with live streaming integration",
     category: "indoor",
     span: "small",
+    image: "/images/projects/conference.jpg",
   },
   {
     id: "5",
@@ -44,6 +48,7 @@ export const PROJECTS: Project[] = [
     subtitle: "High-brightness outdoor advertising displays",
     category: "outdoor",
     span: "medium",
+    image: "/images/projects/billboard.jpg",
   },
   {
     id: "6",
@@ -51,5 +56,6 @@ export const PROJECTS: Project[] = [
     subtitle: "Modular rental rig for international tour",
     category: "stage",
     span: "small",
+    image: "/images/projects/arena-tour.jpg",
   },
 ];

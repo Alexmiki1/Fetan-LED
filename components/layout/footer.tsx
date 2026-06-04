@@ -2,22 +2,23 @@
 
 import { motion } from "framer-motion";
 import { Globe, Mail, Share2 } from "lucide-react";
+import Link from "next/link";
 
 import { Logo } from "@/components/shared/logo";
 import { COMPANY_EMAIL, COMPANY_NAME } from "@/lib/constants/navigation";
 
 const FOOTER_LINKS = {
   services: [
-    { label: "Installation", href: "#services" },
-    { label: "Maintenance", href: "#services" },
-    { label: "Custom Design", href: "#services" },
-    { label: "Event Rentals", href: "#services" },
+    { label: "Installation", href: "/services" },
+    { label: "Maintenance", href: "/services" },
+    { label: "Custom Design", href: "/services" },
+    { label: "Event Rentals", href: "/services" },
   ],
   resources: [
-    { label: "Case Studies", href: "#projects" },
-    { label: "Spec Sheets", href: "#specs" },
-    { label: "Support", href: "#contact" },
-    { label: "FAQ", href: "#contact" },
+    { label: "Case Studies", href: "/#projects" },
+    { label: "Spec Sheets", href: "/#specs" },
+    { label: "Support", href: "/contact" },
+    { label: "FAQ", href: "/contact" },
   ],
 };
 
@@ -48,12 +49,12 @@ export function Footer() {
             <ul className="mt-4 space-y-3">
               {FOOTER_LINKS.services.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <Link
                     href={link.href}
-                    className="text-sm text-white/50 transition-colors hover:text-brand-blue"
+                    className="text-sm text-white/50 transition-colors hover:text-white"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -66,12 +67,12 @@ export function Footer() {
             <ul className="mt-4 space-y-3">
               {FOOTER_LINKS.resources.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <Link
                     href={link.href}
-                    className="text-sm text-white/50 transition-colors hover:text-brand-blue"
+                    className="text-sm text-white/50 transition-colors hover:text-white"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -83,19 +84,19 @@ export function Footer() {
             </h3>
             <address className="mt-4 space-y-3 not-italic">
               <p className="text-sm text-white/50">
-                1200 Innovation Drive
+                Fetan LED Advertising
                 <br />
-                Los Angeles, CA 90015
+                Addis Ababa, Ethiopia
               </p>
               <a
                 href="tel:+18005551234"
-                className="block text-sm text-white/50 transition-colors hover:text-brand-blue"
+                className="block text-sm text-white/50 transition-colors hover:text-white"
               >
-                +1 (800) 555-1234
+                +251 913 001 010
               </a>
               <a
                 href={`mailto:${COMPANY_EMAIL}`}
-                className="block text-sm text-white/50 transition-colors hover:text-brand-blue"
+                className="block text-sm text-white/50 transition-colors hover:text-white"
               >
                 {COMPANY_EMAIL}
               </a>
@@ -116,8 +117,8 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                whileHover={{ scale: 1.1, color: "#242ea7" }}
-                className="text-white/40 transition-colors hover:text-brand-blue"
+                whileHover={{ scale: 1.1, color: "#ffffff" }}
+                className="text-white/40 transition-colors hover:text-white"
               >
                 <Icon className="h-5 w-5" />
               </motion.a>

@@ -18,6 +18,7 @@ export interface Project {
   size?: string;
   featured?: boolean;
   span?: "large" | "medium" | "small";
+   image?: string;
 }
 
 export interface SpecField {
