@@ -56,10 +56,10 @@ function ProjectCard({
             fill
             sizes={
               isLarge
-                ? "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
-                : "(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 25vw"
+                ? "(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
+                : "(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 33vw, 25vw"
             }
-            quality={85}
+            quality={75}
             className="object-cover opacity-40 transition-opacity duration-500 group-hover:opacity-60"
             priority={false}
             loading="lazy"

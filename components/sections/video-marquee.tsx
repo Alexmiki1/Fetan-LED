@@ -44,7 +44,8 @@ export function VideoMarquee() {
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="none"
+        poster="/images/marquee-poster.jpg"
         className="h-28 w-full object-cover sm:h-40 md:h-52 lg:h-60 bg-black"
       />
     </section>
