@@ -25,6 +25,7 @@ function ProjectCard({
   index: number;
 }) {
   const isLarge = project.span === "large";
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
   return (
     <motion.article
@@ -33,7 +34,7 @@ function ProjectCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
-      whileHover={{ scale: 1.02 }}
+      whileHover={!isMobile ? { scale: 1.02 } : undefined}
       className={cn(
         "group relative overflow-hidden border border-white/10 bg-card-gradient transition-all duration-500 hover:border-brand-blue/50 hover:bg-card-gradient-hover hover:shadow-[0_0_40px_rgba(29,116,255,0.22)]",
         isLarge
@@ -53,7 +54,15 @@ function ProjectCard({
             src={project.image}
             alt={project.title}
             fill
+            sizes={
+              isLarge
+                ? "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
+                : "(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 25vw"
+            }
+            quality={85}
             className="object-cover opacity-40 transition-opacity duration-500 group-hover:opacity-60"
+            priority={false}
+            loading="lazy"
           />
         </div>
       )}

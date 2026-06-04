@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 
 import { AnimatedCounter } from "@/components/shared/animated-counter";
 import { STATS_BAR } from "@/lib/constants/stats";
@@ -9,6 +9,19 @@ import { STATS_BAR } from "@/lib/constants/stats";
 export function Statistics() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  // Memoize animation variants to prevent recreating them
+  const variants = useMemo(
+    () => ({
+      hidden: { opacity: 0, y: 24 },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.6, ease: "easeOut" },
+      },
+    }),
+    []
+  );
 
   return (
     <section
@@ -29,14 +42,7 @@ export function Statistics() {
           {STATS_BAR.map((stat) => (
             <motion.div
               key={stat.label}
-              variants={{
-                hidden: { opacity: 0, y: 24 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.6, ease: "easeOut" },
-                },
-              }}
+              variants={variants}
               className="text-center lg:text-left"
             >
               <AnimatedCounter

@@ -1,18 +1,36 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const VIDEO_SRC = "/marquee.mp4";
 
 export function VideoMarquee() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    videoRef.current?.play().catch(() => {});
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          videoRef.current?.play().catch(() => {});
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   return (
     <section
+      ref={containerRef}
       className="relative overflow-hidden border-y border-white/10"
       aria-label="Showcase video"
     >
@@ -21,13 +39,12 @@ export function VideoMarquee() {
 
       <video
         ref={videoRef}
-        src={VIDEO_SRC}
-        autoPlay
+        src={isVisible ? VIDEO_SRC : undefined}
         muted
         loop
         playsInline
-        preload="auto"
-        className="h-28 w-full object-cover sm:h-40 md:h-52 lg:h-60"
+        preload="metadata"
+        className="h-28 w-full object-cover sm:h-40 md:h-52 lg:h-60 bg-black"
       />
     </section>
   );
