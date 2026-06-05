@@ -46,7 +46,6 @@ export function VideoMarquee() {
         className="h-28 w-full object-cover sm:h-40 md:h-52 lg:h-60 bg-black"
       >
         <source src="/videos/marquee.webm" type="video/webm" />
-        <source src="/videos/marquee.mp4" type="video/mp4" />
       </video>
     </section>
   );
