@@ -51,12 +51,8 @@ export function VideoMarquee() {
         poster="/images/marquee-poster.jpg"
         className="h-28 w-full object-cover sm:h-40 md:h-52 lg:h-60 bg-black"
       >
-        {isVisible && (
-          <>
-            <source src={VIDEO_SOURCES.webm} type="video/webm" />
-            <source src={VIDEO_SOURCES.mp4} type="video/mp4" />
-          </>
-        )}
+        <source src={VIDEO_SOURCES.webm} type="video/webm" />
+        <source src={VIDEO_SOURCES.mp4} type="video/mp4" />
       </video>
     </section>
   );
