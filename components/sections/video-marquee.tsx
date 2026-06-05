@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const VIDEO_SRC_WEBM = "/marquee.webm";
-const VIDEO_SRC_MP4 = "/marquee.mp4";
+const VIDEO_SOURCES = {
+  webm: "/marquee.webm",
+  mp4: "/marquee.mp4",
+};
 
 export function VideoMarquee() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -51,8 +53,8 @@ export function VideoMarquee() {
       >
         {isVisible && (
           <>
-            <source src={VIDEO_SRC_WEBM} type="video/webm" />
-            <source src={VIDEO_SRC_MP4} type="video/mp4" />
+            <source src={VIDEO_SOURCES.webm} type="video/webm" />
+            <source src={VIDEO_SOURCES.mp4} type="video/mp4" />
           </>
         )}
       </video>
