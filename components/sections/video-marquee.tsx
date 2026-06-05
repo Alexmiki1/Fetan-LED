@@ -1,8 +1,9 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 
-const VIDEO_SRC = "/marquee.mp4";
+const VIDEO_SRC_WEBM = "/marquee.webm";
+const VIDEO_SRC_MP4 = "/marquee.mp4";
 
 export function VideoMarquee() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -40,7 +41,6 @@ export function VideoMarquee() {
 
       <video
         ref={videoRef}
-        src={isVisible ? VIDEO_SRC : undefined}
         autoPlay
         muted
         loop
@@ -48,7 +48,14 @@ export function VideoMarquee() {
         preload={isVisible ? "auto" : "none"}
         poster="/images/marquee-poster.jpg"
         className="h-28 w-full object-cover sm:h-40 md:h-52 lg:h-60 bg-black"
-      />
+      >
+        {isVisible && (
+          <>
+            <source src={VIDEO_SRC_WEBM} type="video/webm" />
+            <source src={VIDEO_SRC_MP4} type="video/mp4" />
+          </>
+        )}
+      </video>
     </section>
   );
 }

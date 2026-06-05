@@ -52,7 +52,7 @@ export function LoadingScreen() {
   useEffect(() => {
     const timer = window.setTimeout(() => {
       setFallbackReady(true);
-    }, 2500);
+    }, 1500);
 
     return () => window.clearTimeout(timer);
   }, []);
