@@ -48,7 +48,6 @@ export function Hero() {
         loop
         playsInline
         preload="metadata"
-        poster="/images/hero-poster.jpg"
         className="absolute inset-0 h-full w-full object-cover"
       >
         <source src="/videos/hero.webm" type="video/webm" />
