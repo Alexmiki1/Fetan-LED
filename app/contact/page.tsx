@@ -1,4 +1,5 @@
 import { QuoteForm } from "@/components/sections/quote-form";
+import { LocationMap } from "@/components/sections/location-map";
 import { Mail, Phone, MapPin, Clock, HelpCircle } from "lucide-react";
 import { COMPANY_EMAIL, COMPANY_NAME } from "@/lib/constants/navigation";
 
@@ -97,7 +98,7 @@ export default function ContactPage() {
                   </a>
 
                   <a
-                    href="tel:+18005551234"
+                    href="tel:+251913001010"
                     className="group flex items-center gap-4 text-xs text-white/70 transition-colors hover:text-white"
                   >
                     <div className="flex h-10 w-10 items-center justify-center border border-white/10 bg-white/5 group-hover:border-brand-blue group-hover:bg-brand-blue/10">
@@ -105,21 +106,26 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <span className="block text-[10px] uppercase text-white/40">Call Support</span>
-                      <span className="font-semibold">+1 (800) 555-1234</span>
+                      <span className="font-semibold">+251 913 001 010</span>
                     </div>
                   </a>
 
-                  <div className="flex items-center gap-4 text-xs text-white/70">
-                    <div className="flex h-10 w-10 items-center justify-center border border-white/10 bg-white/5">
+                  <a
+                    href="https://maps.app.goo.gl/nLS7MfySa1PDjK2b8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-4 text-xs text-white/70 transition-colors hover:text-white"
+                  >
+                    <div className="flex h-10 w-10 items-center justify-center border border-white/10 bg-white/5 group-hover:border-brand-blue group-hover:bg-brand-blue/10">
                       <MapPin className="h-4 w-4 text-brand-blue" />
                     </div>
                     <div>
                       <span className="block text-[10px] uppercase text-white/40">Headquarters</span>
                       <span className="font-semibold">
-                        1200 Innovation Drive, Los Angeles, CA
+                        Haile Gebre Silase St, Addis Ababa
                       </span>
                     </div>
-                  </div>
+                  </a>
 
                   <div className="flex items-center gap-4 text-xs text-white/70">
                     <div className="flex h-10 w-10 items-center justify-center border border-white/10 bg-white/5">
@@ -136,6 +142,9 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* Location Map Section */}
+      <LocationMap />
     </div>
   );
 }

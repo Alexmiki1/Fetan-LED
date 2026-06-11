@@ -43,3 +43,19 @@ export interface FooterLinkGroup {
   title: string;
   links: { label: string; href: string }[];
 }
+
+export interface ProductSpec {
+  label: string;
+  value: string;
+}
+
+export interface Product {
+  id: string;
+  name: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  features: string[];
+  specs: ProductSpec[];
+}
+

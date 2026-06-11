@@ -1,21 +1,17 @@
 import { lazy, Suspense } from "react";
 import { Hero } from "@/components/sections/hero";
 import { Statistics } from "@/components/sections/statistics";
+import { MarqueeText } from "@/components/MarqueeText";
 
 // Lazy load heavy components
-const VideoMarquee = lazy(() =>
-  import("@/components/sections/video-marquee").then((mod) => ({
-    default: mod.VideoMarquee,
-  }))
-);
 const ProjectGallery = lazy(() =>
   import("@/components/sections/project-gallery").then((mod) => ({
     default: mod.ProjectGallery,
   }))
 );
-const SpecSheets = lazy(() =>
-  import("@/components/sections/spec-sheets").then((mod) => ({
-    default: mod.SpecSheets,
+const ProductsGallery = lazy(() =>
+  import("@/components/sections/products-gallery").then((mod) => ({
+    default: mod.ProductsGallery,
   }))
 );
 const QuoteForm = lazy(() =>
@@ -24,7 +20,6 @@ const QuoteForm = lazy(() =>
   }))
 );
 
-// Fallback component
 function SectionSkeleton() {
   return <div className="h-96 bg-gradient-to-b from-black to-black/50" />;
 }
@@ -33,15 +28,13 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Suspense fallback={<SectionSkeleton />}>
-        <VideoMarquee />
-      </Suspense>
+      <MarqueeText />
       <Statistics />
       <Suspense fallback={<SectionSkeleton />}>
-        <ProjectGallery />
+        <ProductsGallery />
       </Suspense>
       <Suspense fallback={<SectionSkeleton />}>
-        <SpecSheets />
+        <ProjectGallery />
       </Suspense>
       <Suspense fallback={<SectionSkeleton />}>
         <QuoteForm />

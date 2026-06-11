@@ -23,7 +23,7 @@ export function Logo({ className, size = "md" }: LogoProps) {
     <a href="#" className={cn("group inline-flex shrink-0", className)}>
       <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.2 }}>
         <Image
-          src="/logo.png"
+          src="/logo-v2.png"
           alt="FETAN LED"
           width={width}
           height={height}

@@ -50,6 +50,32 @@
   }
 }
 
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 9s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 9s linear infinite;
+}
+
 .bg-hero-panel-left {
   background:
     radial-gradient(
