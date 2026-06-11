@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+@font-face {
+  font-family: 'Yoshida';
+  src: url('data:font/otf;base64,T1RUTwAMAIAAAwBAQ0ZGIAQ6Rt8AABFgAABsCEdERUYDPwMvAAB9aAAAAChHUE9TJ6RLZgAAfZAAAAnWR1NVQoklh5AAAIdoAAAI/k9TLzJ51rroAAAHMAAAAGBjbWFwXncoTQAAC2wAAAXSaGVhZBVPG5MAAADUAAAANmhoZWEQcAkpAAAHDAAAACRobXR4i/ZavwAAAQwAAAYAbWF4cAGAUAAAAADMAAAABm5hbWVG02UFAAAHkAAAA9pwb3N0/7gAMgAAEUAAAAAgAABQAAGAAAAAAQAAAAEAAPxKQz5fDzz1AAMH0AAAAADWzWkOAAAAANbNaQ7/QvzfCVsH0AAAAAMAAgAAAAAAAAPoALoE7ABGBOwARgTsAEYE7ABGBOwARgTsAEYE7ABGBOwARgTsAEYE7ABGBaoARgWqAEYFDABGBMgAPATIADwEyAA8BMgAPATIADwEyAA8BOIARgUyADIE4gBGBTIAMgR0AEYEdABGBHQARgR0AEYEdABGBHQARgR0AEYEdABGBHQARgR0AEYEagBGBNgAPATYADwE2AA8BNgAPATYADwE7ABGBSgAFATsAEYCHABGAhwARgIc/9ACHP/dAhz/lwIcAEYCHP/RAhz/1QIcAEYCHP/fBOIAPATiADwE7ABGBOwARgRqAEYEagBGBGoARgRqAEYEiABGBH4AFAZoAEYE7ABGBOwARgTsAEYE7ABGBOwARgTsAEYE2AA8BNgAPATYADwE2AA8BNgAPATYADwE2AA8BNgAPATYADwE2AA8BNgAPAVaADwE4gBGBOIARgTYADwE6ABGBOgARgToAEYE6ABGBMQAPATEADwExAA8BMQAPATEADwExAA8BNgAPATYADwE2AA8BNgAPATYADwE7ABGBOwARgTsAEYE7ABGBOwARgTsAEYE7ABGBOwARgTsAEYE7ABGBOwARgUYADwHvABGB7wARge8AEYHvABGB7wARgTsAEYE7ABGBOwARgTsAEYE7ABGBOwARgR0AEYEdABGBHQARgR0AEYEugA8BLoAPAS6ADwEugA8BLoAPAS6ADwEugA8BLoAPAS6ADwEugA8B4UAPAeFADwEugBGBLAAPASwADwEsAA8BLAAPASwADwEsAA8BLoAPASwADwG3AA8BOIAPASwADwEsAA8BLAAPASwADwEsAA8BLAAPASwADwEsAA8BLAAPALkADwEugA8BLoAPAS6ADwEugA8BLoAPATEAEYEzgAABMQARgIIAC0CCABGAggARgII/8YCCP/TAgj/oQIIAEYCCP/HAggACgIIAC0CCP/VAgj/QgII/0ICCP9CBLoARgS6AEYCCABGAggARgII/+cCCAAXBC4ARgJEAAoHCABGBMQARgTEAEYExABGBMQARgTEAEYExABGBLAAPASwADwEsAA8BLAAPASwADwEsAA8BLAAPASwADwEsAA8BLAAPASwADwHogA8BLoARgS6AEYEugA8A04ARgNOAEYDTgBGA04ARgSwAFAEsABQBLAAUASwAFAEsABQBLAAUAUsAEYDZwA8A2cAPAVUADwDZwA8A2cAPATEAEYExABGBMQARgTEAEYExABGBMQARgTEAEYExABGBMQARgTEAEYExABGBKAAMQcIAEYHCABGBwgARgcIAEYHCABGBMQARgTEAEYExABGBMQARgTEAEYExABGBHQARgR0AEYEdABGBHQARgXUADwH6AA8BPgAPAZXADwDlgBQA5YAUATYADwEzgBGBMQARgSwADwE6ABGBMQAUASwADwEVgA8BLAAPASwADwDHgBQAw8AUAMQAFADBwBQAxgAUAMQAFQDFgBQAq4APAMWAFADFgBQAx4AUAMPAFADEABQAwcAUAMYAFADEABUAxYAUAKuADwDFgBQAxYAUAMPAFADEABQAwcAUAKA/9gG3QBQBtQAUAbfAFAHOQBQBwoAUAb3AFAG5QB... <truncated>
+  font-weight: 900;
+  font-style: normal;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #000;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.lane { overflow: hidden; width: 100%; padding: 6px 0; }
+.inner {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+}
+.chunk {
+  display: inline-block;
+  padding-right: 8vw;
+  font-family: 'Yoshida', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+.r1 { font-size: 10vw; }
+.r2 { font-size: 7.5vw; }
+.w { color: #ffffff; }
+.c { color: #59D1DC; }
+</style>
+</head>
+<body>
+
+<div class="lane">
+  <div class="inner" id="row1">
+    <span class="chunk r1"><span class="w">FETAN LED&nbsp;</span><span class="c">SCREEN</span></span>
+    <span class="chunk r1"><span class="w">FETAN LED&nbsp;</span><span class="c">SCREEN</span></span>
+    <span class="chunk r1"><span class="w">FETAN LED&nbsp;</span><span class="c">SCREEN</span></span>
+    <span class="chunk r1"><span class="w">FETAN LED&nbsp;</span><span class="c">SCREEN</span></span>
+  </div>
+</div>
+
+<div class="lane">
+  <div class="inner" id="row2">
+    <span class="chunk r2"><span class="c">SALES AND&nbsp;</span><span class="w">INSTALLATION</span></span>
+    <span class="chunk r2"><span class="c">SALES AND&nbsp;</span><span class="w">INSTALLATION</span></span>
+    <span class="chunk r2"><span class="c">SALES AND&nbsp;</span><span class="w">INSTALLATION</span></span>
+    <span class="chunk r2"><span class="c">SALES AND&nbsp;</span><span class="w">INSTALLATION</span></span>
+  </div>
+</div>
+
+<script>
+  function marquee(el, speed) {
+    const items = Array.from(el.children);
+    const half = items.length / 2;
+    const unitWidth = items.slice(0, half).reduce((s, n) => s + n.offsetWidth, 0);
+    let pos = speed > 0 ? 0 : -unitWidth;
+
+    function tick() {
+      pos -= speed;
+      if (speed > 0 && pos <= -unitWidth) pos += unitWidth;
+      if (speed < 0 && pos >= 0)          pos -= unitWidth;
+      el.style.transform = 'translateX(' + pos + 'px)';
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  window.addEventListener('load', function() {
+    marquee(document.getElementById('row1'),  1.5);
+    marquee(document.getElementById('row2'), -1.5);
+  });
+</script>
+
+</body>
+</html>

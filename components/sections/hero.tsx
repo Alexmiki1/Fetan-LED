@@ -6,6 +6,7 @@ import { useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useVideoLoading } from "@/lib/contexts/video-loading";
 import { HERO_STATS } from "@/lib/constants/stats";
+import { MarqueeV5 } from "@/components/marquee-v5";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -126,6 +127,9 @@ export function Hero() {
           </div>
         </motion.div>
       </div>
+
+      {/* Marquee V5 */}
+      <MarqueeV5 />
     </section>
   );
 }
