@@ -9,7 +9,7 @@
 
 /* Sits flush under the Hero — no gap, black bg continues */
 .wrapper {
-  background: #000;
+  background: #1d74ff;
   width: 100%;
   overflow: hidden;
   padding: 2rem 0;
@@ -43,4 +43,4 @@
 .r2 { font-size: 7.5vw; }
 
 .w { color: #ffffff; }
-.c { color: #59D1DC; }
+.c { color: #00fffd; }

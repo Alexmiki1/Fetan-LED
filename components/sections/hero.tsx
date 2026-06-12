@@ -71,7 +71,7 @@ export function Hero() {
         >
           <div className="max-w-lg">
             <h1 className="font-display text-3xl font-bold uppercase leading-none tracking-wide text-white sm:text-4xl md:text-5xl lg:text-6xl">
-              Sales & Installation
+              LED Screen Display Sales & Installation
             </h1>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/70 sm:text-base">
               Permanent LED solutions engineered for retail, corporate, and outdoor environments. From design to deployment.
@@ -105,7 +105,7 @@ export function Hero() {
         >
           <div className="max-w-lg">
             <h1 className="font-display text-3xl font-bold uppercase leading-none tracking-wide text-white sm:text-4xl md:text-5xl lg:text-6xl">
-              Event Rentals
+             LED Screen Display Event Rentals
             </h1>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/70 sm:text-base">
               Modular rental systems for concerts, conferences, and brand activations. Rapid deployment, stunning results.
