@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [],
@@ -12,15 +13,19 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 365,
   },
+
   compress: true,
   poweredByHeader: false,
+
   onDemandEntries: {
     maxInactiveAge: 60 * 60 * 1000,
     pagesBufferLength: 5,
   },
+
   experimental: {
     optimizePackageImports: ["@radix-ui", "lucide-react"],
   },
+
   async headers() {
     return [
       {
@@ -28,20 +33,28 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Content-Security-Policy",
-            value: "frame-src https://www.youtube-nocookie.com https://www.youtube.com;",
+            // YouTube + Google Maps both allowed
+            value:
+              "frame-src https://www.youtube-nocookie.com https://www.youtube.com https://www.google.com https://maps.google.com;",
           },
         ],
       },
       {
         source: "/images/:path*",
         headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
         ],
       },
       {
         source: "/videos/:path*",
         headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
         ],
       },
     ];

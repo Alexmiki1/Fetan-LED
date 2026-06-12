@@ -46,7 +46,12 @@ const SOCIAL_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/20 bg-[#0e397e] text-white">
+    <footer
+      className="text-white"
+      style={{
+        background: "linear-gradient(180deg, #1d74ff 0%, #1559cc 15%, #0e3d8c 35%, #0a2d66 55%, #040e1a 80%, #000000 100%)",
+      }}
+    >
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col items-start">
@@ -69,16 +74,11 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-white">
-              Services
-            </h3>
+            <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-white">Services</h3>
             <ul className="mt-4 space-y-3">
               {FOOTER_LINKS.services.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/75 transition-colors hover:text-white"
-                  >
+                  <Link href={link.href} className="text-sm text-white/75 transition-colors hover:text-white">
                     {link.label}
                   </Link>
                 </li>
@@ -87,16 +87,11 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-white">
-              Resources
-            </h3>
+            <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-white">Resources</h3>
             <ul className="mt-4 space-y-3">
               {FOOTER_LINKS.resources.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/75 transition-colors hover:text-white"
-                  >
+                  <Link href={link.href} className="text-sm text-white/75 transition-colors hover:text-white">
                     {link.label}
                   </Link>
                 </li>
@@ -105,35 +100,24 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-white">
-              Contact
-            </h3>
+            <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-white">Contact</h3>
             <address className="mt-4 space-y-3 not-italic">
               <p className="text-sm text-white/80">
-                Fetan LED Advertising
-                <br />
-                Addis Ababa, Ethiopia
+                Fetan LED Advertising<br />Addis Ababa, Ethiopia
               </p>
-              <a
-                href="tel:+251913001010"
-                className="block text-sm text-white/75 transition-colors hover:text-white"
-              >
+              <a href="tel:+251913001010" className="block text-sm text-white/75 transition-colors hover:text-white">
                 +251 913 001 010
               </a>
-              <a
-                href={`mailto:${COMPANY_EMAIL}`}
-                className="block text-sm text-white/75 transition-colors hover:text-white"
-              >
+              <a href={`mailto:${COMPANY_EMAIL}`} className="block text-sm text-white/75 transition-colors hover:text-white">
                 {COMPANY_EMAIL}
               </a>
             </address>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/20 pt-8 sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
           <p className="text-xs text-white/70">
-            &copy; {new Date().getFullYear()} {COMPANY_NAME}. All rights
-            reserved.
+            &copy; {new Date().getFullYear()} {COMPANY_NAME}. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
