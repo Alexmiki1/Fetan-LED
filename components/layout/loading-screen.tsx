@@ -1,138 +1,77 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useVideoLoading } from "@/lib/contexts/video-loading";
 
-const containerVariants = {
-  hidden: { opacity: 1 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: { duration: 0.6 },
-  },
-};
-
-const textVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8 },
-  },
-};
-
-const loadingDotVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.6,
-      repeat: Infinity,
-      repeatType: "reverse" as const,
-    },
-  },
-};
-
 export function LoadingScreen() {
-  const [isVisible, setIsVisible] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
-  const [fallbackReady, setFallbackReady] = useState(false);
   const { heroVideoReady } = useVideoLoading();
+  const [isMounted, setIsMounted] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  // Only show the loader if things take longer than 400ms — avoids flash on fast loads
+  const [showUI, setShowUI] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
+
+    // Only render the loading UI if the page is still loading after 400ms
+    const showTimer = window.setTimeout(() => setShowUI(true), 400);
+    // Hard cap at 2s regardless
+    const fallbackTimer = window.setTimeout(() => setIsVisible(false), 2000);
+
+    return () => {
+      window.clearTimeout(showTimer);
+      window.clearTimeout(fallbackTimer);
+    };
   }, []);
 
+  // Dismiss as soon as hero signals ready
   useEffect(() => {
-    const timer = window.setTimeout(() => {
-      setFallbackReady(true);
-    }, 1500);
+    if (heroVideoReady) setIsVisible(false);
+  }, [heroVideoReady]);
 
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    if (!isMounted || !(heroVideoReady || fallbackReady)) return;
-
-    const timeout = window.setTimeout(() => {
-      setIsVisible(false);
-    }, 500);
-
-    return () => window.clearTimeout(timeout);
-  }, [isMounted, heroVideoReady, fallbackReady]);
-
-  // Don't render on server
-  if (!isMounted || !isVisible) return null;
+  if (!isMounted || !isVisible || !showUI) return null;
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black"
-    >
-      {/* Content */}
+    <AnimatePresence>
       <motion.div
-        className="relative z-10 flex flex-col items-center justify-center gap-8 px-6 text-center"
-        variants={containerVariants}
+        key="loading"
+        initial={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.4 }}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black"
       >
-        {/* Welcome Text */}
-        <motion.div variants={textVariants}>
-          <h1 className="font-display text-5xl font-bold uppercase tracking-wider text-white sm:text-6xl">
-            Welcome
-          </h1>
-          <p className="mt-4 text-sm uppercase tracking-[0.2em] text-white/60">
-            to fetanled
-          </p>
-        </motion.div>
-
-        {/* Loading Indicator */}
-        <motion.div
-          variants={textVariants}
-          className="flex items-center gap-2"
-        >
-          <span className="text-sm uppercase tracking-wider text-white/70">
-            Loading
-          </span>
-          <div className="flex gap-1">
-            {[0, 1, 2].map((i) => (
-              <motion.span
-                key={i}
-                variants={loadingDotVariants}
-                initial="hidden"
-                animate="visible"
-                transition={{
-                  duration: 0.6,
-                  delay: i * 0.2,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                }}
-                className="h-2 w-2 rounded-full bg-blue-500"
-              />
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Progress Bar */}
-        <motion.div
-          variants={textVariants}
-          className="w-48 overflow-hidden rounded-full bg-white/10"
-        >
+        <div className="flex flex-col items-center gap-8 px-6 text-center">
+          {/* Logo / Title */}
           <motion.div
-            className="h-1 bg-gradient-to-r from-blue-500 to-cyan-500"
-            initial={{ width: "0%" }}
-            animate={{ width: "100%" }}
-            transition={{ duration: 2, ease: "easeInOut" }}
-          />
-        </motion.div>
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h1 className="font-display text-5xl font-bold uppercase tracking-wider text-white sm:text-6xl">
+              FETAN LED
+            </h1>
+            <p className="mt-3 text-sm uppercase tracking-[0.2em] text-white/50">
+              Loading...
+            </p>
+          </motion.div>
+
+          {/* Progress bar — simple, no fake 2s animation */}
+          <motion.div
+            className="w-48 overflow-hidden rounded-full bg-white/10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            <motion.div
+              className="h-0.5 bg-gradient-to-r from-blue-500 to-cyan-400"
+              initial={{ width: "0%" }}
+              animate={{ width: "100%" }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+            />
+          </motion.div>
+        </div>
       </motion.div>
-    </motion.div>
+    </AnimatePresence>
   );
 }
