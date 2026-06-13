@@ -10,15 +10,10 @@ export function Statistics() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
-  // Memoize animation variants to prevent recreating them
   const variants = useMemo(
     () => ({
       hidden: { opacity: 0, y: 24 },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.6 },
-      },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
     }),
     []
   );
@@ -26,7 +21,7 @@ export function Statistics() {
   return (
     <section
       ref={ref}
-      className="relative border-y border-white/10 bg-stats-bar"
+      className="relative border-b border-white/10"
       aria-label="Key statistics"
     >
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">

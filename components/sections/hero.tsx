@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef, useEffect } from "react";
-
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useVideoLoading } from "@/lib/contexts/video-loading";
 import { HERO_STATS } from "@/lib/constants/stats";
@@ -16,51 +15,64 @@ const fadeUp = {
   }),
 };
 
+const VIDEO_ID = "ccWERmdQ6ro";
+
 export function Hero() {
-  const videoRef = useRef<HTMLVideoElement>(null);
   const { setHeroVideoReady } = useVideoLoading();
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handleCanPlay = () => {
+    const t = setTimeout(() => {
+      setReady(true);
       setHeroVideoReady(true);
-    };
-
-    video.addEventListener("canplay", handleCanPlay);
-
-    return () => {
-      video.removeEventListener("canplay", handleCanPlay);
-    };
+    }, 300);
+    return () => clearTimeout(t);
   }, [setHeroVideoReady]);
+
   return (
     <section
       id="services"
       className="relative min-h-screen overflow-hidden bg-black"
       aria-label="Hero"
     >
-      {/* Background Video */}
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        className="absolute inset-0 h-full w-full object-cover"
-      >
-        <source src="/videos/hero.webm" type="video/webm" />
-      </video>
+      {/* YouTube Background — controls=0 hides UI, autoplay=1&mute=1 starts it silently */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {ready && (
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&playsinline=1&rel=0&showinfo=0&cc_load_policy=0&color=white&widget_referrer=0`}
+            allow="autoplay; encrypted-media; picture-in-picture"
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "calc(100vw + 400px)",
+              height: "calc((100vw + 400px) * 9 / 16)",
+              minHeight: "calc(100vh + 200px)",
+              minWidth: "calc((100vh + 200px) * 16 / 9)",
+              border: "none",
+              pointerEvents: "none",
+            }}
+            tabIndex={-1}
+            aria-hidden="true"
+          />
+        )}
+      </div>
 
-      {/* Blue gradient overlay — same colors as before */}
-      <div className="absolute inset-0 bg-[linear-gradient(165deg,rgba(29,116,255,0.55)_0%,rgba(21,89,204,0.45)_20%,rgba(14,61,140,0.55)_40%,rgba(10,45,102,0.65)_60%,rgba(4,14,26,0.80)_80%,rgba(0,0,0,0.92)_100%)]" />
+      {/* Overlay to cover any remaining YouTube UI chrome at edges */}
+      <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/40 to-transparent z-[1]" />
+      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/40 to-transparent z-[1]" />
+      <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-black/40 to-transparent z-[1]" />
+      <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-black/40 to-transparent z-[1]" />
+
+      {/* Blue gradient overlay */}
+      <div className="absolute inset-0 z-[2] bg-[linear-gradient(165deg,rgba(29,116,255,0.55)_0%,rgba(21,89,204,0.45)_20%,rgba(14,61,140,0.55)_40%,rgba(10,45,102,0.65)_60%,rgba(4,14,26,0.80)_80%,rgba(0,0,0,0.92)_100%)]" />
 
       {/* Bottom fade to black */}
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-40 z-[3] bg-gradient-to-t from-black to-transparent" />
 
-      {/* Content — two panels side by side */}
-      <div className="relative z-10 grid min-h-screen grid-cols-1 lg:grid-cols-2">
+      {/* Content */}
+      <div className="relative z-10 grid min-h-screen grid-cols-1 lg:grid-cols-2" style={{ zIndex: 4 }}>
         {/* Left Panel */}
         <motion.div
           custom={0}
@@ -105,7 +117,7 @@ export function Hero() {
         >
           <div className="max-w-lg">
             <h1 className="font-display text-3xl font-bold uppercase leading-none tracking-wide text-white sm:text-4xl md:text-5xl lg:text-6xl">
-             LED Screen Display Event Rentals
+              LED Screen Display Event Rentals
             </h1>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/70 sm:text-base">
               Modular rental systems for concerts, conferences, and brand activations. Rapid deployment, stunning results.

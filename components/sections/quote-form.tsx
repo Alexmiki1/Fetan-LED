@@ -19,9 +19,7 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  QUOTE_STEPS,
-} from "@/lib/constants/quote";
+import { QUOTE_STEPS } from "@/lib/constants/quote";
 import {
   quoteFormSchema,
   type QuoteFormValues,
@@ -83,39 +81,26 @@ export function QuoteForm() {
 
   const onSubmit = async (data: QuoteFormValues) => {
     setSubmitError(null);
-
     if (!data.name || !data.email || !data.company) {
       setSubmitError("Please fill in your name, company, and email before submitting.");
       return;
     }
-
     try {
       const response = await fetch("/api/quote", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-
       if (!response.ok) {
-        const json = (await response.json().catch(() => null)) as
-          | { error?: string }
-          | null;
-        setSubmitError(
-          json?.error ||
-            "We couldn’t send your request right now. Please try again in a moment."
-        );
+        const json = (await response.json().catch(() => null)) as { error?: string } | null;
+        setSubmitError(json?.error || "We couldn't send your request right now. Please try again in a moment.");
         return;
       }
-
       reset();
       setSubmitted(true);
     } catch (error) {
       console.error("Quote form submission failed", error);
-      setSubmitError(
-        "We couldn’t send your request right now. Please check your connection and try again."
-      );
+      setSubmitError("We couldn't send your request right now. Please check your connection and try again.");
     }
   };
 
@@ -125,14 +110,13 @@ export function QuoteForm() {
       className="relative overflow-hidden bg-quote-section py-20 sm:py-28"
       aria-labelledby="quote-heading"
     >
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[70%] bg-quote-glow" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black to-transparent" />
+      {/* Top fade from black into the section */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/60 to-transparent" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <SectionHeading title="Get a Quote" id="quote-heading" />
-
             <ol className="mt-8 space-y-8">
               {QUOTE_STEPS.map((step, i) => (
                 <motion.li
@@ -143,13 +127,9 @@ export function QuoteForm() {
                   transition={{ delay: i * 0.1, duration: 0.5 }}
                   className="flex gap-5"
                 >
-                  <span className="font-display text-3xl font-light text-white/60">
-                    {step.step}
-                  </span>
+                  <span className="font-display text-3xl font-light text-white/60">{step.step}</span>
                   <div>
-                    <h3 className="font-display text-sm font-bold uppercase tracking-wider text-white">
-                      {step.title}
-                    </h3>
+                    <h3 className="font-display text-sm font-bold uppercase tracking-wider text-white">{step.title}</h3>
                     <p className="mt-1 text-sm text-white/50">{step.description}</p>
                   </div>
                 </motion.li>
@@ -164,95 +144,53 @@ export function QuoteForm() {
             transition={{ duration: 0.6 }}
             className="border border-white/10 bg-form-card p-6 backdrop-blur-sm sm:p-8"
           >
-            <h3 className="font-display text-xl font-bold uppercase tracking-wide text-white">
-              REQUEST A PROPOSAL
-            </h3>
+            <h3 className="font-display text-xl font-bold uppercase tracking-wide text-white">REQUEST A PROPOSAL</h3>
 
             {submitted ? (
               <div className="mt-8 flex flex-col items-center justify-center py-12 text-center">
                 <div className="flex h-16 w-16 items-center justify-center border border-brand-blue bg-brand-blue/10">
-                  <span className="text-2xl text-white">✓</span>
+                  <span className="text-2xl text-white">&#10003;</span>
                 </div>
-                <p className="mt-6 font-display text-lg font-bold uppercase text-white">
-                  Request Received
-                </p>
+                <p className="mt-6 font-display text-lg font-bold uppercase text-white">Request Received</p>
                 <p className="mt-2 max-w-sm text-sm text-white/50">
-                  Our team will review your project details and respond within
-                  4 hours.
+                  Our team will review your project details and respond within 4 hours.
                 </p>
               </div>
             ) : (
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="mt-6 space-y-5"
-                noValidate
-              >
+              <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-5" noValidate>
                 <Tabs
                   value={serviceType}
-                  onValueChange={(v) =>
-                    setValue("serviceType", v as "sales" | "rentals", {
-                      shouldValidate: true,
-                    })
-                  }
+                  onValueChange={(v) => setValue("serviceType", v as "sales" | "rentals", { shouldValidate: true })}
                 >
                   <TabsList className="w-full">
-                    <TabsTrigger value="sales" className="flex-1">
-                      SALES & INSTALLATION
-                    </TabsTrigger>
-                    <TabsTrigger value="rentals" className="flex-1">
-                      EVENT RENTAL
-                    </TabsTrigger>
+                    <TabsTrigger value="sales" className="flex-1">SALES & INSTALLATION</TabsTrigger>
+                    <TabsTrigger value="rentals" className="flex-1">EVENT RENTAL</TabsTrigger>
                   </TabsList>
                   <TabsContent value={serviceType} />
                 </Tabs>
 
                 <div className="grid gap-5 sm:grid-cols-2">
                   <FormField label="FULL NAME" error={errors.name?.message}>
-                    <Input
-                      {...register("name")}
-                      placeholder="Your name"
-                      aria-invalid={!!errors.name}
-                    />
+                    <Input {...register("name")} placeholder="Your name" aria-invalid={!!errors.name} />
                   </FormField>
                   <FormField label="COMPANY" error={errors.company?.message}>
-                    <Input
-                      {...register("company")}
-                      placeholder="Organisation"
-                      aria-invalid={!!errors.company}
-                    />
+                    <Input {...register("company")} placeholder="Organisation" aria-invalid={!!errors.company} />
                   </FormField>
                 </div>
 
                 <div className="grid gap-5 sm:grid-cols-2">
                   <FormField label="EMAIL" error={errors.email?.message}>
-                    <Input
-                      type="email"
-                      {...register("email")}
-                      placeholder="work@company.com"
-                      aria-invalid={!!errors.email}
-                    />
+                    <Input type="email" {...register("email")} placeholder="work@company.com" aria-invalid={!!errors.email} />
                   </FormField>
                   <FormField label="PHONE" error={errors.phone?.message}>
-                    <Input
-                      type="tel"
-                      {...register("phone")}
-                      placeholder="+251 ____"
-                      aria-invalid={!!errors.phone}
-                    />
+                    <Input type="tel" {...register("phone")} placeholder="+251 ____" aria-invalid={!!errors.phone} />
                   </FormField>
                 </div>
 
-                <FormField
-                  label="VENUE / ENVIRONMENT"
-                  error={errors.venueEnvironment?.message}
-                >
+                <FormField label="VENUE / ENVIRONMENT" error={errors.venueEnvironment?.message}>
                   <Select
                     value={watch("venueEnvironment")}
-                    onValueChange={(v) =>
-                      setValue("venueEnvironment", v, {
-                        shouldValidate: true,
-                      })
-                    }
+                    onValueChange={(v) => setValue("venueEnvironment", v, { shouldValidate: true })}
                   >
                     <SelectTrigger aria-invalid={!!errors.venueEnvironment}>
                       <SelectValue placeholder="Select environment" />
@@ -270,91 +208,33 @@ export function QuoteForm() {
 
                 <FormField label="ESTIMATED SCREEN DIMENSIONS (METERS)" error={undefined}>
                   <div className="flex items-center gap-3">
-                    <Input
-                      {...register("screenWidth")}
-                      placeholder="Width (m)"
-                      aria-invalid={!!errors.screenWidth}
-                      className="flex-1"
-                    />
+                    <Input {...register("screenWidth")} placeholder="Width (m)" aria-invalid={!!errors.screenWidth} className="flex-1" />
                     <span className="text-white/50">x</span>
-                    <Input
-                      {...register("screenHeight")}
-                      placeholder="Height (m)"
-                      aria-invalid={!!errors.screenHeight}
-                      className="flex-1"
-                    />
+                    <Input {...register("screenHeight")} placeholder="Height (m)" aria-invalid={!!errors.screenHeight} className="flex-1" />
                   </div>
                 </FormField>
 
                 <FormField label="CONTENT TYPE (SELECT ALL THAT APPLY)" error={undefined}>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <div className="flex items-center gap-3">
-                      <Checkbox
-                        id="contentTypeVideo"
-                        checked={watch("contentTypeVideo")}
-                        onCheckedChange={(checked) =>
-                          setValue("contentTypeVideo", checked === true)
-                        }
-                      />
-                      <Label
-                        htmlFor="contentTypeVideo"
-                        className="cursor-pointer font-normal text-white/80"
-                      >
-                        Video / Animation
-                      </Label>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Checkbox
-                        id="contentTypeStatic"
-                        checked={watch("contentTypeStatic")}
-                        onCheckedChange={(checked) =>
-                          setValue("contentTypeStatic", checked === true)
-                        }
-                      />
-                      <Label
-                        htmlFor="contentTypeStatic"
-                        className="cursor-pointer font-normal text-white/80"
-                      >
-                        Static Imagery
-                      </Label>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Checkbox
-                        id="contentTypeLiveFeed"
-                        checked={watch("contentTypeLiveFeed")}
-                        onCheckedChange={(checked) =>
-                          setValue("contentTypeLiveFeed", checked === true)
-                        }
-                      />
-                      <Label
-                        htmlFor="contentTypeLiveFeed"
-                        className="cursor-pointer font-normal text-white/80"
-                      >
-                        Live Feed
-                      </Label>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Checkbox
-                        id="contentTypeScoreboard"
-                        checked={watch("contentTypeScoreboard")}
-                        onCheckedChange={(checked) =>
-                          setValue("contentTypeScoreboard", checked === true)
-                        }
-                      />
-                      <Label
-                        htmlFor="contentTypeScoreboard"
-                        className="cursor-pointer font-normal text-white/80"
-                      >
-                        Scoreboard / Data
-                      </Label>
-                    </div>
+                    {[
+                      { id: "contentTypeVideo", label: "Video / Animation" },
+                      { id: "contentTypeStatic", label: "Static Imagery" },
+                      { id: "contentTypeLiveFeed", label: "Live Feed" },
+                      { id: "contentTypeScoreboard", label: "Scoreboard / Data" },
+                    ].map(({ id, label }) => (
+                      <div key={id} className="flex items-center gap-3">
+                        <Checkbox
+                          id={id}
+                          checked={watch(id as keyof QuoteFormValues) as boolean}
+                          onCheckedChange={(checked) => setValue(id as keyof QuoteFormValues, checked === true)}
+                        />
+                        <Label htmlFor={id} className="cursor-pointer font-normal text-white/80">{label}</Label>
+                      </div>
+                    ))}
                   </div>
                 </FormField>
 
-                <FormField
-                  label="ADDITIONAL NOTES"
-                  error={errors.additionalNotes?.message}
-                >
+                <FormField label="ADDITIONAL NOTES" error={errors.additionalNotes?.message}>
                   <Textarea
                     {...register("additionalNotes")}
                     placeholder="Describe your project, budget range, timeline, or any specific technical requirements..."
@@ -364,21 +244,15 @@ export function QuoteForm() {
                 </FormField>
 
                 <div className="space-y-4">
-                  <Button
-                    type="submit"
-                    className="w-full"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Sending..." : "SUBMIT PROPOSAL REQUEST →"}
+                  <Button type="submit" className="w-full" disabled={isSubmitting}>
+                    {isSubmitting ? "Sending..." : "SUBMIT PROPOSAL REQUEST"}
                   </Button>
                   {submitError && (
-                    <p className="text-xs text-red-400" role="alert">
-                      {submitError}
-                    </p>
+                    <p className="text-xs text-red-400" role="alert">{submitError}</p>
                   )}
                   <div className="space-y-1 text-center text-xs text-white/50">
                     <p>We typically respond within 4 business hours.</p>
-                    <p>No obligations – just a clear, itemised proposal.</p>
+                    <p>No obligations - just a clear, itemised proposal.</p>
                   </div>
                 </div>
               </form>

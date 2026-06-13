@@ -87,6 +87,7 @@ export default function RootLayout({
           <LoadingScreen />
           <Navbar />
           <main>{children}</main>
+          {/* Footer sits on solid #1d74ff — connects seamlessly with page gradient */}
           <Footer />
         </VideoLoadingProvider>
       </body>
