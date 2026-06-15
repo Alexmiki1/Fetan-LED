@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
 const SALES_EMAIL = "Alexxissmiki@gmail.com";
-const FROM_EMAIL = process.env.QUOTE_FROM_EMAIL || "onboarding@resend.dev";
+const FROM_EMAIL = process.env.QUOTE_FROM_EMAIL || SALES_EMAIL;
 const BRAND_NAME = "Fetanled";
 
 type QuotePayload = {
