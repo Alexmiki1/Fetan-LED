@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { LoadingScreen } from "@/components/layout/loading-screen";
 import { VideoLoadingProvider } from "@/lib/contexts/video-loading";
+import Script from "next/script";
 import { COMPANY_NAME, COMPANY_TAGLINE } from "@/lib/constants/navigation";
 
 import "./globals.css";
@@ -82,6 +83,12 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${barlowCondensed.variable} h-full scroll-smooth antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://www.youtube-nocookie.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.youtube.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://static.doubleclick.net" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-full bg-black font-sans text-white">
         <VideoLoadingProvider>
           <LoadingScreen />
@@ -90,6 +97,7 @@ export default function RootLayout({
           {/* Footer sits on solid #1d74ff — connects seamlessly with page gradient */}
           <Footer />
         </VideoLoadingProvider>
+        <Script src="https://www.youtube.com/iframe_api" strategy="afterInteractive" />
       </body>
     </html>
   );

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
@@ -20,7 +21,7 @@ export function Logo({ className, size = "md" }: LogoProps) {
   const { height, width } = SIZES[size];
 
   return (
-    <a href="#" className={cn("group inline-flex shrink-0", className)}>
+    <Link href="/" className={cn("group inline-flex shrink-0", className)}>
       <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.2 }}>
         <Image
           src="/logo-v2.png"
@@ -32,6 +33,7 @@ export function Logo({ className, size = "md" }: LogoProps) {
           priority
         />
       </motion.div>
-    </a>
+    </Link>
   );
 }
+

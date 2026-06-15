@@ -4,8 +4,11 @@ import { MapPin } from "lucide-react";
 
 export function LocationMap() {
   return (
-    <section className="relative z-10 border-t border-white/10 bg-black py-20 sm:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="relative z-10 border-t border-white/10 bg-quote-section pt-20 pb-20 sm:pb-28 overflow-hidden">
+      {/* Glow overlay matching the quote form on the home page */}
+      <div className="absolute inset-0 bg-quote-glow z-[1] pointer-events-none" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12 flex items-center gap-2 border-b border-white/10 pb-4">
           <MapPin className="h-5 w-5 text-brand-blue" />

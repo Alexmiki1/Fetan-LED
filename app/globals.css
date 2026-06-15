@@ -15,6 +15,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -42,20 +43,42 @@
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-@keyframes marquee-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-@keyframes marquee-right {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
-.animate-marquee-left { animation: marquee-left 9s linear infinite; }
-.animate-marquee-right { animation: marquee-right 9s linear infinite; }
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 9s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 9s linear infinite;
+}
 
 .bg-hero-panel-left {
   background:
@@ -91,24 +114,20 @@
 
 /* Quote section: black at top, ends at exactly #1559cc at the very bottom */
 .bg-quote-section {
-  background: linear-gradient(
-    180deg,
-    #000000 0%,
-    #020a1a 20%,
-    #1245a0 85%,
-    #1245a0 85%,
-    #09398c 85%,
-    #1d74ff 100% 100%,
-    #1d74ff 100%
-  );
+  background: linear-gradient(180deg,
+      #000000 0%,
+      #020a1a 20%,
+      #1245a0 85%,
+      #1245a0 85%,
+      #1d74ff 100%,
+      #1d74ff 100%,
+      #1d74ff 100%);
 }
 
 .bg-quote-glow {
-  background: radial-gradient(
-    ellipse 140% 100% at 50% 110%,
-    rgba(var(--brand-blue-rgb), 0.45) 0%,
-    rgba(var(--brand-blue-rgb), 0.22) 30%,
-    rgba(var(--brand-blue-rgb), 0.08) 60%,
-    transparent 80%
-  );
+  background: radial-gradient(ellipse 140% 100% at 50% 110%,
+      rgba(var(--brand-blue-rgb), 0.45) 0%,
+      rgba(var(--brand-blue-rgb), 0.22) 30%,
+      rgba(var(--brand-blue-rgb), 0.08) 60%,
+      transparent 80%);
 }

@@ -91,11 +91,12 @@ const PROCESS_STEPS = [
 
 export default function ServicesPage() {
   return (
-    <article className="min-h-screen bg-black pt-24 pb-16 sm:pt-32 sm:pb-24">
+    <article className="min-h-screen bg-black pt-24 pb-0">
       {/* Background radial glow */}
       <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_50%_10%,rgba(29,116,255,0.08)_0%,transparent_65%)]" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* Services main content wrapper */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
         {/* Page Header */}
         <div className="border-b border-white/10 pb-12 text-center sm:text-left">
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">
@@ -188,22 +189,29 @@ export default function ServicesPage() {
             ))}
           </div>
         </section>
-
-        {/* CTA Banner */}
-        <section className="mt-24 border border-brand-blue/30 bg-brand-blue/5 p-8 text-center sm:p-12">
-          <h2 className="font-display text-2xl font-bold uppercase tracking-wider text-white sm:text-3xl lg:text-4xl">
-            Have a Specific Project in Mind?
-          </h2>
-          <p className="mx-auto mt-3 max-w-lg text-xs text-white/60 sm:text-sm">
-            Connect with our engineering team today to receive a comprehensive, itemized 3D simulation and price quote.
-          </p>
-          <div className="mt-8 flex justify-center">
-            <Button asChild size="lg">
-              <Link href="/contact">Get in Touch →</Link>
-            </Button>
-          </div>
-        </section>
       </div>
+
+      {/* CTA Banner Section with seamless gradient to footer */}
+      <section className="relative mt-24 overflow-hidden bg-quote-section pt-20 pb-20 sm:pb-28">
+        {/* Glow overlay matching the quote form on the home page */}
+        <div className="absolute inset-0 bg-quote-glow z-[1] pointer-events-none" />
+
+        <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+          <div className="border border-white/10 bg-white/[0.01] p-8 sm:p-12 backdrop-blur-md">
+            <h2 className="font-display text-2xl font-bold uppercase tracking-wider text-white sm:text-3xl lg:text-4xl">
+              Have a Specific Project in Mind?
+            </h2>
+            <p className="mx-auto mt-3 max-w-lg text-xs text-white/60 sm:text-sm">
+              Connect with our engineering team today to receive a comprehensive, itemized 3D simulation and price quote.
+            </p>
+            <div className="mt-8 flex justify-center">
+              <Button asChild size="lg">
+                <Link href="/contact">Get in Touch →</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
     </article>
   );
 }
