@@ -31,9 +31,7 @@ export function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
   return (
@@ -46,19 +44,21 @@ export function Navbar() {
       )}
     >
       <nav
-        className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:h-24 sm:px-6 lg:px-8"
+        className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:h-24 lg:px-8"
         aria-label="Main navigation"
       >
-        {/* Logo — bigger on large screens */}
-        <Logo size="md" />
+        {/* Logo — scales with screen */}
+        <div className="scale-90 sm:scale-100">
+          <Logo size="md" />
+        </div>
 
-        {/* Nav links — Poppins, bigger on large screens */}
-        <ul className={cn("hidden items-center gap-10 lg:flex", poppins.variable)}>
+        {/* Desktop nav links */}
+        <ul className={cn("hidden items-center gap-8 lg:flex xl:gap-10", poppins.variable)}>
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="font-[family-name:var(--font-poppins)] text-sm font-600 uppercase tracking-[0.15em] text-white/75 transition-colors hover:text-white xl:text-base"
+                className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-[0.15em] text-white/75 transition-colors hover:text-white xl:text-base"
               >
                 {link.label}
               </Link>
@@ -86,7 +86,7 @@ export function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile full-screen menu */}
       <motion.div
         initial={false}
         animate={mobileOpen ? "open" : "closed"}
@@ -97,7 +97,7 @@ export function Navbar() {
         transition={{ duration: 0.3 }}
         className="fixed inset-0 z-40 bg-black/95 backdrop-blur-lg lg:hidden"
       >
-        <div className={cn("flex h-full flex-col items-center justify-center gap-8", poppins.variable)}>
+        <div className={cn("flex h-full flex-col items-center justify-center gap-6 px-6", poppins.variable)}>
           {NAV_LINKS.map((link, i) => (
             <MotionLink
               key={link.href}
@@ -106,12 +106,12 @@ export function Navbar() {
               initial={{ opacity: 0, y: 20 }}
               animate={mobileOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ delay: i * 0.05 }}
-              className="font-[family-name:var(--font-poppins)] text-2xl font-bold uppercase tracking-wider text-white"
+              className="font-[family-name:var(--font-poppins)] text-xl font-bold uppercase tracking-wider text-white sm:text-2xl"
             >
               {link.label}
             </MotionLink>
           ))}
-          <Button asChild className="mt-4">
+          <Button asChild size="lg" className="mt-4 w-full max-w-xs">
             <Link href="/contact" onClick={() => setMobileOpen(false)}>
               Request a Quote
             </Link>

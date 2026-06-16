@@ -7,7 +7,6 @@
   font-style: normal;
 }
 
-/* Sits flush under the Hero — no gap, black bg continues */
 .wrapper {
   background: #1d74ff;
   width: 100%;
@@ -39,8 +38,9 @@
   line-height: 1;
 }
 
-.r1 { font-size: 10vw; }
-.r2 { font-size: 7.5vw; }
+/* Mobile first — bigger than before */
+.r1 { font-size: clamp(3.5rem, 12vw, 10vw); }
+.r2 { font-size: clamp(2.8rem, 9vw, 7.5vw); }
 
 .w { color: #ffffff; }
 .c { color: #00fffd; }

@@ -42,9 +42,9 @@ export function Statistics() {
             >
               <AnimatedCounter
                 value={stat.value}
-                className="font-display text-3xl font-bold text-white sm:text-4xl md:text-5xl"
+                className="font-display text-4xl font-bold text-white sm:text-5xl md:text-6xl"
               />
-              <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/40 sm:text-xs">
+              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/40 sm:text-sm">
                 {stat.label}
               </p>
             </motion.div>
