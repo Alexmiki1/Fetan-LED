@@ -29,7 +29,7 @@ const barlowCondensed = Barlow_Condensed({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://fetan-led-4o7l.vercel.app"),
+  metadataBase: new URL("https://fetanled.com"),
   title: {
     default: `${COMPANY_NAME} | LED Screen Display Sales & Rental in Addis Ababa, Ethiopia`,
     template: `%s | ${COMPANY_NAME}`,
@@ -95,7 +95,7 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: COMPANY_NAME,
-  image: "https://fetan-led-4o7l.vercel.app/logo.png",
+  image: "https://fetanled.com/logo.png",
   description:
     "Fetan LED provides LED screen display sales, rental, and installation services in Addis Ababa, Ethiopia, including indoor, outdoor, and event display solutions.",
   address: {
@@ -106,7 +106,7 @@ const localBusinessSchema = {
   },
   telephone: "+251913001010",
   email: "hello@fetanled.com",
-  url: "https://fetan-led-4o7l.vercel.app",
+  url: "https://fetanled.com",
   areaServed: {
     "@type": "City",
     name: "Addis Ababa",
