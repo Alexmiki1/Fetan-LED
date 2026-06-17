@@ -138,11 +138,6 @@ export function Navbar() {
               {link.label}
             </MotionLink>
           ))}
-          <Button asChild size="lg" className="mt-4 w-full max-w-xs">
-            <Link href="/contact" onClick={() => setMobileOpen(false)}>
-              Request a Quote
-            </Link>
-          </Button>
         </div>
       </motion.div>
     </header>
