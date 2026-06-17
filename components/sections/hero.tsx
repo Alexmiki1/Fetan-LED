@@ -23,15 +23,21 @@ export function Hero() {
 
   useEffect(() => {
     let player: any;
+    let cancelled = false;
 
-    const initPlayer = () => {
+    function initPlayer() {
+      if (cancelled) return;
       const YT = (window as any).YT;
       if (!YT || !YT.Player) return;
 
       player = new YT.Player("hero-youtube-player", {
         events: {
+          onReady: () => {
+            // Fallback in case onStateChange never fires (some browsers)
+            setIsPlaying(true);
+            setHeroVideoReady(true);
+          },
           onStateChange: (event: any) => {
-            // YT.PlayerState.PLAYING === 1
             if (event.data === 1) {
               setIsPlaying(true);
               setHeroVideoReady(true);
@@ -39,21 +45,36 @@ export function Hero() {
           },
         },
       });
-    };
+    }
 
-    // Initialize player if YT API is already loaded
-    if ((window as any).YT && (window as any).YT.Player) {
-      initPlayer();
-    } else {
-      // Or set/wrap the global callback
+    // Load the YouTube IFrame API script if it isn't already on the page
+    if (!(window as any).YT) {
+      const existingScript = document.getElementById("youtube-iframe-api");
+      if (!existingScript) {
+        const tag = document.createElement("script");
+        tag.id = "youtube-iframe-api";
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
+      }
+
       const previousCallback = (window as any).onYouTubeIframeAPIReady;
       (window as any).onYouTubeIframeAPIReady = () => {
         if (previousCallback) previousCallback();
         initPlayer();
       };
+    } else if ((window as any).YT.Player) {
+      initPlayer();
     }
 
+    // Hard fallback: if nothing fires within 4s, just show the iframe anyway
+    const fallback = setTimeout(() => {
+      setIsPlaying(true);
+      setHeroVideoReady(true);
+    }, 4000);
+
     return () => {
+      cancelled = true;
+      clearTimeout(fallback);
       if (player && typeof player.destroy === "function") {
         player.destroy();
       }
@@ -66,7 +87,6 @@ export function Hero() {
       className="relative min-h-screen overflow-hidden bg-black"
       aria-label="Hero"
     >
-      {/* YouTube Background — controls=0 hides UI, autoplay=1&mute=1 starts it silently */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <iframe
           id="hero-youtube-player"
@@ -78,9 +98,9 @@ export function Hero() {
             left: "50%",
             transform: "translate(-50%, -50%) scale(1.3)",
             width: "100vw",
-            height: "56.25vw", // 16:9 ratio
+            height: "56.25vw",
             minHeight: "100vh",
-            minWidth: "177.77vh", // 16:9 ratio
+            minWidth: "177.77vh",
             border: "none",
             pointerEvents: "none",
             opacity: isPlaying ? 1 : 0,
@@ -91,21 +111,16 @@ export function Hero() {
         />
       </div>
 
-      {/* Overlay to cover any remaining YouTube UI chrome at edges */}
       <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/40 to-transparent z-[1]" />
       <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/40 to-transparent z-[1]" />
       <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-black/40 to-transparent z-[1]" />
       <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-black/40 to-transparent z-[1]" />
 
-      {/* Blue gradient overlay */}
       <div className="absolute inset-0 z-[2] bg-[linear-gradient(165deg,rgba(29,116,255,0.55)_0%,rgba(21,89,204,0.45)_20%,rgba(14,61,140,0.55)_40%,rgba(10,45,102,0.65)_60%,rgba(4,14,26,0.80)_80%,rgba(0,0,0,0.92)_100%)]" />
 
-      {/* Bottom fade to black */}
       <div className="absolute inset-x-0 bottom-0 h-40 z-[3] bg-gradient-to-t from-black to-transparent" />
 
-      {/* Content */}
       <div className="relative z-10 grid min-h-screen grid-cols-1 lg:grid-cols-2" style={{ zIndex: 4 }}>
-        {/* Left Panel */}
         <motion.div
           custom={0}
           initial="hidden"
@@ -136,10 +151,8 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* Divider */}
         <div className="hidden lg:block absolute left-1/2 top-1/4 h-1/2 w-px bg-white/10" />
 
-        {/* Right Panel */}
         <motion.div
           custom={1}
           initial="hidden"

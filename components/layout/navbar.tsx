@@ -42,7 +42,6 @@ export function Navbar() {
 
     const handleOutside = (e: MouseEvent | TouchEvent) => {
       const target = e.target as Node;
-      // If tap is outside the menu AND outside the hamburger button → close
       if (
         menuRef.current &&
         !menuRef.current.contains(target) &&
@@ -78,6 +77,7 @@ export function Navbar() {
           <Logo size="md" />
         </div>
 
+        {/* Desktop Links */}
         <ul className={cn("hidden items-center gap-8 lg:flex xl:gap-10", poppins.variable)}>
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
@@ -97,7 +97,7 @@ export function Navbar() {
           </Button>
         </div>
 
-        {/* Hamburger */}
+        {/* Hamburger (Kept z-50 so it sits on top of everything) */}
         <button
           ref={hamburgerRef}
           type="button"
@@ -112,7 +112,7 @@ export function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu overlay */}
       <motion.div
         ref={menuRef}
         initial={false}
@@ -122,9 +122,19 @@ export function Navbar() {
           closed: { opacity: 0, pointerEvents: "none" as const },
         }}
         transition={{ duration: 0.2 }}
-        className="fixed inset-0 z-40 bg-black/95 backdrop-blur-lg lg:hidden"
+        className="fixed inset-0 z-40 flex flex-col bg-black/95 backdrop-blur-lg lg:hidden"
       >
-        <div className={cn("flex h-full flex-col items-center justify-center gap-6 px-6", poppins.variable)}>
+        {/* Mobile Menu Top Row: Restores the logo visually alongside the 'X' button */}
+        <div className="flex h-16 items-center justify-between px-4 sm:h-20 sm:px-6">
+          <div className="scale-90 sm:scale-100" onClick={() => setMobileOpen(false)}>
+            <Logo size="md" />
+          </div>
+          {/* Invisible spacer matching the hamburger button size keeps the layout symmetrical */}
+          <div className="w-10 h-10" />
+        </div>
+
+        {/* Mobile Links container: Centered inside the remaining screen area */}
+        <div className={cn("flex flex-1 flex-col items-center justify-center gap-6 pb-16 px-6", poppins.variable)}>
           {NAV_LINKS.map((link, i) => (
             <MotionLink
               key={link.href}
