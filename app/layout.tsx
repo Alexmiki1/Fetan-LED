@@ -5,7 +5,6 @@ import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { LoadingScreen } from "@/components/layout/loading-screen";
 import { VideoLoadingProvider } from "@/lib/contexts/video-loading";
-import Script from "next/script";
 import { COMPANY_NAME, COMPANY_TAGLINE } from "@/lib/constants/navigation";
 
 import "./globals.css";
@@ -30,41 +29,92 @@ const barlowCondensed = Barlow_Condensed({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://fetan-led-4o7l.vercel.app"),
   title: {
-    default: `${COMPANY_NAME} | ${COMPANY_TAGLINE}`,
+    default: `${COMPANY_NAME} | LED Screen Display Sales & Rental in Addis Ababa, Ethiopia`,
     template: `%s | ${COMPANY_NAME}`,
   },
   description:
-    "Premium LED display solutions for permanent installations and event rentals. Sales, installation, maintenance, and custom design services with industry-leading pixel pitch and rapid response.",
+    "Fetan LED is Ethiopia's leading LED screen display company in Addis Ababa, offering LED screen sales, rental, and installation for events, advertising, and permanent indoor/outdoor displays. Fast quotes, reliable service.",
   keywords: [
-    "LED display",
-    "LED wall",
-    "event rentals",
-    "digital signage",
-    "pixel pitch",
-    "LED installation",
-    "corporate display",
-    "outdoor LED",
+    "LED screen Ethiopia",
+    "LED display Addis Ababa",
+    "LED screen rental Addis Ababa",
+    "LED billboard Ethiopia",
+    "outdoor LED screen Ethiopia",
+    "indoor LED display Addis Ababa",
+    "LED video wall Ethiopia",
+    "LED screen for sale Ethiopia",
+    "LED screen installation Addis Ababa",
+    "LED advertising screen Ethiopia",
+    "LED screen rental for events Addis Ababa",
+    "LED stage screen rental Ethiopia",
+    "LED billboard advertising Addis Ababa",
+    "LED screen company Ethiopia",
+    "LED display installation services Ethiopia",
+    "buy LED screen Addis Ababa",
+    "LED panel supplier Ethiopia",
+    "LED screen for concerts Ethiopia",
+    "digital signage Addis Ababa",
+    "LED screen maintenance Ethiopia",
+    "P2.5 LED screen Ethiopia",
+    "P4 outdoor LED display",
+    "pixel pitch LED screen Addis Ababa",
+    "transparent LED screen Ethiopia",
+    "curved LED display Ethiopia",
+    "best LED screen company Ethiopia",
+    "LED screen price Ethiopia",
+    "LED display cost Addis Ababa",
   ],
   authors: [{ name: COMPANY_NAME }],
   openGraph: {
     type: "website",
     locale: "en_US",
     siteName: COMPANY_NAME,
-    title: `${COMPANY_NAME} | ${COMPANY_TAGLINE}`,
+    title: `${COMPANY_NAME} | LED Screen Display Sales & Rental in Addis Ababa, Ethiopia`,
     description:
-      "Premium LED display solutions for permanent installations and event rentals.",
+      "LED screen sales, rental, and installation in Addis Ababa, Ethiopia. Indoor, outdoor, and event display solutions with fast turnaround.",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${COMPANY_NAME} | ${COMPANY_TAGLINE}`,
+    title: `${COMPANY_NAME} | LED Screen Display Sales & Rental in Addis Ababa, Ethiopia`,
     description:
-      "Premium LED display solutions for permanent installations and event rentals.",
+      "LED screen sales, rental, and installation in Addis Ababa, Ethiopia. Indoor, outdoor, and event display solutions with fast turnaround.",
   },
   robots: {
     index: true,
     follow: true,
   },
+  other: {
+    "geo.region": "ET-AA",
+    "geo.placename": "Addis Ababa, Ethiopia",
+  },
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: COMPANY_NAME,
+  image: "https://fetan-led-4o7l.vercel.app/logo.png",
+  description:
+    "Fetan LED provides LED screen display sales, rental, and installation services in Addis Ababa, Ethiopia, including indoor, outdoor, and event display solutions.",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Haile Gebre Silase St",
+    addressLocality: "Addis Ababa",
+    addressCountry: "ET",
+  },
+  telephone: "+251913001010",
+  email: "hello@fetanled.com",
+  url: "https://fetan-led-4o7l.vercel.app",
+  areaServed: {
+    "@type": "City",
+    name: "Addis Ababa",
+  },
+  sameAs: [
+    "https://linkedin.com/company/fetanled",
+    "https://fb.me/FetanLED",
+  ],
 };
 
 export const viewport: Viewport = {
@@ -84,10 +134,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${barlowCondensed.variable} h-full scroll-smooth antialiased`}
     >
       <head>
-        <link rel="preconnect" href="https://www.youtube-nocookie.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://www.youtube.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://static.doubleclick.net" crossOrigin="anonymous" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
       </head>
       <body className="min-h-full bg-black font-sans text-white">
         <VideoLoadingProvider>
@@ -97,7 +147,6 @@ export default function RootLayout({
           {/* Footer sits on solid #1d74ff — connects seamlessly with page gradient */}
           <Footer />
         </VideoLoadingProvider>
-        <Script src="https://www.youtube.com/iframe_api" strategy="afterInteractive" />
       </body>
     </html>
   );
