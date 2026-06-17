@@ -25,6 +25,24 @@ const featuredProducts = FEATURED_IDS.map((id) =>
 
 const remainingProducts = PRODUCTS.filter((p) => !FEATURED_IDS.includes(p.id));
 
+const INDOOR_MODELS = ["P1.25 Cabinet", "P1.8 Cabinet", "P2.5 Cabinet", "P2.5 Module"];
+const OUTDOOR_MODELS = ["P4 Module", "P4 Cabinet", "P10 Single Color", "P10 Full Color"];
+
+function ModelChips({ models }: { models: string[] }) {
+  return (
+    <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
+      {models.map((model) => (
+        <span
+          key={model}
+          className="rounded-full border border-brand-blue/40 bg-brand-blue/15 px-4 py-1.5 text-sm font-semibold uppercase tracking-wider text-white"
+        >
+          {model}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function FeaturedCard({
   product,
   index,
@@ -98,6 +116,12 @@ export function ProductsGallery() {
           <h3 className="text-center font-display text-lg font-bold uppercase tracking-[0.2em] text-white sm:text-left sm:text-xl">
             Outdoor LED Display Screen
           </h3>
+          <div className="mt-3 flex flex-col items-center gap-2 sm:flex-row sm:items-baseline sm:gap-3">
+            <span className="text-base font-semibold uppercase tracking-wider text-white">
+              Available models:
+            </span>
+            <ModelChips models={OUTDOOR_MODELS} />
+          </div>
           <div className="mt-6 grid gap-6 sm:grid-cols-2 sm:gap-8">
             {featuredProducts.slice(0, 2).map((product, idx) => (
               <FeaturedCard
@@ -115,6 +139,12 @@ export function ProductsGallery() {
           <h3 className="text-center font-display text-lg font-bold uppercase tracking-[0.2em] text-white sm:text-left sm:text-xl">
             Indoor Display Screen
           </h3>
+          <div className="mt-3 flex flex-col items-center gap-2 sm:flex-row sm:items-baseline sm:gap-3">
+            <span className="text-base font-semibold uppercase tracking-wider text-white">
+              Available models:
+            </span>
+            <ModelChips models={INDOOR_MODELS} />
+          </div>
           <div className="mt-6 grid gap-6 sm:grid-cols-2 sm:gap-8">
             {featuredProducts.slice(2, 4).map((product, idx) => (
               <FeaturedCard
