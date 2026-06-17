@@ -122,7 +122,7 @@ export function Hero() {
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-6">
               <Button asChild>
-                <a href="#projects">View Solutions</a>
+                <a href="#products">View Solutions</a>
               </Button>
               <div className="flex items-baseline gap-2">
                 <span className="font-display text-3xl font-light text-white/90 sm:text-4xl">

@@ -107,11 +107,12 @@ export function QuoteForm() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-quote-section py-20 sm:py-28"
+      className="relative overflow-hidden py-20 sm:py-28"
+      style={{
+        background: "linear-gradient(180deg, #1245a0 0%, #15409a 25%, #1858b8 50%, #1a66cc 75%, #1d74ff 100%)",
+      }}
       aria-labelledby="quote-heading"
     >
-      {/* Top fade from black into the section */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/60 to-transparent" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">

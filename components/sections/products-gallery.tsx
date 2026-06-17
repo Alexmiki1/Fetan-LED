@@ -4,15 +4,76 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { X, CheckCircle, Cpu, MessageSquare } from "lucide-react";
+import { X, CheckCircle, Cpu, MessageSquare, ChevronDown } from "lucide-react";
 
 import { SectionHeading } from "@/components/shared/section-heading";
 import { Button } from "@/components/ui/button";
 import { PRODUCTS } from "@/lib/constants/products";
 import type { Product } from "@/types";
 
+// Featured: Outdoor row + Indoor row (2 columns x 2 rows)
+const FEATURED_IDS = [
+  "outdoor-die-cast",
+  "outdoor-fixed-steel",
+  "indoor-die-cast",
+  "transparent-indoor",
+];
+
+const featuredProducts = FEATURED_IDS.map((id) =>
+  PRODUCTS.find((p) => p.id === id)
+).filter(Boolean) as Product[];
+
+const remainingProducts = PRODUCTS.filter((p) => !FEATURED_IDS.includes(p.id));
+
+function FeaturedCard({
+  product,
+  index,
+  onClick,
+}: {
+  product: Product;
+  index: number;
+  onClick: () => void;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      onClick={onClick}
+      className="group cursor-pointer rounded-2xl border border-white/10 bg-black/20 p-6 transition-all duration-300 hover:border-brand-blue/40 hover:bg-black/40 hover:shadow-[0_8px_40px_rgba(29,116,255,0.18)] sm:p-8"
+    >
+      <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-brand-blue">
+        {product.subtitle}
+      </span>
+
+      <div className="relative mt-4 aspect-[16/10] w-full overflow-hidden rounded-xl bg-white p-8 transition-transform duration-300 group-hover:scale-[1.02] sm:aspect-[16/9] sm:p-10">
+        <Image
+          src={product.image}
+          alt={product.name}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-contain p-2"
+          quality={90}
+          priority={index < 2}
+        />
+      </div>
+
+      <div className="mt-6 flex flex-col justify-between">
+        <h3 className="font-display text-xl font-bold uppercase tracking-wider text-white transition-colors duration-300 group-hover:text-brand-blue sm:text-2xl">
+          {product.name}
+        </h3>
+        <span className="mt-5 text-xs font-semibold uppercase tracking-wider text-brand-blue/80 transition-colors duration-300 group-hover:text-brand-blue">
+          Click to view details &rarr;
+        </span>
+      </div>
+    </motion.div>
+  );
+}
+
 export function ProductsGallery() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = selectedProduct ? "hidden" : "";
@@ -32,43 +93,109 @@ export function ProductsGallery() {
           id="products-heading"
         />
 
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {PRODUCTS.map((product, idx) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.4, delay: idx * 0.05 }}
-              onClick={() => setSelectedProduct(product)}
-              className="group cursor-pointer rounded-2xl border border-white/10 bg-black/20 p-4 transition-all duration-300 hover:border-brand-blue/40 hover:bg-black/40 hover:shadow-[0_8px_30px_rgb(29,116,255,0.15)]"
+        {/* Outdoor row */}
+        <div className="mt-12">
+          <h3 className="text-center font-display text-lg font-bold uppercase tracking-[0.2em] text-white sm:text-left sm:text-xl">
+            Outdoor LED Display Screen
+          </h3>
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 sm:gap-8">
+            {featuredProducts.slice(0, 2).map((product, idx) => (
+              <FeaturedCard
+                key={product.id}
+                product={product}
+                index={idx}
+                onClick={() => setSelectedProduct(product)}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Indoor row */}
+        <div className="mt-12">
+          <h3 className="text-center font-display text-lg font-bold uppercase tracking-[0.2em] text-white sm:text-left sm:text-xl">
+            Indoor Display Screen
+          </h3>
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 sm:gap-8">
+            {featuredProducts.slice(2, 4).map((product, idx) => (
+              <FeaturedCard
+                key={product.id}
+                product={product}
+                index={idx + 2}
+                onClick={() => setSelectedProduct(product)}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* See More toggle */}
+        {!showAll && remainingProducts.length > 0 && (
+          <div className="mt-10 flex justify-center">
+            <Button
+              variant="outline"
+              onClick={() => setShowAll(true)}
+              className="gap-2"
             >
-              <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-white p-6 transition-transform duration-300 group-hover:scale-[1.02]">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-contain p-2"
-                  quality={85}
-                  priority={idx < 4}
-                />
+              See More Products
+              <ChevronDown className="h-4 w-4" />
+            </Button>
+          </div>
+        )}
+
+        {/* Remaining products — smaller grid, same style as before */}
+        <AnimatePresence>
+          {showAll && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.4 }}
+              className="overflow-hidden"
+            >
+              <div className="mt-10 grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {remainingProducts.map((product, idx) => (
+                  <motion.div
+                    key={product.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: idx * 0.05 }}
+                    onClick={() => setSelectedProduct(product)}
+                    className="group cursor-pointer rounded-2xl border border-white/5 bg-neutral-900/40 p-4 transition-all duration-300 hover:border-brand-blue/30 hover:bg-neutral-900/80 hover:shadow-[0_8px_30px_rgb(29,116,255,0.08)]"
+                  >
+                    <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-white p-6 transition-transform duration-300 group-hover:scale-[1.02]">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                        className="object-contain p-2"
+                        quality={85}
+                      />
+                    </div>
+                    <div className="mt-4 flex flex-col justify-between">
+                      <h3 className="font-display text-base font-bold uppercase tracking-wider text-white transition-colors duration-300 group-hover:text-brand-blue">
+                        {product.name}
+                      </h3>
+                      <p className="mt-1 text-xs text-white/50 line-clamp-1">{product.subtitle}</p>
+                      <span className="mt-4 text-[10px] font-semibold uppercase tracking-wider text-brand-blue/80 transition-colors duration-300 group-hover:text-brand-blue">
+                        Click to view details &rarr;
+                      </span>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
 
-              <div className="mt-4 flex flex-col justify-between">
-                <h3 className="font-display text-base font-bold uppercase tracking-wider text-white transition-colors duration-300 group-hover:text-brand-blue">
-                  {product.name}
-                </h3>
-                <p className="mt-1 text-xs text-white/50 line-clamp-1">{product.subtitle}</p>
-                <span className="mt-4 text-[10px] font-semibold uppercase tracking-wider text-brand-blue/80 transition-colors duration-300 group-hover:text-brand-blue">
-                  Click to view details &rarr;
-                </span>
+              <div className="mt-8 flex justify-center">
+                <Button variant="outline" onClick={() => setShowAll(false)} className="gap-2">
+                  Show Less
+                  <ChevronDown className="h-4 w-4 rotate-180" />
+                </Button>
               </div>
             </motion.div>
-          ))}
-        </div>
+          )}
+        </AnimatePresence>
       </div>
 
+      {/* Modal — unchanged */}
       <AnimatePresence>
         {selectedProduct && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">

@@ -115,10 +115,10 @@
 /* Quote section: black at top, ends at exactly #1559cc at the very bottom */
 .bg-quote-section {
   background: linear-gradient(180deg,
-      #000000 0%,
-      #020a1a 20%,
-      #1245a0 85%,
-      #1245a0 85%,
+      #1245a0 100%,
+      #1245a0 100%,
+      #1245a0 100%,
+      #1245a0 100%,
       #1d74ff 100%,
       #1d74ff 100%,
       #1d74ff 100%);

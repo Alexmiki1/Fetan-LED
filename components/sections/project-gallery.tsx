@@ -53,7 +53,7 @@ function ProjectCard({ project, index }: { project: (typeof PROJECTS)[number]; i
       )}
       <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(29,116,255,0.1)_0%,transparent_50%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(29,116,255,0.14)_0%,transparent_50%)]" />
-      <div className="absolute inset-#1245a0 85%, bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
       <div className="relative flex h-full flex-col justify-between p-5 sm:p-6">
         <div className="flex items-start justify-between">
           <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/70">
@@ -64,10 +64,10 @@ function ProjectCard({ project, index }: { project: (typeof PROJECTS)[number]; i
           )}
         </div>
         <div>
-          <h3 className={cn("font-display font-bold uppercase tracking-wide text-white", isLarge ? "text-xl sm:text-2xl lg:text-3xl" : "text-base sm:text-lg")}>
+          <h3 className={cn("font-display font-bold uppercase tracking-wide text-white", isLarge ? "text-2xl sm:text-3xl lg:text-4xl" : "text-lg sm:text-xl")}>
             {project.title}
           </h3>
-          <p className="mt-2 text-xs text-white/50 sm:text-sm">{project.subtitle}</p>
+          <p className="mt-2 text-sm text-white/50 sm:text-base">{project.subtitle}</p>
           <span className="mt-4 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-brand-blue opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             View Case Study
           </span>
@@ -85,6 +85,9 @@ export function ProjectGallery() {
     <section
       id="projects"
       className="relative border-t border-white/10 py-20 sm:py-28"
+      style={{
+        background: "linear-gradient(180deg, #000000 0%, #050a18 30%, #0a1530 55%, #0e2050 75%, #1245a0 100%)",
+      }}
       aria-labelledby="projects-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
