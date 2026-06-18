@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -66,6 +66,8 @@ export function QuoteForm() {
       company: "",
       email: "",
       phone: "",
+      eventStartDate: "",
+      eventEndDate: "",
       venueEnvironment: "",
       screenWidth: "",
       screenHeight: "",
@@ -86,10 +88,19 @@ export function QuoteForm() {
       return;
     }
     try {
+      const payload = {
+        ...data,
+        eventDates:
+          data.serviceType === "rentals" && data.eventStartDate
+            ? data.eventEndDate
+              ? `${data.eventStartDate} to ${data.eventEndDate}`
+              : data.eventStartDate
+            : undefined,
+      };
       const response = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
       if (!response.ok) {
         const json = (await response.json().catch(() => null)) as { error?: string } | null;
@@ -187,6 +198,25 @@ export function QuoteForm() {
                     <Input type="tel" {...register("phone")} placeholder="+251 ____" aria-invalid={!!errors.phone} />
                   </FormField>
                 </div>
+
+                <AnimatePresence initial={false}>
+                  {serviceType === "rentals" && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="grid gap-5 sm:grid-cols-2 overflow-hidden"
+                    >
+                      <FormField label="EVENT START DATE" error={errors.eventStartDate?.message}>
+                        <Input type="date" {...register("eventStartDate")} aria-invalid={!!errors.eventStartDate} />
+                      </FormField>
+                      <FormField label="EVENT END DATE" error={errors.eventEndDate?.message}>
+                        <Input type="date" {...register("eventEndDate")} aria-invalid={!!errors.eventEndDate} />
+                      </FormField>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 <FormField label="VENUE / ENVIRONMENT" error={errors.venueEnvironment?.message}>
                   <Select

@@ -13,6 +13,8 @@ export const quoteFormSchema = z
     .max(100, "Company name must be under 100 characters"),
   email: z.string().email("Please enter a valid email address"),
   phone: z.string().max(20, "Phone number is too long").optional().or(z.literal("")),
+  eventStartDate: z.string().optional().or(z.literal("")),
+  eventEndDate: z.string().optional().or(z.literal("")),
   venueEnvironment: z.string().optional().or(z.literal("")),
   screenWidth: z.string().optional().or(z.literal("")),
   screenHeight: z.string().optional().or(z.literal("")),
