@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { LoadingScreen } from "@/components/layout/loading-screen";
 import { VideoLoadingProvider } from "@/lib/contexts/video-loading";
-import { COMPANY_NAME, COMPANY_TAGLINE } from "@/lib/constants/navigation";
+import { COMPANY_NAME, COMPANY_TAGLINE, COMPANY_EMAIL } from "@/lib/constants/navigation";
 
 import "./globals.css";
 
@@ -37,6 +37,13 @@ export const metadata: Metadata = {
   description:
     "Fetan LED is Ethiopia's leading LED screen display company in Addis Ababa, offering LED screen sales, rental, and installation for events, advertising, and permanent indoor/outdoor displays. Fast quotes, reliable service.",
   keywords: [
+    "LED Display screen Ethiopia",
+    "LED Display screen Addis Ababa",
+    "LED Display screen sales Ethiopia",
+    "LED Display screen sales Addis Ababa",
+    "LED screen sales Addis Ababa",
+    "LED display screen supplier Ethiopia",
+    "LED video wall sales Addis Ababa",
     "LED screen Ethiopia",
     "LED display Addis Ababa",
     "LED screen rental Addis Ababa",
@@ -105,7 +112,7 @@ const localBusinessSchema = {
     addressCountry: "ET",
   },
   telephone: "+251913001010",
-  email: "hello@fetanled.com",
+  email: COMPANY_EMAIL,
   url: "https://fetanled.com",
   areaServed: {
     "@type": "City",

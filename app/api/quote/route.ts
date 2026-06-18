@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
 // Change this to wherever you want quote requests to actually land
-const SALES_EMAIL = "hello@fetanled.com";
+const SALES_EMAIL = "alexxissmiki@gmail.com";
 const FROM_EMAIL = process.env.QUOTE_FROM_EMAIL || "quotes@fetanled.com";
 const BRAND_NAME = "Fetanled";
 
@@ -137,7 +137,12 @@ export async function POST(req: Request) {
   const resend = new Resend(process.env.RESEND_API_KEY);
 
   try {
-    const body = (await req.json()) as Partial<QuotePayload>;
+    const body = (await req.json()) as Partial<QuotePayload> & {
+      contentTypeVideo?: boolean;
+      contentTypeStatic?: boolean;
+      contentTypeLiveFeed?: boolean;
+      contentTypeScoreboard?: boolean;
+    };
     console.log("📩 Received Payload:", body);
 
     if (!body.name || !body.email || !body.company) {
@@ -146,6 +151,13 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
+
+    const contentTypes: string[] = [];
+    if (body.contentTypeVideo) contentTypes.push("Video / Animation");
+    if (body.contentTypeStatic) contentTypes.push("Static Imagery");
+    if (body.contentTypeLiveFeed) contentTypes.push("Live Feed");
+    if (body.contentTypeScoreboard) contentTypes.push("Scoreboard / Data");
+    const contentType = contentTypes.length > 0 ? contentTypes.join(", ") : (body.contentType ?? "");
 
     const payload: QuotePayload = {
       serviceType: body.serviceType === "rentals" ? "rentals" : "sales",
@@ -159,7 +171,7 @@ export async function POST(req: Request) {
       screenWidth: body.screenWidth ?? "",
       screenHeight: body.screenHeight ?? "",
       numberOfScreens: body.numberOfScreens ?? "",
-      contentType: body.contentType ?? "",
+      contentType: contentType,
       pixelPitchPreference: body.pixelPitchPreference ?? "",
       closestViewerDistance: body.closestViewerDistance ?? "",
       budgetRange: body.budgetRange ?? "",

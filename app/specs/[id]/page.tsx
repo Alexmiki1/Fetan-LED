@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, ShieldAlert, BadgeCheck, Zap } from "lucide-react";
 
 import { SPEC_PRODUCTS } from "@/lib/constants/specs";
+import { COMPANY_EMAIL } from "@/lib/constants/navigation";
 import { Button } from "@/components/ui/button";
 import { PrintButton } from "@/components/ui/print-button";
 
@@ -228,7 +229,7 @@ export default function SpecPage({ params }: PageProps) {
           </p>
 
           <p>
-            For the latest updates or inquiries, email hello@fetanled.com or
+            For the latest updates or inquiries, email {COMPANY_EMAIL} or
             visit www.fetanled.com
           </p>
         </div>
