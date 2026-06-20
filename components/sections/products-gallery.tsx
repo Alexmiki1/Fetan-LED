@@ -28,17 +28,243 @@ const remainingProducts = PRODUCTS.filter((p) => !FEATURED_IDS.includes(p.id));
 const INDOOR_MODELS = ["P1.25 Cabinet", "P1.8 Cabinet", "P2.5 Cabinet", "P2.5 Module"];
 const OUTDOOR_MODELS = ["P4 Module", "P4 Cabinet", "P10 Single Color", "P10 Full Color"];
 
-function ModelChips({ models }: { models: string[] }) {
+interface ModelInfo {
+  name: string;
+  image: string;
+  category: "Indoor" | "Outdoor";
+  description: string;
+  specs: { label: string; value: string }[];
+}
+
+const MODEL_DATA: Record<string, ModelInfo> = {
+  "P1.25 Cabinet": {
+    name: "P1.25 Cabinet",
+    image: "/images/products/p1_25_cabinet.png",
+    category: "Indoor",
+    description: "Ultra-fine pixel pitch indoor LED cabinet. Engineered for close-up viewing environments like control rooms, corporate boardrooms, and high-end retail displays where exceptional detail and clarity are paramount.",
+    specs: [
+      { label: "Pixel Pitch", value: "1.25 mm" },
+      { label: "Cabinet Size", value: "600 x 337.5 mm" },
+      { label: "Resolution", value: "480 x 270 px" },
+      { label: "Brightness", value: "600 - 800 nits" },
+      { label: "Refresh Rate", value: "3,840 Hz" },
+      { label: "Cabinet Material", value: "Die-Cast Aluminium" }
+    ]
+  },
+  "P1.8 Cabinet": {
+    name: "P1.8 Cabinet",
+    image: "/images/products/p1_8_cabinet.png",
+    category: "Indoor",
+    description: "Fine-pitch indoor LED display cabinet offering a balance of stunning high resolution and cost-effectiveness. Perfect for corporate lobbies, conference halls, and premium branding displays.",
+    specs: [
+      { label: "Pixel Pitch", value: "1.86 mm" },
+      { label: "Cabinet Size", value: "600 x 337.5 mm" },
+      { label: "Resolution", value: "322 x 181 px" },
+      { label: "Brightness", value: "800 nits" },
+      { label: "Refresh Rate", value: "3,840 Hz" },
+      { label: "Cabinet Material", value: "Die-Cast Aluminium" }
+    ]
+  },
+  "P2.5 Cabinet": {
+    name: "P2.5 Cabinet",
+    image: "/images/products/p2_5_cabinet.png",
+    category: "Indoor",
+    description: "Standard resolution indoor LED cabinet. Highly versatile and popular for retail walls, stage backdrops, and information displays with standard viewing distances.",
+    specs: [
+      { label: "Pixel Pitch", value: "2.5 mm" },
+      { label: "Cabinet Size", value: "640 x 640 mm" },
+      { label: "Resolution", value: "256 x 256 px" },
+      { label: "Brightness", value: "800 - 1,000 nits" },
+      { label: "Refresh Rate", value: "1,920 - 3,840 Hz" },
+      { label: "Cabinet Material", value: "Die-Cast Aluminium" }
+    ]
+  },
+  "P2.5 Module": {
+    name: "P2.5 Module",
+    image: "/images/products/p2_5_module.png",
+    category: "Indoor",
+    description: "Individual indoor P2.5 LED module. Features magnetic front service capability. Ideal for custom structural frames, curved walls, columns, or direct wall-mounting projects.",
+    specs: [
+      { label: "Pixel Pitch", value: "2.5 mm" },
+      { label: "Module Size", value: "320 x 160 mm" },
+      { label: "Resolution", value: "128 x 64 px" },
+      { label: "Lamp Type", value: "SMD1515" },
+      { label: "Service Mode", value: "Magnetic Front Access" },
+      { label: "Refresh Rate", value: "1,920 Hz" }
+    ]
+  },
+  "P4 Module": {
+    name: "P4 Module",
+    image: "/images/products/p4_module.png",
+    category: "Outdoor",
+    description: "Outdoor P4 LED module with high-brightness SMD LEDs. Fully waterproof front coating (IP65) and durable housing for long-term outdoor operation. Perfect for custom display enclosures.",
+    specs: [
+      { label: "Pixel Pitch", value: "4.0 mm" },
+      { label: "Module Size", value: "320 x 160 mm" },
+      { label: "Resolution", value: "80 x 40 px" },
+      { label: "Brightness", value: "5,500 nits" },
+      { label: "IP Rating", value: "IP65 Waterproof Front" },
+      { label: "Lamp Type", value: "SMD1919" }
+    ]
+  },
+  "P4 Cabinet": {
+    name: "P4 Cabinet",
+    image: "/images/products/p4_cabinet.png",
+    category: "Outdoor",
+    description: "Outdoor fixed/rental P4 LED cabinet. Featuring heavy-duty protection against weather, high brightness for direct sunlight visibility, and efficient heat dissipation.",
+    specs: [
+      { label: "Pixel Pitch", value: "4.0 mm" },
+      { label: "Cabinet Size", value: "960 x 960 mm" },
+      { label: "Resolution", value: "240 x 240 px" },
+      { label: "Brightness", value: "5,500 - 6,000 nits" },
+      { label: "IP Rating", value: "IP65 Front & Rear" },
+      { label: "Cabinet Material", value: "Steel / Aluminium" }
+    ]
+  },
+  "P10 Single Color": {
+    name: "P10 Single Color",
+    image: "/images/products/p10_single_color.png",
+    category: "Outdoor",
+    description: "High-contrast single color (typically red or amber) LED display module. Extensively used for scroll text banners, parking signs, store opening messages, and simple information displays.",
+    specs: [
+      { label: "Pixel Pitch", value: "10.0 mm" },
+      { label: "Module Size", value: "320 x 160 mm" },
+      { label: "Resolution", value: "32 x 16 px" },
+      { label: "Display Color", value: "Mono Color (Red/Amber)" },
+      { label: "Brightness", value: "3,500 nits" },
+      { label: "IP Rating", value: "IP65 Front" }
+    ]
+  },
+  "P10 Full Color": {
+    name: "P10 Full Color",
+    image: "/images/products/p10_full_color.png",
+    category: "Outdoor",
+    description: "Robust P10 full color outdoor LED module. Outstanding choice for large-scale outdoor advertising billboards, stadium perimeter displays, and long-range information screens.",
+    specs: [
+      { label: "Pixel Pitch", value: "10.0 mm" },
+      { label: "Module Size", value: "320 x 160 mm" },
+      { label: "Resolution", value: "32 x 16 px" },
+      { label: "Brightness", value: "6,500 nits" },
+      { label: "IP Rating", value: "IP65 Front" },
+      { label: "Lamp Type", value: "SMD3535" }
+    ]
+  }
+};
+
+function ModelChips({
+  models,
+  onModelClick,
+}: {
+  models: string[];
+  onModelClick: (model: string) => void;
+}) {
   return (
     <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
       {models.map((model) => (
-        <span
+        <button
           key={model}
-          className="rounded-full border border-brand-blue/40 bg-brand-blue/15 px-4 py-1.5 text-sm font-semibold uppercase tracking-wider text-white"
+          onClick={() => onModelClick(model)}
+          className="rounded-full border border-brand-blue/40 bg-brand-blue/15 hover:bg-brand-blue/30 hover:border-brand-blue hover:shadow-[0_0_12px_rgba(29,116,255,0.4)] px-4 py-1.5 text-sm font-semibold uppercase tracking-wider text-white transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
         >
           {model}
-        </span>
+        </button>
       ))}
+    </div>
+  );
+}
+
+interface ModelDetailsModalProps {
+  modelName: string | null;
+  onClose: () => void;
+}
+
+function ModelDetailsModal({ modelName, onClose }: ModelDetailsModalProps) {
+  if (!modelName) return null;
+  const modelInfo = MODEL_DATA[modelName];
+  if (!modelInfo) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="fixed inset-0 bg-black/80 backdrop-blur-md"
+      />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        transition={{ type: "spring", duration: 0.5 }}
+        className="relative z-10 flex h-full max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-white/10 bg-neutral-950 shadow-[0_0_50px_rgba(29,116,255,0.15)] md:h-auto"
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 z-20 rounded-full border border-white/10 bg-black/60 p-2 text-white/70 transition-colors hover:bg-black hover:text-white cursor-pointer"
+          aria-label="Close model details"
+        >
+          <X className="h-5 w-5" />
+        </button>
+        
+        <div className="flex-1 overflow-y-auto p-6 md:p-8">
+          <div className="grid gap-8 md:grid-cols-12">
+            <div className="md:col-span-5 flex flex-col gap-4">
+              <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-white p-6">
+                <Image
+                  src={modelInfo.image}
+                  alt={modelInfo.name}
+                  fill
+                  className="object-contain p-4"
+                  sizes="(max-width: 768px) 100vw, 30vw"
+                />
+              </div>
+            </div>
+            
+            <div className="md:col-span-7 flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-blue">
+                  Model Specifications
+                </span>
+                <h2 className="mt-2 font-display text-2xl font-bold uppercase tracking-wide text-white sm:text-3xl">
+                  {modelInfo.name}
+                </h2>
+                <div className="mt-2">
+                  <span className="inline-block rounded-full bg-brand-blue/15 px-2.5 py-0.5 text-[10px] font-semibold text-brand-blue border border-brand-blue/30 uppercase tracking-wider">
+                    {modelInfo.category} Screen
+                  </span>
+                </div>
+                <p className="mt-4 text-sm leading-relaxed text-white/70">
+                  {modelInfo.description}
+                </p>
+              </div>
+
+              <div className="mt-6">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-2">Technical Specs</h4>
+                <div className="grid gap-2.5 grid-cols-2">
+                  {modelInfo.specs.map((spec) => (
+                    <div key={spec.label} className="rounded-lg bg-white/[0.02] p-2.5 border border-white/5">
+                      <span className="text-[9px] uppercase tracking-wider text-white/40 block">{spec.label}</span>
+                      <span className="text-xs font-semibold text-white mt-0.5 block">{spec.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-8 pt-4 border-t border-white/5 flex flex-col sm:flex-row gap-3">
+                <Button className="flex-1" asChild onClick={onClose}>
+                  <Link href={`/contact?model=${encodeURIComponent(modelInfo.name)}`}>
+                    <MessageSquare className="mr-2 h-4 w-4" /> Inquire About This Model
+                  </Link>
+                </Button>
+                <Button variant="outline" className="flex-1" onClick={onClose}>
+                  Close Details
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 }
@@ -91,12 +317,13 @@ function FeaturedCard({
 
 export function ProductsGallery() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedModel, setSelectedModel] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = selectedProduct ? "hidden" : "";
+    document.body.style.overflow = (selectedProduct || selectedModel) ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
-  }, [selectedProduct]);
+  }, [selectedProduct, selectedModel]);
 
   return (
     <section
@@ -120,7 +347,7 @@ export function ProductsGallery() {
             <span className="text-base font-semibold uppercase tracking-wider text-white">
               Available models:
             </span>
-            <ModelChips models={OUTDOOR_MODELS} />
+            <ModelChips models={OUTDOOR_MODELS} onModelClick={setSelectedModel} />
           </div>
           <div className="mt-6 grid gap-6 sm:grid-cols-2 sm:gap-8">
             {featuredProducts.slice(0, 2).map((product, idx) => (
@@ -143,7 +370,7 @@ export function ProductsGallery() {
             <span className="text-base font-semibold uppercase tracking-wider text-white">
               Available models:
             </span>
-            <ModelChips models={INDOOR_MODELS} />
+            <ModelChips models={INDOOR_MODELS} onModelClick={setSelectedModel} />
           </div>
           <div className="mt-6 grid gap-6 sm:grid-cols-2 sm:gap-8">
             {featuredProducts.slice(2, 4).map((product, idx) => (
@@ -313,6 +540,11 @@ export function ProductsGallery() {
             </motion.div>
           </div>
         )}
+      </AnimatePresence>
+
+      {/* Model Detail Modal */}
+      <AnimatePresence>
+        <ModelDetailsModal modelName={selectedModel} onClose={() => setSelectedModel(null)} />
       </AnimatePresence>
     </section>
   );
