@@ -71,17 +71,17 @@ function buildAdminHtml(body: QuotePayload) {
                 ${row("Email Address", email)}
                 ${row("Phone", phone)}
                 ${row("Event Dates (if rental)", eventDatesRow)}
-                ${row("Location", location)}
+                
                 ${row("Venue / Environment", venueEnvironment)}
                 ${row("Screen Dimensions (Width x Height)", screenDimensionsRow)}
-                ${row("Number of Screens", numberOfScreens)}
-                ${row("Content Type", contentType)}
-                ${row("Pixel Pitch Preference", pixelPitchPreference)}
-                ${row("Closest Viewer Distance", closestViewerDistance)}
-                ${row("Budget Range", budgetRange)}
+                
+                
+                
+                
+              
                 ${row("Target Completion Date", targetCompletionDate)}
                 ${row("Additional Notes", additionalNotes)}
-                ${row("How Did You Hear About Us", heardAbout)}
+              
               </table>
             </td></tr>
           </table>

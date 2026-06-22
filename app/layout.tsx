@@ -74,6 +74,11 @@ export const metadata: Metadata = {
     "LED display cost Addis Ababa",
   ],
   authors: [{ name: COMPANY_NAME }],
+  icons: {
+    icon: "/logo-v2.png",
+    shortcut: "/logo-v2.png",
+    apple: "/logo-v2.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -81,12 +86,21 @@ export const metadata: Metadata = {
     title: `${COMPANY_NAME} | LED Screen Display Sales & Rental in Addis Ababa, Ethiopia`,
     description:
       "LED screen sales, rental, and installation in Addis Ababa, Ethiopia. Indoor, outdoor, and event display solutions with fast turnaround.",
+    images: [
+      {
+        url: "/logo-v2.png",
+        width: 800,
+        height: 600,
+        alt: "Fetan LED Logo",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${COMPANY_NAME} | LED Screen Display Sales & Rental in Addis Ababa, Ethiopia`,
     description:
       "LED screen sales, rental, and installation in Addis Ababa, Ethiopia. Indoor, outdoor, and event display solutions with fast turnaround.",
+    images: ["/logo-v2.png"],
   },
   robots: {
     index: true,
@@ -102,7 +116,7 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: COMPANY_NAME,
-  image: "https://fetanled.com/logo.png",
+  image: "https://fetanled.com/logo-v2.png",
   description:
     "Fetan LED provides LED screen display sales, rental, and installation services in Addis Ababa, Ethiopia, including indoor, outdoor, and event display solutions.",
   address: {
@@ -125,7 +139,7 @@ const localBusinessSchema = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#1d74ff",
   width: "device-width",
   initialScale: 1,
 };
@@ -151,7 +165,6 @@ export default function RootLayout({
           <LoadingScreen />
           <Navbar />
           <main>{children}</main>
-          {/* Footer sits on solid #1d74ff — connects seamlessly with page gradient */}
           <Footer />
         </VideoLoadingProvider>
       </body>
