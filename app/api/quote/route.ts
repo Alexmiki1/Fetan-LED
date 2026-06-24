@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
 // Change this to wherever you want quote requests to actually land
-const SALES_EMAIL = "alexxissmiki@gmail.com";
+const SALES_EMAIL = "contact@fetanled.com";
 const FROM_EMAIL = process.env.QUOTE_FROM_EMAIL || "quotes@fetanled.com";
 const BRAND_NAME = "Fetanled";
 

@@ -19,6 +19,8 @@ const SIZES = {
 
 export function Logo({ className, size = "md" }: LogoProps) {
   const { height, width } = SIZES[size];
+  const iconOffset = Math.round(width * 0.26);  // icon portion ≈ 26% of logo width
+  const textWidth  = width - iconOffset;         // remaining width = "FETAN LED" span
 
   return (
     <Link href="/" className={cn("group inline-flex shrink-0 flex-col items-start", className)}>
@@ -32,7 +34,14 @@ export function Logo({ className, size = "md" }: LogoProps) {
           style={{ height, width: "auto", maxWidth: width }}
           priority
         />
-        <span className="block text-[10px] font-bold uppercase tracking-[0.25em] text-white mt-0.5 pl-0.5">
+        <span
+          className="block text-[10px] font-bold uppercase text-white mt-0 whitespace-nowrap"
+          style={{
+            paddingLeft: iconOffset,
+            width: width,
+            letterSpacing: `${((textWidth - 110) / 19).toFixed(1)}px`,
+          }}
+        >
           LED Display Solutions
         </span>
       </motion.div>
