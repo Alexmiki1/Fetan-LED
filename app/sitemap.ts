@@ -6,7 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://fetanled.com";
 
   // Base static routes
-  const staticRoutes = ["", "/contact", "/services"].map((route) => ({
+  const staticRoutes = ["", "/contact", "/services", "/about"].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,

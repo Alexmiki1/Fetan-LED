@@ -73,8 +73,11 @@ export function Navbar() {
         className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:h-24 lg:px-8"
         aria-label="Main navigation"
       >
-        <div className="scale-90 sm:scale-100">
-          <Logo size="md" />
+        <div>
+          {/* Mobile / tablet: original size */}
+          <span className="lg:hidden"><Logo size="md" /></span>
+          {/* Desktop: bigger size */}
+          <span className="hidden lg:inline-flex"><Logo size="lg" /></span>
         </div>
 
         {/* Desktop Links */}
@@ -126,7 +129,7 @@ export function Navbar() {
       >
         {/* Mobile Menu Top Row: Restores the logo visually alongside the 'X' button */}
         <div className="flex h-16 items-center justify-between px-4 sm:h-20 sm:px-6">
-          <div className="scale-90 sm:scale-100" onClick={() => setMobileOpen(false)}>
+          <div onClick={() => setMobileOpen(false)}>
             <Logo size="md" />
           </div>
           {/* Invisible spacer matching the hamburger button size keeps the layout symmetrical */}

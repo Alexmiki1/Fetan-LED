@@ -4,6 +4,7 @@ import { Barlow_Condensed, Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { LoadingScreen } from "@/components/layout/loading-screen";
+import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { VideoLoadingProvider } from "@/lib/contexts/video-loading";
 import { COMPANY_NAME, COMPANY_TAGLINE, COMPANY_EMAIL } from "@/lib/constants/navigation";
 
@@ -166,6 +167,7 @@ export default function RootLayout({
           <Navbar />
           <main>{children}</main>
           <Footer />
+          <WhatsAppButton />
         </VideoLoadingProvider>
       </body>
     </html>

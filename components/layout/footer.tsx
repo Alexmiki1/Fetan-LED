@@ -15,10 +15,10 @@ const FOOTER_LINKS = {
     { label: "Event Rentals", href: "/services" },
   ],
   resources: [
+    { label: "About Us", href: "/about" },
     { label: "LED Products", href: "/#products" },
     { label: "Case Studies", href: "/#projects" },
     { label: "Support", href: "/contact" },
-    { label: "FAQ", href: "/contact" },
   ],
 };
 
