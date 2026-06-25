@@ -165,10 +165,10 @@ export default function AboutPage() {
               <span className="text-brand-blue">{COMPANY_NAME}</span>
             </h1>
             <p className="mt-6 max-w-3xl text-sm leading-relaxed text-white/60 sm:text-base">
-              Ethiopia&apos;s premier destination for cutting-edge LED screen supply,
+              Ethiopia&apos;s premier destination for cutting edge LED screen supply,
               custom engineering, and professional installation. Founded in 2016,
               we have spent the last decade helping businesses, brands, and public
-              spaces communicate more effectively with high-impact visual technology.
+              spaces communicate more effectively with high impact visual technology.
             </p>
             <p className="mt-3 max-w-3xl text-sm leading-relaxed text-white/50 sm:text-base">
               From commanding outdoor advertising billboards to seamless indoor
@@ -203,8 +203,8 @@ export default function AboutPage() {
                 </h2>
               </div>
               <p className="mt-5 text-sm leading-relaxed text-white/65">
-                To provide Ethiopian businesses and institutions with world-class LED display
-                technology — delivered with precision engineering, transparent pricing, and
+                To provide Ethiopian businesses and institutions with world class LED display
+                technology  delivered with precision engineering, transparent pricing, and
                 long-term post-installation support. We believe every space deserves a display
                 that communicates its message with maximum visual impact.
               </p>
@@ -220,10 +220,10 @@ export default function AboutPage() {
                 </h2>
               </div>
               <p className="mt-5 text-sm leading-relaxed text-white/65">
-                To become East Africa&apos;s most trusted LED display partner — raising the standard
+                To become East Africa&apos;s most trusted LED display partner raising the standard
                 for visual communication technology across the continent. We envision a future
                 where every major Ethiopian city landmark, venue, and brand speaks through
-                premium LED-powered displays.
+                premium LED powered displays.
               </p>
             </div>
           </div>
@@ -240,21 +240,13 @@ export default function AboutPage() {
                   <span className="text-white/60">Global Standards</span>
                 </h2>
                 <p className="mt-5 text-sm leading-relaxed text-white/60">
-                  Fetan LED was founded by a team of engineers and entrepreneurs who recognized a
-                  critical gap in Ethiopia&apos;s rapidly modernizing commercial sector: the absence
-                  of a reliable, technically sophisticated LED display partner.
+                  Fetan LED is a premium LED screen supplier based in Addis Ababa, specializing in custom structural fabrication and precision installation.
                 </p>
                 <p className="mt-4 text-sm leading-relaxed text-white/60">
-                  We are 100% Ethiopian-owned and operated, with deep local knowledge of the
-                  regulatory environment, climate conditions, and logistical challenges unique to
-                  operating in East Africa. We combine this local intelligence with global
-                  supply-chain partnerships to source the finest LED hardware on the market.
+                  Established in 2016 as Fetan ICT and Advertising, we have spent a decade transforming the advertising sector in Ethiopia and now urbanizing landscapes and corporate spaces with high-performance digital display technology. We engineer indoor and outdoor visual systems that command attention, maximize audience engagement, and are built to endure.
                 </p>
                 <p className="mt-4 text-sm leading-relaxed text-white/60">
-                  Our in-house engineering team handles every phase of the project lifecycle —
-                  from site surveys and custom structural design to calibration, software
-                  integration, and ongoing maintenance — ensuring complete accountability and
-                  the highest levels of quality control.
+                  As part of a unified digital ecosystem alongside our sister company, Fetan Advertising, we bridge the gap between heavy duty technological engineering and high ROI commercial visibility. From sourcing premium components and constructing massive steel support structures to managing high traffic ad placements, we are the single point of execution for brands ready to dominate the digital space.
                 </p>
                 <div className="mt-6 flex items-center gap-2 text-sm text-white/50">
                   <MapPin className="h-4 w-4 text-brand-blue" />
@@ -292,15 +284,15 @@ export default function AboutPage() {
           <section className="mt-24 border-t border-white/10 pt-20">
             <div className="text-center">
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">
-                Dual-Force Ecosystem
+                Dual Force Ecosystem
               </span>
               <h2 className="mt-3 font-display text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl">
                 Fetan Ecosystem
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/55 sm:text-base">
                 To provide our clients with a truly seamless experience, Fetan LED operates
-                alongside our sister company, Fetan Advertising — forming a powerful ecosystem
-                that bridges the gap between state-of-the-art hardware and high-performance visibility.
+                alongside our sister company, Fetan Advertising forming a powerful ecosystem
+                that bridges the gap between state of the art hardware and high performance visibility.
               </p>
             </div>
 
@@ -344,8 +336,8 @@ export default function AboutPage() {
                 Whether you are looking to{" "}
                 <span className="font-semibold text-white">purchase and install an enterprise-grade LED screen</span>{" "}
                 for your property, or you want to{" "}
-                <span className="font-semibold text-white">monetize a high-traffic location</span>{" "}
-                through premium advertising partnerships — the Fetan ecosystem delivers
+                <span className="font-semibold text-white">monetize a high traffic location</span>{" "}
+                through premium advertising partnerships the Fetan ecosystem delivers
                 everything you need under one roof.
               </p>
             </div>
