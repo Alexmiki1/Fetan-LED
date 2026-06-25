@@ -91,15 +91,18 @@ const PROCESS_STEPS = [
 
 export default function ServicesPage() {
   return (
-    <article className="min-h-screen bg-black pt-24 pb-0">
+    <article 
+      className="min-h-screen pt-24 pb-0"
+      style={{ background: "linear-gradient(180deg, #1d74ff 0%, #0a2d66 100%)" }}
+    >
       {/* Background radial glow */}
-      <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_50%_10%,rgba(29,116,255,0.08)_0%,transparent_65%)]" />
+      <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_50%_10%,rgba(255,255,255,0.08)_0%,transparent_65%)]" />
 
       {/* Services main content wrapper */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
         {/* Page Header */}
         <div className="border-b border-white/10 pb-12 text-center sm:text-left">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
             Our Expertise
           </span>
           <h1 className="mt-2 font-display text-4xl font-bold uppercase tracking-wide text-white sm:text-5xl md:text-6xl">
@@ -117,10 +120,10 @@ export default function ServicesPage() {
             return (
               <section
                 key={service.title}
-                className="group relative border border-white/10 bg-card-gradient p-6 transition-all duration-500 hover:border-brand-blue/40 hover:bg-card-gradient-hover hover:shadow-[0_0_50px_rgba(29,116,255,0.15)] sm:p-8"
+                className="group relative border border-white/10 bg-card-gradient p-6 transition-all duration-500 hover:border-white/40 hover:bg-card-gradient-hover hover:shadow-[0_0_50px_rgba(29,116,255,0.15)] sm:p-8"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center border border-brand-blue bg-brand-blue/10 text-white transition-colors duration-500 group-hover:bg-brand-blue group-hover:text-white">
+                  <div className="flex h-12 w-12 items-center justify-center border border-white bg-white/10 text-white transition-colors duration-500 group-hover:bg-white group-hover:text-white">
                     <Icon className="h-6 w-6" />
                   </div>
                   <div>
@@ -136,7 +139,7 @@ export default function ServicesPage() {
                 </p>
 
                 <div className="mt-8">
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-brand-blue">
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-white">
                     What We Deliver:
                   </h3>
                   <ul className="mt-4 space-y-3">
@@ -145,7 +148,7 @@ export default function ServicesPage() {
                         key={benefit}
                         className="flex items-start gap-2.5 text-xs text-white/60"
                       >
-                        <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue/70" />
+                        <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-white/70" />
                         <span>{benefit}</span>
                       </li>
                     ))}
@@ -159,7 +162,7 @@ export default function ServicesPage() {
         {/* Workflow / Process Section */}
         <section className="mt-24 border-t border-white/10 pt-20">
           <div className="text-center">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
               Our Process
             </span>
             <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl">
@@ -176,7 +179,7 @@ export default function ServicesPage() {
                 key={proc.step}
                 className="border border-white/5 bg-white/[0.01] p-6 text-center sm:text-left"
               >
-                <span className="font-display text-4xl font-light text-brand-blue/30">
+                <span className="font-display text-4xl font-light text-white/30">
                   {proc.step}
                 </span>
                 <h3 className="mt-3 font-display text-sm font-bold uppercase tracking-wider text-white">
