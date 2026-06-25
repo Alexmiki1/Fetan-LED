@@ -12,19 +12,25 @@ interface LogoProps {
 }
 
 const SIZES = {
-  sm: { height: 36, width: 120 },
-  md: { height: 44, width: 148 },
-  lg: { height: 65, width: 220 },
+  sm: { height: 26, width: 130 },
+  md: { height: 32, width: 160 },
+  lg: { height: 44, width: 220 },
 } as const;
 
 export function Logo({ className, size = "md" }: LogoProps) {
   const { height, width } = SIZES[size];
-  const iconOffset = Math.round(width * 0.26);  // icon portion ≈ 26% of logo width
-  const textWidth  = width - iconOffset;         // remaining width = "FETAN LED" span
+  
+  // Align "L" with "F" (approx 25% from left)
+  const iconOffset = Math.round(width * 0.25);
+  // Align "S" with "D" (approx 5% from right, avoiding the ® symbol)
+  const trademarkOffset = Math.round(width * 0.05);
+  const textWidth  = width - iconOffset - trademarkOffset;
+
+  const tagline = "LED DISPLAY SOLUTIONS";
 
   return (
     <Link href="/" className={cn("group inline-flex shrink-0 flex-col items-start", className)}>
-      <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.2 }}>
+      <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.2 }} className="flex flex-col">
         <Image
           src="/logo-v2.png"
           alt="FETAN LED"
@@ -34,18 +40,22 @@ export function Logo({ className, size = "md" }: LogoProps) {
           style={{ height, width: "auto", maxWidth: width }}
           priority
         />
-        <span
-          className="block text-[10px] font-bold uppercase text-white mt-0 whitespace-nowrap"
+        <div
+          className="flex justify-between font-semibold uppercase text-white"
           style={{
-            paddingLeft: iconOffset,
-            width: width,
-            letterSpacing: `${((textWidth - 110) / 19).toFixed(1)}px`,
+            marginLeft: iconOffset,
+            width: textWidth,
+            marginTop: size === "sm" ? "-3px" : size === "md" ? "-5px" : "-8px",
+            fontSize: size === "sm" ? "8px" : size === "md" ? "9.5px" : "13px",
           }}
         >
-          LED Display Solutions
-        </span>
+          {tagline.split("").map((char, i) => (
+            <span key={i} className={char === " " ? "w-[0.5ch]" : ""}>
+              {char === " " ? "\u00A0" : char}
+            </span>
+          ))}
+        </div>
       </motion.div>
     </Link>
   );
 }
-

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { QuoteForm } from "@/components/sections/quote-form";
 import { LocationMap } from "@/components/sections/location-map";
 import { Mail, Phone, MapPin, Clock, HelpCircle } from "lucide-react";
@@ -43,7 +44,9 @@ export default function ContactPage() {
 
       {/* Main Quote Form Section */}
       <div className="relative z-10">
-        <QuoteForm />
+        <Suspense fallback={<div className="h-96 bg-transparent" />}>
+          <QuoteForm />
+        </Suspense>
       </div>
 
       {/* Direct Contact Cards & FAQs */}

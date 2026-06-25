@@ -2,7 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 import { SectionHeading } from "@/components/shared/section-heading";
@@ -48,6 +49,7 @@ function FormField({
 }
 
 export function QuoteForm() {
+  const searchParams = useSearchParams();
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -78,6 +80,14 @@ export function QuoteForm() {
       additionalNotes: "",
     },
   });
+
+  // Auto-select tab from URL query param (?tab=rentals)
+  useEffect(() => {
+    const tab = searchParams.get("tab");
+    if (tab === "rentals" || tab === "sales") {
+      setValue("serviceType", tab, { shouldValidate: false });
+    }
+  }, [searchParams, setValue]);
 
   const serviceType = watch("serviceType");
 

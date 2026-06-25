@@ -339,7 +339,7 @@ export function ProductsGallery() {
         />
 
         {/* Outdoor row */}
-        <div className="mt-12">
+        <div id="outdoor" className="mt-12">
           <h3 className="text-center font-display text-lg font-bold uppercase tracking-[0.2em] text-white sm:text-left sm:text-xl">
             Outdoor LED Display Screen
           </h3>
@@ -362,7 +362,7 @@ export function ProductsGallery() {
         </div>
 
         {/* Indoor row */}
-        <div className="mt-12">
+        <div id="indoor" className="mt-12">
           <h3 className="text-center font-display text-lg font-bold uppercase tracking-[0.2em] text-white sm:text-left sm:text-xl">
             Indoor Display Screen
           </h3>

@@ -9,14 +9,18 @@ import {
   MapPin,
   ShieldCheck,
   TrendingUp,
+  Layers,
+  Radio,
+  Wrench,
+  BarChart3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { COMPANY_NAME } from "@/lib/constants/navigation";
 
 export const metadata: Metadata = {
-  title: `About Us | ${COMPANY_NAME}`,
+  title: `About Fetan LED | LED Screen Supply, Installation & Advertising in Ethiopia`,
   description:
-    "Learn about Fetan LED — Ethiopia's premier LED display company based in Addis Ababa. Our story, mission, and commitment to delivering world-class LED screen solutions.",
+    "Learn about Fetan LED — Ethiopia's premier destination for cutting-edge LED screen supply, custom engineering, and professional installation. Founded in 2016, we deliver turnkey digital signage solutions built for reliability, brightness, and brilliant clarity.",
 };
 
 const VALUES = [
@@ -48,20 +52,26 @@ const VALUES = [
 
 const MILESTONES = [
   {
-    year: "2018",
+    year: "2016",
     title: "Founded in Addis Ababa",
     description:
       "Fetan LED was established with a clear vision: to bring world-class LED display technology to Ethiopia's fast-growing commercial landscape.",
   },
   {
-    year: "2019",
+    year: "2018",
     title: "First Landmark Installation",
     description:
       "Completed our first large-scale outdoor LED billboard in Bole, setting a new standard for outdoor advertising displays in Addis Ababa.",
   },
   {
-    year: "2021",
-    title: "Event Rental Division Launched",
+    year: "2020",
+    title: "Fetan Advertising Launched",
+    description:
+      "Expanded into premium ad placement and strategic location scouting, forming the powerful dual-force Fetan ecosystem.",
+  },
+  {
+    year: "2022",
+    title: "Event Rental Division",
     description:
       "Expanded into high-impact event display rentals, powering concerts, corporate summits, and broadcast-grade stage screens across Ethiopia.",
   },
@@ -80,10 +90,61 @@ const MILESTONES = [
 ];
 
 const STATS = [
-  { value: "50+", label: "Projects Delivered" },
-  { value: "6+", label: "Years in Business" },
-  { value: "100%", label: "Ethiopian Owned" },
+  { value: "23+", label: "Projects Delivered" },
+  { value: "10+", label: "Years in Business" },
   { value: "24/7", label: "Support Coverage" },
+];
+
+const ECOSYSTEM = [
+  {
+    icon: Wrench,
+    brand: "Fetan LED",
+    tagline: "The Technical Engine",
+    points: [
+      "Premium component sourcing & supply",
+      "In-house fabrication & custom steel structures",
+      "Display configuration & software integration",
+      "Flawless on-site installation & calibration",
+    ],
+  },
+  {
+    icon: BarChart3,
+    brand: "Fetan Advertising",
+    tagline: "The Commercial Force",
+    points: [
+      "Premium ad placement management",
+      "Strategic location scouting",
+      "Revenue-sharing partnership models",
+      "Dynamic content distribution",
+    ],
+  },
+];
+
+const WHY_PARTNER = [
+  {
+    icon: Layers,
+    title: "End-to-End Execution",
+    description:
+      "We manage the entire lifecycle of your project, from structural steel fabrication and component assembly to final calibration and maintenance.",
+  },
+  {
+    icon: Award,
+    title: "A Decade of Proven Expertise",
+    description:
+      "Since 2016, we have successfully deployed digital screens across complex urban landscapes, corporate environments, and high-traffic retail hubs.",
+  },
+  {
+    icon: Zap,
+    title: "Premium Engineering",
+    description:
+      "We specialize in high-refresh-rate, energy-efficient indoor and outdoor LED modules built to withstand local environmental conditions.",
+  },
+  {
+    icon: Radio,
+    title: "Strategic Synergy",
+    description:
+      "Our partnership with Fetan Advertising ensures your hardware investments can be instantly paired with market-leading commercial strategy.",
+  },
 ];
 
 export default function AboutPage() {
@@ -103,10 +164,16 @@ export default function AboutPage() {
               About{" "}
               <span className="text-brand-blue">{COMPANY_NAME}</span>
             </h1>
-            <p className="mt-6 max-w-2xl text-sm leading-relaxed text-white/60 sm:text-base">
-              We are Ethiopia&apos;s leading LED display company — engineering premium visual
-              experiences for businesses, events, and public spaces across Addis Ababa and beyond.
-              Built on a foundation of technical excellence and local expertise.
+            <p className="mt-6 max-w-3xl text-sm leading-relaxed text-white/60 sm:text-base">
+              Ethiopia&apos;s premier destination for cutting-edge LED screen supply,
+              custom engineering, and professional installation. Founded in 2016,
+              we have spent the last decade helping businesses, brands, and public
+              spaces communicate more effectively with high-impact visual technology.
+            </p>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-white/50 sm:text-base">
+              From commanding outdoor advertising billboards to seamless indoor
+              corporate displays, we deliver turnkey digital signage solutions
+              built for reliability, brightness, and brilliant clarity.
             </p>
           </div>
 
@@ -173,9 +240,9 @@ export default function AboutPage() {
                   <span className="text-white/60">Global Standards</span>
                 </h2>
                 <p className="mt-5 text-sm leading-relaxed text-white/60">
-                  Fetan LED Advertising was founded by a team of engineers and entrepreneurs who
-                  recognized a critical gap in Ethiopia&apos;s rapidly modernizing commercial sector:
-                  the absence of a reliable, technically sophisticated LED display partner.
+                  Fetan LED was founded by a team of engineers and entrepreneurs who recognized a
+                  critical gap in Ethiopia&apos;s rapidly modernizing commercial sector: the absence
+                  of a reliable, technically sophisticated LED display partner.
                 </p>
                 <p className="mt-4 text-sm leading-relaxed text-white/60">
                   We are 100% Ethiopian-owned and operated, with deep local knowledge of the
@@ -195,25 +262,125 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              {/* Decorative grid of glowing boxes */}
+              {/* Decorative grid of glowing boxes — each links to the relevant section */}
               <div className="grid grid-cols-2 gap-3">
                 {[
-                  { label: "Indoor Displays", icon: "🖥️" },
-                  { label: "Outdoor Billboards", icon: "🏙️" },
-                  { label: "Event Screens", icon: "🎤" },
-                  { label: "Custom Solutions", icon: "⚙️" },
+                  { label: "Indoor Displays", icon: "🖥️", href: "/#indoor" },
+                  { label: "Outdoor Billboards", icon: "🏙️", href: "/#outdoor" },
+                  { label: "Event Screens", icon: "🎤", href: "/contact?tab=rentals#contact" },
+                  { label: "Custom Solutions", icon: "⚙️", href: "/contact#contact" },
                 ].map((item) => (
-                  <div
+                  <Link
                     key={item.label}
-                    className="flex flex-col items-center justify-center gap-3 border border-white/10 bg-white/[0.02] p-6 text-center transition-all duration-300 hover:border-brand-blue/30 hover:bg-white/[0.04]"
+                    href={item.href}
+                    className="group/card flex flex-col items-center justify-center gap-3 border border-white/10 bg-white/[0.02] p-6 text-center transition-all duration-300 hover:border-brand-blue/40 hover:bg-white/[0.05] hover:shadow-[0_0_30px_rgba(29,116,255,0.12)]"
                   >
-                    <span className="text-3xl">{item.icon}</span>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-white/70">
+                    <span className="text-3xl transition-transform duration-300 group-hover/card:scale-110">{item.icon}</span>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-white/70 transition-colors duration-300 group-hover/card:text-brand-blue">
                       {item.label}
                     </p>
-                  </div>
+                    <span className="text-[10px] font-medium uppercase tracking-wider text-brand-blue/0 transition-all duration-300 group-hover/card:text-brand-blue/80">
+                      View →
+                    </span>
+                  </Link>
                 ))}
               </div>
+            </div>
+          </section>
+
+          {/* ── FETAN ECOSYSTEM ── */}
+          <section className="mt-24 border-t border-white/10 pt-20">
+            <div className="text-center">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">
+                Dual-Force Ecosystem
+              </span>
+              <h2 className="mt-3 font-display text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl">
+                Fetan Ecosystem
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/55 sm:text-base">
+                To provide our clients with a truly seamless experience, Fetan LED operates
+                alongside our sister company, Fetan Advertising — forming a powerful ecosystem
+                that bridges the gap between state-of-the-art hardware and high-performance visibility.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-6 md:grid-cols-2">
+              {ECOSYSTEM.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={item.brand}
+                    className="group border border-white/10 bg-white/[0.02] p-8 transition-all duration-500 hover:border-brand-blue/40 hover:shadow-[0_0_50px_rgba(29,116,255,0.12)]"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center border border-brand-blue bg-brand-blue/10 text-brand-blue transition-colors duration-500 group-hover:bg-brand-blue group-hover:text-white">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <h3 className="font-display text-base font-bold uppercase tracking-wider text-white sm:text-lg">
+                          {item.brand}
+                        </h3>
+                        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-blue/70">
+                          {item.tagline}
+                        </p>
+                      </div>
+                    </div>
+                    <ul className="mt-6 space-y-3">
+                      {item.points.map((point) => (
+                        <li key={point} className="flex items-start gap-3 text-sm text-white/60">
+                          <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-blue" />
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Ecosystem bridge statement */}
+            <div className="mt-8 border border-brand-blue/20 bg-brand-blue/5 p-6 text-center">
+              <p className="text-sm leading-relaxed text-white/65 sm:text-base">
+                Whether you are looking to{" "}
+                <span className="font-semibold text-white">purchase and install an enterprise-grade LED screen</span>{" "}
+                for your property, or you want to{" "}
+                <span className="font-semibold text-white">monetize a high-traffic location</span>{" "}
+                through premium advertising partnerships — the Fetan ecosystem delivers
+                everything you need under one roof.
+              </p>
+            </div>
+          </section>
+
+          {/* ── WHY PARTNER WITH FETAN LED ── */}
+          <section className="mt-24 border-t border-white/10 pt-20">
+            <div className="text-center">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">
+                The Fetan Advantage
+              </span>
+              <h2 className="mt-3 font-display text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl">
+                Why Partner with Fetan LED?
+              </h2>
+            </div>
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {WHY_PARTNER.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={item.title}
+                    className="group border border-white/10 bg-white/[0.02] p-6 transition-all duration-500 hover:border-brand-blue/40 hover:shadow-[0_0_40px_rgba(29,116,255,0.12)]"
+                  >
+                    <div className="mb-4 flex h-10 w-10 items-center justify-center border border-brand-blue bg-brand-blue/10 text-brand-blue transition-colors duration-500 group-hover:bg-brand-blue group-hover:text-white">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="font-display text-sm font-bold uppercase tracking-wider text-white">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 text-xs leading-relaxed text-white/55">
+                      {item.description}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </section>
 
@@ -262,7 +429,7 @@ export default function AboutPage() {
             </div>
 
             <div className="mt-14 space-y-0">
-              {MILESTONES.map((milestone, i) => (
+              {MILESTONES.map((milestone) => (
                 <div
                   key={milestone.year}
                   className="group relative grid grid-cols-[80px_1fr] gap-6 sm:grid-cols-[120px_1fr]"
