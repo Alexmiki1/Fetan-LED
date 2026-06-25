@@ -40,7 +40,7 @@ export function Logo({ className, size = "md" }: LogoProps) {
           style={{ height, width: "auto", maxWidth: width }}
           priority
         />
-        <div
+        {/* <div
           className="flex justify-between font-semibold uppercase text-white"
           style={{
             marginLeft: iconOffset,
@@ -54,7 +54,7 @@ export function Logo({ className, size = "md" }: LogoProps) {
               {char === " " ? "\u00A0" : char}
             </span>
           ))}
-        </div>
+        </div> */}
       </motion.div>
     </Link>
   );
