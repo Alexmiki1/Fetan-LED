@@ -61,31 +61,31 @@ const MILESTONES = [
     year: "2018",
     title: "First Landmark Installation",
     description:
-      "Completed our first large-scale outdoor LED billboard in Bole, setting a new standard for outdoor advertising displays in Addis Ababa.",
+      "Completed our first large scale outdoor LED billboard in Bole, setting a new standard for outdoor advertising displays in Addis Ababa.",
   },
   {
     year: "2020",
     title: "Fetan Advertising Launched",
     description:
-      "Expanded into premium ad placement and strategic location scouting, forming the powerful dual-force Fetan ecosystem.",
+      "Expanded into premium ad placement and strategic location scouting, forming the powerful dual force Fetan ecosystem.",
   },
   {
     year: "2022",
     title: "Event Rental Division",
     description:
-      "Expanded into high-impact event display rentals, powering concerts, corporate summits, and broadcast-grade stage screens across Ethiopia.",
+      "Expanded into high-impact event display rentals, powering concerts, corporate summits, and broadcast grade stage screens across Ethiopia.",
   },
   {
     year: "2023",
-    title: "50+ Installations Nationwide",
+    title: "23+ Installations Nationwide",
     description:
-      "Passed the milestone of 50 successful permanent installations across retail, hospitality, government, and broadcast sectors.",
+      "Passed the milestone of 23 successful permanent installations across retail, hospitality, government, and broadcast sectors.",
   },
   {
     year: "2024",
     title: "Expanded Service Portfolio",
     description:
-      "Introduced custom R&D capabilities including curved, transparent, and ultra-fine pitch displays engineered for complex architectural environments.",
+      "Introduced custom R&D capabilities including curved, transparent, and ultra fine pitch displays engineered for complex architectural environments.",
   },
 ];
 
@@ -104,7 +104,7 @@ const ECOSYSTEM = [
       "Premium component sourcing & supply",
       "In-house fabrication & custom steel structures",
       "Display configuration & software integration",
-      "Flawless on-site installation & calibration",
+      "Flawless on site installation & calibration",
     ],
   },
   {
@@ -114,7 +114,7 @@ const ECOSYSTEM = [
     points: [
       "Premium ad placement management",
       "Strategic location scouting",
-      "Revenue-sharing partnership models",
+      "Revenue sharing partnership models",
       "Dynamic content distribution",
     ],
   },
@@ -123,7 +123,7 @@ const ECOSYSTEM = [
 const WHY_PARTNER = [
   {
     icon: Layers,
-    title: "End-to-End Execution",
+    title: "End to End Execution",
     description:
       "We manage the entire lifecycle of your project, from structural steel fabrication and component assembly to final calibration and maintenance.",
   },
@@ -131,38 +131,41 @@ const WHY_PARTNER = [
     icon: Award,
     title: "A Decade of Proven Expertise",
     description:
-      "Since 2016, we have successfully deployed digital screens across complex urban landscapes, corporate environments, and high-traffic retail hubs.",
+      "Since 2016, we have successfully deployed digital screens across complex urban landscapes, corporate environments, and high traffic retail hubs.",
   },
   {
     icon: Zap,
     title: "Premium Engineering",
     description:
-      "We specialize in high-refresh-rate, energy-efficient indoor and outdoor LED modules built to withstand local environmental conditions.",
+      "We specialize in high refresh rate, energy efficient indoor and outdoor LED modules built to withstand local environmental conditions.",
   },
   {
     icon: Radio,
     title: "Strategic Synergy",
     description:
-      "Our partnership with Fetan Advertising ensures your hardware investments can be instantly paired with market-leading commercial strategy.",
+      "Our partnership with Fetan Advertising ensures your hardware investments can be instantly paired with market leading commercial strategy.",
   },
 ];
 
 export default function AboutPage() {
   return (
-    <article className="min-h-screen bg-black pt-24 pb-0">
+    <article 
+      className="min-h-screen pt-24 pb-0"
+      style={{ background: "linear-gradient(180deg, #1d74ff 0%, #0a2d66 100%)" }}
+    >
       {/* Background radial glow */}
-      <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_50%_10%,rgba(29,116,255,0.08)_0%,transparent_65%)]" />
+      <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_50%_10%,rgba(255,255,255,0.08)_0%,transparent_65%)]" />
 
       <div className="relative z-10">
         {/* ── HERO SECTION ── */}
         <div className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
           <div className="border-b border-white/10 pb-16 pt-4">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
               Our Story
             </span>
             <h1 className="mt-3 font-display text-4xl font-bold uppercase tracking-wide text-white sm:text-5xl md:text-6xl lg:text-7xl">
               About{" "}
-              <span className="text-brand-blue">{COMPANY_NAME}</span>
+              <span className="text-white">{COMPANY_NAME}</span>
             </h1>
             <p className="mt-6 max-w-3xl text-sm leading-relaxed text-white/60 sm:text-base">
               Ethiopia&apos;s premier destination for cutting edge LED screen supply,
@@ -193,9 +196,9 @@ export default function AboutPage() {
 
           {/* ── MISSION & VISION ── */}
           <div className="mt-20 grid gap-6 md:grid-cols-2">
-            <div className="group border border-white/10 bg-white/[0.02] p-8 transition-all duration-500 hover:border-brand-blue/40 hover:shadow-[0_0_50px_rgba(29,116,255,0.12)]">
+            <div className="group border border-white/10 bg-white/[0.02] p-8 transition-all duration-500 hover:border-white/40 hover:shadow-[0_0_50px_rgba(29,116,255,0.12)]">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center border border-brand-blue bg-brand-blue/10 text-brand-blue transition-colors duration-500 group-hover:bg-brand-blue group-hover:text-white">
+                <div className="flex h-10 w-10 items-center justify-center border border-white bg-white/10 text-white transition-colors duration-500 group-hover:bg-white group-hover:text-white">
                   <Target className="h-5 w-5" />
                 </div>
                 <h2 className="font-display text-lg font-bold uppercase tracking-wider text-white sm:text-xl">
@@ -205,14 +208,14 @@ export default function AboutPage() {
               <p className="mt-5 text-sm leading-relaxed text-white/65">
                 To provide Ethiopian businesses and institutions with world class LED display
                 technology  delivered with precision engineering, transparent pricing, and
-                long-term post-installation support. We believe every space deserves a display
+                long term post installation support. We believe every space deserves a display
                 that communicates its message with maximum visual impact.
               </p>
             </div>
 
-            <div className="group border border-white/10 bg-white/[0.02] p-8 transition-all duration-500 hover:border-brand-blue/40 hover:shadow-[0_0_50px_rgba(29,116,255,0.12)]">
+            <div className="group border border-white/10 bg-white/[0.02] p-8 transition-all duration-500 hover:border-white/40 hover:shadow-[0_0_50px_rgba(29,116,255,0.12)]">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center border border-brand-blue bg-brand-blue/10 text-brand-blue transition-colors duration-500 group-hover:bg-brand-blue group-hover:text-white">
+                <div className="flex h-10 w-10 items-center justify-center border border-white bg-white/10 text-white transition-colors duration-500 group-hover:bg-white group-hover:text-white">
                   <Eye className="h-5 w-5" />
                 </div>
                 <h2 className="font-display text-lg font-bold uppercase tracking-wider text-white sm:text-xl">
@@ -232,7 +235,7 @@ export default function AboutPage() {
           <section className="mt-24 border-t border-white/10 pt-20">
             <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
               <div>
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
                   Who We Are
                 </span>
                 <h2 className="mt-3 font-display text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl">
@@ -249,7 +252,7 @@ export default function AboutPage() {
                   As part of a unified digital ecosystem alongside our sister company, Fetan Advertising, we bridge the gap between heavy duty technological engineering and high ROI commercial visibility. From sourcing premium components and constructing massive steel support structures to managing high traffic ad placements, we are the single point of execution for brands ready to dominate the digital space.
                 </p>
                 <div className="mt-6 flex items-center gap-2 text-sm text-white/50">
-                  <MapPin className="h-4 w-4 text-brand-blue" />
+                  <MapPin className="h-4 w-4 text-white" />
                   <span>Haile Gebre Silase St, Addis Ababa, Ethiopia</span>
                 </div>
               </div>
@@ -265,13 +268,13 @@ export default function AboutPage() {
                   <Link
                     key={item.label}
                     href={item.href}
-                    className="group/card flex flex-col items-center justify-center gap-3 border border-white/10 bg-white/[0.02] p-6 text-center transition-all duration-300 hover:border-brand-blue/40 hover:bg-white/[0.05] hover:shadow-[0_0_30px_rgba(29,116,255,0.12)]"
+                    className="group/card flex flex-col items-center justify-center gap-3 border border-white/10 bg-white/[0.02] p-6 text-center transition-all duration-300 hover:border-white/40 hover:bg-white/[0.05] hover:shadow-[0_0_30px_rgba(29,116,255,0.12)]"
                   >
                     <span className="text-3xl transition-transform duration-300 group-hover/card:scale-110">{item.icon}</span>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-white/70 transition-colors duration-300 group-hover/card:text-brand-blue">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-white/70 transition-colors duration-300 group-hover/card:text-white">
                       {item.label}
                     </p>
-                    <span className="text-[10px] font-medium uppercase tracking-wider text-brand-blue/0 transition-all duration-300 group-hover/card:text-brand-blue/80">
+                    <span className="text-[10px] font-medium uppercase tracking-wider text-white/0 transition-all duration-300 group-hover/card:text-white/80">
                       View →
                     </span>
                   </Link>
@@ -283,7 +286,7 @@ export default function AboutPage() {
           {/* ── FETAN ECOSYSTEM ── */}
           <section className="mt-24 border-t border-white/10 pt-20">
             <div className="text-center">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
                 Dual Force Ecosystem
               </span>
               <h2 className="mt-3 font-display text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl">
@@ -302,17 +305,17 @@ export default function AboutPage() {
                 return (
                   <div
                     key={item.brand}
-                    className="group border border-white/10 bg-white/[0.02] p-8 transition-all duration-500 hover:border-brand-blue/40 hover:shadow-[0_0_50px_rgba(29,116,255,0.12)]"
+                    className="group border border-white/10 bg-white/[0.02] p-8 transition-all duration-500 hover:border-white/40 hover:shadow-[0_0_50px_rgba(29,116,255,0.12)]"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center border border-brand-blue bg-brand-blue/10 text-brand-blue transition-colors duration-500 group-hover:bg-brand-blue group-hover:text-white">
+                      <div className="flex h-10 w-10 items-center justify-center border border-white bg-white/10 text-white transition-colors duration-500 group-hover:bg-white group-hover:text-white">
                         <Icon className="h-5 w-5" />
                       </div>
                       <div>
                         <h3 className="font-display text-base font-bold uppercase tracking-wider text-white sm:text-lg">
                           {item.brand}
                         </h3>
-                        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-blue/70">
+                        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
                           {item.tagline}
                         </p>
                       </div>
@@ -320,7 +323,7 @@ export default function AboutPage() {
                     <ul className="mt-6 space-y-3">
                       {item.points.map((point) => (
                         <li key={point} className="flex items-start gap-3 text-sm text-white/60">
-                          <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-blue" />
+                          <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-white" />
                           {point}
                         </li>
                       ))}
@@ -331,10 +334,10 @@ export default function AboutPage() {
             </div>
 
             {/* Ecosystem bridge statement */}
-            <div className="mt-8 border border-brand-blue/20 bg-brand-blue/5 p-6 text-center">
+            <div className="mt-8 border border-white/20 bg-white/5 p-6 text-center">
               <p className="text-sm leading-relaxed text-white/65 sm:text-base">
                 Whether you are looking to{" "}
-                <span className="font-semibold text-white">purchase and install an enterprise-grade LED screen</span>{" "}
+                <span className="font-semibold text-white">purchase and install an enterprise grade LED screen</span>{" "}
                 for your property, or you want to{" "}
                 <span className="font-semibold text-white">monetize a high traffic location</span>{" "}
                 through premium advertising partnerships the Fetan ecosystem delivers
@@ -346,7 +349,7 @@ export default function AboutPage() {
           {/* ── WHY PARTNER WITH FETAN LED ── */}
           <section className="mt-24 border-t border-white/10 pt-20">
             <div className="text-center">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
                 The Fetan Advantage
               </span>
               <h2 className="mt-3 font-display text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl">
@@ -359,9 +362,9 @@ export default function AboutPage() {
                 return (
                   <div
                     key={item.title}
-                    className="group border border-white/10 bg-white/[0.02] p-6 transition-all duration-500 hover:border-brand-blue/40 hover:shadow-[0_0_40px_rgba(29,116,255,0.12)]"
+                    className="group border border-white/10 bg-white/[0.02] p-6 transition-all duration-500 hover:border-white/40 hover:shadow-[0_0_40px_rgba(29,116,255,0.12)]"
                   >
-                    <div className="mb-4 flex h-10 w-10 items-center justify-center border border-brand-blue bg-brand-blue/10 text-brand-blue transition-colors duration-500 group-hover:bg-brand-blue group-hover:text-white">
+                    <div className="mb-4 flex h-10 w-10 items-center justify-center border border-white bg-white/10 text-white transition-colors duration-500 group-hover:bg-white group-hover:text-white">
                       <Icon className="h-5 w-5" />
                     </div>
                     <h3 className="font-display text-sm font-bold uppercase tracking-wider text-white">
@@ -379,7 +382,7 @@ export default function AboutPage() {
           {/* ── VALUES ── */}
           <section className="mt-24 border-t border-white/10 pt-20">
             <div className="text-center">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
                 What Drives Us
               </span>
               <h2 className="mt-3 font-display text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl">
@@ -392,9 +395,9 @@ export default function AboutPage() {
                 return (
                   <div
                     key={val.title}
-                    className="group border border-white/10 bg-white/[0.02] p-6 transition-all duration-500 hover:border-brand-blue/40 hover:shadow-[0_0_40px_rgba(29,116,255,0.12)]"
+                    className="group border border-white/10 bg-white/[0.02] p-6 transition-all duration-500 hover:border-white/40 hover:shadow-[0_0_40px_rgba(29,116,255,0.12)]"
                   >
-                    <div className="mb-4 flex h-10 w-10 items-center justify-center border border-brand-blue bg-brand-blue/10 text-brand-blue transition-colors duration-500 group-hover:bg-brand-blue group-hover:text-white">
+                    <div className="mb-4 flex h-10 w-10 items-center justify-center border border-white bg-white/10 text-white transition-colors duration-500 group-hover:bg-white group-hover:text-white">
                       <Icon className="h-5 w-5" />
                     </div>
                     <h3 className="font-display text-sm font-bold uppercase tracking-wider text-white">
@@ -412,7 +415,7 @@ export default function AboutPage() {
           {/* ── TIMELINE / MILESTONES ── */}
           <section className="mt-24 border-t border-white/10 pt-20">
             <div className="text-center">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
                 Our Journey
               </span>
               <h2 className="mt-3 font-display text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl">
@@ -428,7 +431,7 @@ export default function AboutPage() {
                 >
                   {/* Year column */}
                   <div className="flex flex-col items-end pt-1">
-                    <span className="font-display text-xl font-bold text-brand-blue sm:text-2xl">
+                    <span className="font-display text-xl font-bold text-white sm:text-2xl">
                       {milestone.year}
                     </span>
                   </div>
@@ -436,7 +439,7 @@ export default function AboutPage() {
                   {/* Vertical line + content */}
                   <div className="relative border-l border-white/10 pb-10 pl-8 group-last:pb-0">
                     {/* Dot on the timeline */}
-                    <span className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-brand-blue ring-4 ring-black" />
+                    <span className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-white ring-4 ring-black" />
 
                     <h3 className="font-display text-sm font-bold uppercase tracking-wider text-white sm:text-base">
                       {milestone.title}
@@ -456,7 +459,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-quote-glow z-[1] pointer-events-none" />
           <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
             <div className="border border-white/10 bg-white/[0.01] p-8 sm:p-12 backdrop-blur-md">
-              <Award className="mx-auto mb-4 h-8 w-8 text-brand-blue" />
+              <Award className="mx-auto mb-4 h-8 w-8 text-white" />
               <h2 className="font-display text-2xl font-bold uppercase tracking-wider text-white sm:text-3xl lg:text-4xl">
                 Ready to Elevate Your Space?
               </h2>
