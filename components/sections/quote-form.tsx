@@ -182,7 +182,7 @@ export function QuoteForm() {
                 </Tabs>
 
                 <div className="grid gap-5 sm:grid-cols-2">
-                  <FormField label="FULL NAME" error={errors.name?.message}>
+                  <FormField label="FULL NAME *" error={errors.name?.message}>
                     <Input {...register("name")} placeholder="Your name" aria-invalid={!!errors.name} />
                   </FormField>
                   <FormField label="COMPANY" error={errors.company?.message}>
@@ -191,10 +191,10 @@ export function QuoteForm() {
                 </div>
 
                 <div className="grid gap-5 sm:grid-cols-2">
-                  <FormField label="EMAIL" error={errors.email?.message}>
+                  <FormField label="EMAIL *" error={errors.email?.message}>
                     <Input type="email" {...register("email")} placeholder="work@company.com" aria-invalid={!!errors.email} />
                   </FormField>
-                  <FormField label="PHONE" error={errors.phone?.message}>
+                  <FormField label="PHONE *" error={errors.phone?.message}>
                     <Input type="tel" {...register("phone")} placeholder="+251 ____" aria-invalid={!!errors.phone} />
                   </FormField>
                 </div>

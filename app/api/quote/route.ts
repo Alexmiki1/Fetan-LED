@@ -145,9 +145,9 @@ export async function POST(req: Request) {
     };
     console.log("📩 Received Payload:", body);
 
-    if (!body.name || !body.email || !body.company) {
+    if (!body.name || !body.email || !body.company || !body.phone) {
       return new Response(
-        JSON.stringify({ error: "Name, Email, and Company are required." }),
+        JSON.stringify({ error: "Name, Email, Phone, and Company are required." }),
         { status: 400 }
       );
     }
