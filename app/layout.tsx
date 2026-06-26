@@ -161,14 +161,14 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
         {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-GV4725WCVS" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-E5VK4660N9" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-GV4725WCVS');
+              gtag('config', 'G-E5VK4660N9');
             `,
           }}
         />
