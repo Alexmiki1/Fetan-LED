@@ -77,9 +77,9 @@ const MILESTONES = [
   },
   {
     year: "2023",
-    title: "23+ Installations Nationwide",
+    title: "50+ Installations Nationwide",
     description:
-      "Passed the milestone of 23 successful permanent installations across retail, hospitality, government, and broadcast sectors.",
+      "Passed the milestone of 50+ successful permanent installations across retail, hospitality, government, and broadcast sectors.",
   },
   {
     year: "2024",
@@ -149,7 +149,7 @@ const WHY_PARTNER = [
 
 export default function AboutPage() {
   return (
-    <article 
+    <article
       className="min-h-screen pt-24 pb-0"
       style={{ background: "linear-gradient(180deg, #1d74ff 0%, #0a2d66 100%)" }}
     >
