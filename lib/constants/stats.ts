@@ -1,7 +1,7 @@
 import type { StatItem } from "@/types";
 
 export const HERO_STATS = {
-  sales: { value: "200+", label: "Installations" },
+  sales: { value: "23+", label: "Installations" },
   rentals: { value: "500+", label: "Events Delivered" },
 } as const;
 
