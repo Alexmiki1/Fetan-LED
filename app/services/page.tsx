@@ -195,7 +195,10 @@ export default function ServicesPage() {
       </div>
 
       {/* CTA Banner Section with seamless gradient to footer */}
-      <section className="relative mt-24 overflow-hidden bg-quote-section pt-20 pb-20 sm:pb-28">
+      <section 
+        className="relative mt-24 overflow-hidden pt-20 pb-20 sm:pb-28"
+        style={{ background: "linear-gradient(180deg, #0e3d8c 0%, #1d74ff 100%)" }}
+      >
         {/* Glow overlay matching the quote form on the home page */}
         <div className="absolute inset-0 bg-quote-glow z-[1] pointer-events-none" />
 

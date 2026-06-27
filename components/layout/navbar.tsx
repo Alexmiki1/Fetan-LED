@@ -81,12 +81,12 @@ export function Navbar() {
         </div>
 
         {/* Desktop Links */}
-        <ul className={cn("hidden items-center gap-8 lg:flex xl:gap-10", poppins.variable)}>
+        <ul className={cn("hidden items-center gap-5 lg:flex xl:gap-8", poppins.variable)}>
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="font-[family-name:var(--font-poppins)] text-sm font-semibold uppercase tracking-[0.15em] text-white/75 transition-colors hover:text-white xl:text-base"
+                className="font-[family-name:var(--font-poppins)] text-xs font-semibold uppercase tracking-widest whitespace-nowrap text-white/75 transition-colors hover:text-white xl:text-sm"
               >
                 {link.label}
               </Link>
