@@ -8,6 +8,7 @@ const SOLUTIONS = [
   { title: "Retail", description: "Vibrant storefront displays and digital signage to drive foot traffic." },
   { title: "Real Estate", description: "Immersive video walls and transparent screens for property showrooms." },
   { title: "Manufacturing", description: "Rugged LED systems for factory floors and production tracking." },
+  { title: "Church", description: "Immersive visual experiences to elevate worship services and congregation engagement." },
 ];
 
 export function SolutionsNav() {
