@@ -15,7 +15,7 @@ const fadeUp = {
   }),
 };
 
-const VIDEO_ID = "ccWERmdQ6ro";
+const VIDEO_ID = "2Zvx9EWN2T4";
 
 export function Hero() {
   const { setHeroVideoReady } = useVideoLoading();
