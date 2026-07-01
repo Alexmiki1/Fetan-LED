@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./solutions-nav.module.css";
 
 const SOLUTIONS = [
@@ -25,12 +26,15 @@ export function SolutionsNav() {
           <div 
             key={solution.title} 
             className={styles.card}
-            style={{
-              backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%), url(${solution.image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
           >
+            <Image
+              src={solution.image}
+              alt={solution.title}
+              fill
+              className={styles.cardImage}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+            />
+            <div className={styles.cardOverlay} />
             <div className={styles.cardContent}>
               <div className={styles.textContainer}>
                 <h3 className={styles.title}>{solution.title}</h3>
