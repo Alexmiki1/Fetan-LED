@@ -340,9 +340,12 @@ export function ProductsGallery() {
 
         {/* Outdoor row */}
         <div id="outdoor" className="mt-12">
-          <h3 className="text-center font-display text-lg font-bold uppercase tracking-[0.2em] text-white sm:text-left sm:text-xl">
+          <h3 className="text-center font-display text-2xl font-bold uppercase tracking-[0.2em] text-white sm:text-left sm:text-3xl">
             Outdoor LED Display Screen
           </h3>
+          <p className="mt-4 text-sm leading-relaxed text-white/70 max-w-5xl mx-auto sm:mx-0 text-center sm:text-left">
+            Fetan LED's high definition outdoor screens feature advanced seamless stitching, ultra high refresh rates, and ultra wide viewing angles for crystal clear, sun readable visuals. Built to withstand the elements, they offer vivid, true to life colors and high contrast even in bright daylight. Ideal for high impact billboard advertising, sports stadiums, mall facades, and transit hubs.
+          </p>
           <div className="mt-3 flex flex-col items-center gap-2 sm:flex-row sm:items-baseline sm:gap-3">
             <span className="text-base font-semibold uppercase tracking-wider text-white">
               Available models:
@@ -362,10 +365,13 @@ export function ProductsGallery() {
         </div>
 
         {/* Indoor row */}
-        <div id="indoor" className="mt-12">
-          <h3 className="text-center font-display text-lg font-bold uppercase tracking-[0.2em] text-white sm:text-left sm:text-xl">
+        <div id="indoor" className="mt-16">
+          <h3 className="text-center font-display text-2xl font-bold uppercase tracking-[0.2em] text-white sm:text-left sm:text-3xl">
             Indoor Display Screen
           </h3>
+          <p className="mt-4 text-sm leading-relaxed text-white/70 max-w-5xl mx-auto sm:mx-0 text-center sm:text-left">
+            Optimized for close viewing, our premium indoor displays use intelligent low brightness and high gray scale engineering to protect eyes while maintaining stunning depth and color accuracy. These sleek, high resolution digital signs are the ideal solution for retail malls, hotel lobbies, corporate offices, and control rooms.
+          </p>
           <div className="mt-3 flex flex-col items-center gap-2 sm:flex-row sm:items-baseline sm:gap-3">
             <span className="text-base font-semibold uppercase tracking-wider text-white">
               Available models:

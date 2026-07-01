@@ -68,17 +68,15 @@
 
 .card {
   position: relative;
-  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 2rem;
   text-decoration: none;
   color: white;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  min-height: 140px;
-  backdrop-filter: blur(12px);
+  min-height: 300px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -101,7 +99,6 @@
   transform: translateY(-6px);
   border-color: rgba(29, 116, 255, 0.4);
   box-shadow: 0 12px 40px rgba(29, 116, 255, 0.2);
-  background: rgba(255, 255, 255, 0.05);
 }
 
 .card:hover::before {
