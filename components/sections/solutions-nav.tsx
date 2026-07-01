@@ -2,14 +2,14 @@ import Image from "next/image";
 import styles from "./solutions-nav.module.css";
 
 const SOLUTIONS = [
-  { title: "Bank & finance", description: "Secure, high-contrast displays for trading floors and retail banking.", image: "/images/solutions/bank.png" },
-  { title: "Education", description: "Interactive and large-scale screens for modern campuses and auditoriums.", image: "/images/solutions/education.png" },
-  { title: "Stage", description: "Dynamic and seamless backdrops for live events and performances.", image: "/images/solutions/stage.png" },
-  { title: "Healthcare", description: "Medical-grade clarity for diagnostics, wayfinding, and patient rooms.", image: "/images/solutions/healthcare.png" },
+  { title: "Bank & finance", description: "Secure, high-contrast displays for trading floors and retail banking.", image: "/images/solutions/bank.jpg" },
+  { title: "Education", description: "Interactive and large-scale screens for modern campuses and auditoriums.", image: "/images/solutions/education.jpg" },
+  { title: "Stage", description: "Dynamic and seamless backdrops for live events and performances.", image: "/images/solutions/stage.jpg" },
+  { title: "Healthcare", description: "Medical-grade clarity for diagnostics, wayfinding, and patient rooms.", image: "/images/solutions/healthcare.jpg" },
   { title: "Retail", description: "Vibrant storefront displays and digital signage to drive foot traffic.", image: "/images/solutions/retail-bar.jpg" },
-  { title: "Real Estate", description: "Immersive video walls and transparent screens for property showrooms.", image: "/images/solutions/real-estate.png" },
+  { title: "Real Estate", description: "Immersive video walls and transparent screens for property showrooms.", image: "/images/solutions/real-estate.jpg" },
   { title: "Conference", description: "High-resolution displays for seamless presentations and corporate meetings.", image: "/images/projects/conference.jpg" },
-  { title: "Church", description: "Immersive visual experiences to elevate worship services and congregation engagement.", image: "/images/solutions/church.png" },
+  { title: "Church", description: "Immersive visual experiences to elevate worship services and congregation engagement.", image: "/images/solutions/church.jpg" },
 ];
 
 export function SolutionsNav() {
