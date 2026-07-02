@@ -48,7 +48,7 @@ export function SolutionsNav() {
               fill
               className={styles.cardImage}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-              priority={index < 4}
+              priority
               unoptimized
             />
             <div className={styles.cardOverlay} />
