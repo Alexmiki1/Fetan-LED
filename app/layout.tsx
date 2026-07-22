@@ -103,7 +103,7 @@ export const metadata: Metadata = {
     siteName: COMPANY_NAME,
     title: `${COMPANY_NAME} | LED Screen Display Sales & Rental in Addis Ababa, Ethiopia`,
     description:
-      "LED screen sales, rental, and installation in Addis Ababa, Ethiopia. Indoor, outdoor, and event display solutions with fast turnaround.",
+      "Fetan LED is Ethiopia's leading LED screen display company in Addis Ababa, offering LED screen sales, rental, and installation for events, advertising, and permanent indoor/outdoor displays. Fast quotes, reliable service.",
     images: [
       {
         url: "/logo-v2.png",
@@ -117,7 +117,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${COMPANY_NAME} | LED Screen Display Sales & Rental in Addis Ababa, Ethiopia`,
     description:
-      "LED screen sales, rental, and installation in Addis Ababa, Ethiopia. Indoor, outdoor, and event display solutions with fast turnaround.",
+      "Fetan LED is Ethiopia's leading LED screen display company in Addis Ababa, offering LED screen sales, rental, and installation for events, advertising, and permanent indoor/outdoor displays. Fast quotes, reliable service.",
     images: ["/logo-v2.png"],
   },
   robots: {

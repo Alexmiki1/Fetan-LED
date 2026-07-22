@@ -25,7 +25,7 @@ const featuredProducts = FEATURED_IDS.map((id) =>
 
 const remainingProducts = PRODUCTS.filter((p) => !FEATURED_IDS.includes(p.id));
 
-const INDOOR_MODELS = ["P1.25 Cabinet", "P1.8 Cabinet", "P2.5 Cabinet", "P2.5 Module"];
+const INDOOR_MODELS = ["P1.25 Cabinet", "P1.25 Module", "P1.8 Cabinet", "P2.5 Cabinet", "P2.5 Module"];
 const OUTDOOR_MODELS = ["P4 Module", "P4 Cabinet", "P10 Single Color", "P10 Full Color"];
 
 interface ModelInfo {
@@ -49,6 +49,20 @@ const MODEL_DATA: Record<string, ModelInfo> = {
       { label: "Brightness", value: "600 - 800 nits" },
       { label: "Refresh Rate", value: "3,840 Hz" },
       { label: "Cabinet Material", value: "Die-Cast Aluminium" }
+    ]
+  },
+  "P1.25 Module": {
+    name: "P1.25 Module",
+    image: "/images/products/p1_25_module.png",
+    category: "Indoor",
+    description: "Individual ultra-fine pitch indoor P1.25 LED module. Features magnetic front service capability. Ideal for custom structural frames, curved walls, columns, or direct wall-mounting projects requiring premium clarity.",
+    specs: [
+      { label: "Pixel Pitch", value: "1.25 mm" },
+      { label: "Module Size", value: "320 x 160 mm" },
+      { label: "Resolution", value: "256 x 128 px" },
+      { label: "Lamp Type", value: "SMD1010" },
+      { label: "Service Mode", value: "Magnetic Front Access" },
+      { label: "Refresh Rate", value: "3,840 Hz" }
     ]
   },
   "P1.8 Cabinet": {
@@ -95,7 +109,7 @@ const MODEL_DATA: Record<string, ModelInfo> = {
   },
   "P4 Module": {
     name: "P4 Module",
-    image: "/images/products/p4_module.png",
+    image: "/images/products/p4_module.jpg",
     category: "Outdoor",
     description: "Outdoor P4 LED module with high-brightness SMD LEDs. Fully waterproof front coating (IP65) and durable housing for long-term outdoor operation. Perfect for custom display enclosures.",
     specs: [

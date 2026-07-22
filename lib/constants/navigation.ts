@@ -11,4 +11,4 @@ export const NAV_LINKS: NavLink[] = [
 
 export const COMPANY_NAME = "FETAN LED";
 export const COMPANY_TAGLINE = "Premium LED Display Solutions";
-export const COMPANY_EMAIL = "contact@fetanled.com";
+export const COMPANY_EMAIL = "Alexxissmiki@gmail.com";
