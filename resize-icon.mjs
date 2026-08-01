@@ -6,6 +6,7 @@ async function generateIcon() {
       fit: 'contain',
       background: '#1d74ff'
     })
+    .flatten({ background: '#1d74ff' })
     .toFile('app/icon.png');
   console.log('Successfully generated app/icon.png');
 }
