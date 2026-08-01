@@ -21,6 +21,14 @@ export const metadata: Metadata = {
   title: `About Fetan LED | LED Screen Supply, Installation & Advertising in Ethiopia`,
   description:
     "Learn about Fetan LED — Ethiopia's premier destination for cutting-edge LED screen supply, custom engineering, and professional installation. Founded in 2016, we deliver turnkey digital signage solutions built for reliability, brightness, and brilliant clarity.",
+  keywords: [
+    "Fetan LED history",
+    "Ethiopian LED company",
+    "LED installation experts Addis Ababa",
+    "Fetan Advertising",
+    "about Fetan LED",
+    "LED engineering Ethiopia",
+  ],
 };
 
 const VALUES = [

@@ -1,8 +1,17 @@
+import type { Metadata } from "next";
 import { SolutionsNav } from "@/components/sections/solutions-nav";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Enterprise Solutions | Fetan LED",
   description: "Explore our customized LED solutions for Bank & Finance, Education, Energy, Healthcare, Retail, Real Estate, and Manufacturing sectors.",
+  keywords: [
+    "retail LED solutions",
+    "stadium LED displays Addis Ababa",
+    "healthcare digital signage",
+    "education LED screens Ethiopia",
+    "custom LED architecture",
+    "enterprise LED displays",
+  ],
 };
 
 export default function SolutionsPage() {

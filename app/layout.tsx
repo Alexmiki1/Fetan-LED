@@ -93,8 +93,6 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: COMPANY_NAME }],
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
     apple: "/logo-v2.png",
   },
   openGraph: {

@@ -1,4 +1,4 @@
-
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ShieldAlert, BadgeCheck, Zap } from "lucide-react";
@@ -9,8 +9,29 @@ import { Button } from "@/components/ui/button";
 import { PrintButton } from "@/components/ui/print-button";
 
 interface PageProps {
-  params: {
-    id: string;
+  params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const product = SPEC_PRODUCTS.find((p) => p.id === id);
+
+  if (!product) {
+    return {
+      title: "Product Not Found | Fetan LED",
+    };
+  }
+
+  return {
+    title: `${product.name} LED Screen Specifications | Fetan LED`,
+    description: `Technical specifications for the ${product.name} LED display. ${product.tagline}. View pixel pitch, resolution, brightness, and panel dimensions.`,
+    keywords: [
+      `${product.name} LED screen`,
+      `${product.name} LED display specs`,
+      "LED panel specifications",
+      "Fetan LED technical specs",
+      "buy LED screen Ethiopia",
+    ],
   };
 }
 
@@ -74,8 +95,8 @@ const SPEC_DETAILS: Record<
   },
 };
 
-export default function SpecPage({ params }: PageProps) {
-  const { id } = params;
+export default async function SpecPage({ params }: PageProps) {
+  const { id } = await params;
 
   const product = SPEC_PRODUCTS.find((p) => p.id === id);
   const detail = SPEC_DETAILS[id];

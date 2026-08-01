@@ -1,4 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Professional LED Services | Installation & Maintenance | Fetan LED",
+  description: "Comprehensive LED display services in Ethiopia including sales, installation, SLA maintenance, custom R&D, and high-impact event rentals.",
+  keywords: [
+    "LED maintenance Ethiopia",
+    "LED display installation Addis Ababa",
+    "LED screen SLA agreements",
+    "LED event rentals Ethiopia",
+    "custom LED engineering",
+    "LED repair services Ethiopia",
+  ],
+};
 import {
   Wrench,
   DraftingCompass,

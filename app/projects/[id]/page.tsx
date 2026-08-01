@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,6 +8,29 @@ import { Button } from "@/components/ui/button";
 
 interface PageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const project = PROJECTS.find((p) => p.id === id);
+
+  if (!project) {
+    return {
+      title: "Project Not Found | Fetan LED",
+    };
+  }
+
+  return {
+    title: `${project.title} | Fetan LED Projects`,
+    description: `Discover how Fetan LED delivered the ${project.title} project. ${project.subtitle}. Premium LED display installations in Ethiopia.`,
+    keywords: [
+      project.title,
+      "Fetan LED projects",
+      "LED installation Ethiopia",
+      `${project.category} LED screen`,
+      "Addis Ababa digital signage",
+    ],
+  };
 }
 
 const PROJECT_DETAILS: Record<

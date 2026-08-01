@@ -1,5 +1,18 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { QuoteForm } from "@/components/sections/quote-form";
+
+export const metadata: Metadata = {
+  title: "Contact Fetan LED | Get a Quote for LED Displays",
+  description: "Get in touch with Fetan LED for expert consultation, premium LED screen quotes, and custom digital signage solutions in Addis Ababa, Ethiopia.",
+  keywords: [
+    "contact Fetan LED",
+    "LED screen quotes Addis Ababa",
+    "buy LED screen Ethiopia",
+    "LED display consultation",
+    "Fetan Advertising contact",
+  ],
+};
 import { LocationMap } from "@/components/sections/location-map";
 import { Mail, Phone, MapPin, Clock, HelpCircle } from "lucide-react";
 import { COMPANY_EMAIL, COMPANY_NAME } from "@/lib/constants/navigation";
