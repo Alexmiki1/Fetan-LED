@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 
 async function generateIcon() {
-  await sharp('public/iconnn.png')
+  await sharp('public/new-icon.png')
     .resize(512, 512, {
       fit: 'contain',
       background: '#1d74ff'
