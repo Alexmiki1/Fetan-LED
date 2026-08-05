@@ -9,6 +9,9 @@ const ProjectGallery = lazy(() =>
 const ProductsGallery = lazy(() =>
   import("@/components/sections/products-gallery").then((mod) => ({ default: mod.ProductsGallery }))
 );
+const SisterCompanies = lazy(() =>
+  import("@/components/sections/sister-companies").then((mod) => ({ default: mod.SisterCompanies }))
+);
 const QuoteForm = lazy(() =>
   import("@/components/sections/quote-form").then((mod) => ({ default: mod.QuoteForm }))
 );
@@ -36,6 +39,9 @@ export default function Home() {
         </Suspense>
         <Suspense fallback={<SectionSkeleton />}>
           <ProjectGallery />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton />}>
+          <SisterCompanies />
         </Suspense>
         <Suspense fallback={<SectionSkeleton />}>
           <QuoteForm />
