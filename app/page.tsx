@@ -30,7 +30,7 @@ export default function Home() {
       <div
         style={{
           background:
-            "linear-gradient(180deg, #1d74ff 0%, #1245a0 8%, #0e2d5e 18%, #071a38 28%, #040e1a 40%, #000000 52%, #000000 68%, #020a1a 76%, #051228 83%, #0a1f45 89%, #1245a0 95%, #1d74ff 100%)",
+            "linear-gradient(180deg, #1d74ff 0%, #1245a0 8%, #0e2d5e 18%, #071a38 28%, #040e1a 40%, #040e1a 52%, #040e1a 68%, #020a1a 76%, #051228 83%, #0a1f45 89%, #1245a0 95%, #1d74ff 100%)",
         }}
       >
         <Statistics />

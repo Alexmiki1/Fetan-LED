@@ -84,7 +84,8 @@ export function Hero() {
   return (
     <section
       id="services"
-      className="relative min-h-screen overflow-hidden bg-black"
+      className="relative min-h-screen overflow-hidden"
+      style={{ background: "#040e1a" }}
       aria-label="Hero"
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -112,14 +113,14 @@ export function Hero() {
         />
       </div>
 
-      <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/40 to-transparent z-[1]" />
-      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/40 to-transparent z-[1]" />
-      <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-black/40 to-transparent z-[1]" />
-      <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-black/40 to-transparent z-[1]" />
+      <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#040e1a]/60 to-transparent z-[1]" />
+      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#040e1a]/60 to-transparent z-[1]" />
+      <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#040e1a]/60 to-transparent z-[1]" />
+      <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#040e1a]/60 to-transparent z-[1]" />
 
-      <div className="absolute inset-0 z-[2] bg-[linear-gradient(165deg,rgba(29,116,255,0.55)_0%,rgba(21,89,204,0.45)_20%,rgba(14,61,140,0.55)_40%,rgba(10,45,102,0.65)_60%,rgba(4,14,26,0.80)_80%,rgba(0,0,0,0.92)_100%)]" />
+      <div className="absolute inset-0 z-[2] bg-[linear-gradient(165deg,rgba(29,116,255,0.55)_0%,rgba(21,89,204,0.45)_20%,rgba(14,61,140,0.55)_40%,rgba(10,45,102,0.65)_60%,rgba(4,14,26,0.80)_80%,rgba(4,14,26,0.92)_100%)]" />
 
-      <div className="absolute inset-x-0 bottom-0 h-40 z-[3] bg-gradient-to-t from-black to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-40 z-[3] bg-gradient-to-t from-[#040e1a] to-transparent" />
 
       <div className="relative z-10 grid min-h-screen grid-cols-1 lg:grid-cols-2" style={{ zIndex: 4 }}>
         <motion.div

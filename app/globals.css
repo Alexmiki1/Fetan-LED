@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
+  --background: #040e1a;
   --foreground: #ffffff;
   --brand-blue: #1d74ff;
   --brand-blue-dark: #1559cc;
@@ -83,13 +83,13 @@
 .bg-hero-panel-left {
   background:
     radial-gradient(ellipse 90% 70% at 15% 0%, rgba(var(--brand-blue-rgb), 0.85) 0%, rgba(var(--brand-blue-rgb), 0.35) 40%, transparent 70%),
-    linear-gradient(165deg, #1d74ff 0%, #1868e8 15%, #1559cc 30%, #0e3d8c 48%, #0a2d66 62%, #040e1a 82%, #000000 100%);
+    linear-gradient(165deg, #1d74ff 0%, #1868e8 15%, #1559cc 30%, #0e3d8c 48%, #0a2d66 62%, #040e1a 82%, #040e1a 100%);
 }
 
 .bg-hero-panel-right {
   background:
     radial-gradient(ellipse 90% 70% at 85% 0%, rgba(var(--brand-blue-rgb), 0.85) 0%, rgba(var(--brand-blue-rgb), 0.35) 40%, transparent 70%),
-    linear-gradient(195deg, #1d74ff 0%, #1868e8 15%, #1559cc 30%, #0e3d8c 48%, #0a2d66 62%, #040e1a 82%, #000000 100%);
+    linear-gradient(195deg, #1d74ff 0%, #1868e8 15%, #1559cc 30%, #0e3d8c 48%, #0a2d66 62%, #040e1a 82%, #040e1a 100%);
 }
 
 .bg-hero-hover-glow {
@@ -97,19 +97,19 @@
 }
 
 .bg-stats-bar {
-  background: linear-gradient(180deg, #000000 0%, #050810 50%, #000000 100%);
+  background: linear-gradient(180deg, #040e1a 0%, #050810 50%, #040e1a 100%);
 }
 
 .bg-marquee-fade {
-  background: linear-gradient(180deg, #000000 0%, #0a1020 50%, #000000 100%);
+  background: linear-gradient(180deg, #040e1a 0%, #0a1020 50%, #040e1a 100%);
 }
 
 .bg-gallery-section {
-  background: linear-gradient(180deg, #000000 0%, #03060f 50%, #000000 100%);
+  background: linear-gradient(180deg, #040e1a 0%, #03060f 50%, #040e1a 100%);
 }
 
 .bg-spec-section {
-  background: linear-gradient(180deg, #000000 0%, #0a1020 35%, #050810 65%, #000000 100%);
+  background: linear-gradient(180deg, #040e1a 0%, #0a1020 35%, #050810 65%, #040e1a 100%);
 }
 
 /* Quote section: black at top, ends at exactly #1559cc at the very bottom */

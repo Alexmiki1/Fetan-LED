@@ -188,7 +188,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full bg-black font-sans text-white">
+      <body className="min-h-full bg-[#040e1a] font-sans text-white">
         <VideoLoadingProvider>
           <LoadingScreen />
           <Navbar />

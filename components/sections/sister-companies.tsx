@@ -35,6 +35,7 @@ export function SisterCompanies() {
     <section
       ref={ref}
       className="relative border-t border-white/10 py-24 sm:py-32"
+      style={{ background: "linear-gradient(180deg, #071a38 0%, #0e2d5e 50%, #071a38 100%)" }}
       aria-label="Sister companies"
     >
       {/* Subtle glow */}
