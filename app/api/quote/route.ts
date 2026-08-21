@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
 // Change this to wherever you want quote requests to actually land
-const SALES_EMAIL = "contact@fetanled.com";
+const SALES_EMAIL = process.env.SALES_EMAIL || "contact@fetanled.com";
 const FROM_EMAIL = process.env.QUOTE_FROM_EMAIL || "quotes@fetanled.com";
 const BRAND_NAME = "Fetanled";
 
@@ -202,16 +202,18 @@ export async function POST(req: Request) {
     console.log("📨 ADMIN RESULT:", adminResult);
     console.log("📨 CUSTOMER RESULT:", customerResult);
 
-    if (adminResult.status === "rejected") {
-      console.error("❌ Failed to send admin quote email:", adminResult.reason);
+    if (adminResult.status === "rejected" || (adminResult.status === "fulfilled" && adminResult.value.error)) {
+      const errorDetail = adminResult.status === "fulfilled" ? adminResult.value.error : adminResult.reason;
+      console.error("❌ Failed to send admin quote email:", errorDetail);
       return new Response(
         JSON.stringify({ error: "Unable to send quote email. Please try again shortly." }),
         { status: 500 }
       );
     }
 
-    if (customerResult.status === "rejected") {
-      console.error("⚠️ Failed to send customer confirmation email:", customerResult.reason);
+    if (customerResult.status === "rejected" || (customerResult.status === "fulfilled" && customerResult.value.error)) {
+      const errorDetail = customerResult.status === "fulfilled" ? customerResult.value.error : customerResult.reason;
+      console.error("⚠️ Failed to send customer confirmation email:", errorDetail);
     }
 
     console.log("✅ Email process completed");
