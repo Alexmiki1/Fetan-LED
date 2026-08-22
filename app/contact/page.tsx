@@ -17,15 +17,6 @@ export const metadata: Metadata = {
   ],
 };
 
-const requirements = [
-  "Company and primary contact details",
-  "Project type (Sales/Installation or Rental)",
-  "Venue environment and target screen dimensions",
-  "Preferred content types (Video, Static, Live Feed)",
-  "Target completion date and budget expectations",
-  "Any additional technical requirements",
-];
-
 const FAQS = [
   {
     question: "What is your typical response time?",
@@ -47,60 +38,32 @@ const FAQS = [
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-[#020202] text-white antialiased">
-      {/* Brand Header Line */}
-      <div className="h-1.5 bg-gradient-to-r from-[#1245a0] via-[#1a66cc] to-[#1d74ff]" />
-      
-      {/* Main Quote Form Section with Split Layout (adapted from reference) */}
-      <main id="main-content" tabIndex={-1}>
-        <section className="border-b border-white/5 bg-[#050505] px-5 py-16 sm:px-6 lg:px-8 lg:py-24">
-          <div className="mx-auto grid w-full max-w-[1500px] gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(560px,1.2fr)] lg:items-start">
-            
-            {/* Left Column - Sticky Info Sidebar */}
-            <div className="lg:sticky lg:top-24">
-              <span className="inline-flex rounded-full border border-brand-blue/30 bg-brand-blue/10 px-4 py-2 text-[11px] font-bold uppercase tracking-[.16em] text-brand-blue">
-                Quote request
-              </span>
-              <h1 className="mt-5 font-display text-4xl leading-[1.05] sm:text-6xl uppercase font-bold tracking-wide">
-                Let's configure the perfect LED display.
-              </h1>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-white/60">
-                Provide a short overview of your project. Our engineering team will review it, confirm the best hardware and design path, and send a detailed proposal.
-              </p>
-              
-              <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur-sm">
-                <h2 className="text-sm font-bold uppercase tracking-[.14em] text-white">Before you begin</h2>
-                <ul className="mt-4 grid gap-3 text-sm leading-6 text-white/60">
-                  {requirements.map((item) => (
-                    <li key={item} className="flex gap-3">
-                      <span className="mt-1 text-brand-blue">✓</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <p className="mt-5 text-sm leading-6 text-white/40">
-                No payment information is required. We provide clear, itemized proposals with zero obligations.
-              </p>
-            </div>
+    <div className="min-h-screen bg-black text-white antialiased">
+      {/* Intro Header */}
+      <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 text-center border-b border-white/10">
+        <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_50%_10%,rgba(29,116,255,0.06)_0%,transparent_65%)]" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">
+            Connect With Us
+          </span>
+          <h1 className="mt-2 font-display text-4xl font-bold uppercase tracking-wide text-white sm:text-5xl md:text-6xl">
+            Let's Build Something Visual
+          </h1>
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-white/50">
+            Have a project in mind? Our AV engineering experts are ready to design a custom LED display solution tailored to your environment.
+          </p>
+        </div>
+      </section>
 
-            {/* Right Column - Embedded Quote Form */}
-            <div className="rounded-3xl border border-white/10 bg-[#0a0a0a] p-5 text-white shadow-2xl sm:p-7 relative z-10">
-              <div className="text-[11px] font-bold uppercase tracking-[.18em] text-brand-blue mb-2">Project Details</div>
-              <h2 className="mt-2 font-display text-2xl sm:text-3xl font-bold uppercase tracking-wide">Tell us about your project.</h2>
-              <p className="mt-2 text-sm leading-6 text-white/50 mb-8">Required fields are marked with an asterisk (*). Our team will respond within 4 business hours.</p>
-              
-              <Suspense fallback={<div className="h-96 bg-transparent" />}>
-                <QuoteForm />
-              </Suspense>
-            </div>
+      {/* Main Quote Form Section */}
+      <div className="relative z-10">
+        <Suspense fallback={<div className="h-96 bg-transparent" />}>
+          <QuoteForm />
+        </Suspense>
+      </div>
 
-          </div>
-        </section>
-      </main>
-
-      {/* Direct Contact Cards & FAQs (From Original) */}
-      <section className="relative z-10 border-t border-white/5 bg-[#020202] py-20 sm:py-24">
+      {/* Direct Contact Cards & FAQs */}
+      <section className="relative z-10 border-t border-white/10 bg-black py-20 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-16 lg:grid-cols-12">
             {/* Left Column - FAQ */}
