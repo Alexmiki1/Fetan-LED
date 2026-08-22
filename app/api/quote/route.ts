@@ -1,8 +1,7 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 // Change this to wherever you want quote requests to actually land
-const SALES_EMAIL = process.env.SALES_EMAIL || "contact@fetanled.com";
-const FROM_EMAIL = process.env.QUOTE_FROM_EMAIL || "quotes@fetanled.com";
+const SALES_EMAIL = "contact@fetanled.com";
 const BRAND_NAME = "Fetanled";
 
 type QuotePayload = {
@@ -71,17 +70,10 @@ function buildAdminHtml(body: QuotePayload) {
                 ${row("Email Address", email)}
                 ${row("Phone", phone)}
                 ${row("Event Dates (if rental)", eventDatesRow)}
-                
                 ${row("Venue / Environment", venueEnvironment)}
                 ${row("Screen Dimensions (Width x Height)", screenDimensionsRow)}
-                
-                
-                
-                
-              
                 ${row("Target Completion Date", targetCompletionDate)}
                 ${row("Additional Notes", additionalNotes)}
-              
               </table>
             </td></tr>
           </table>
@@ -124,17 +116,25 @@ function buildCustomerHtml(body: QuotePayload) {
 }
 
 export async function POST(req: Request) {
-  console.log("🚀 QUOTE API HIT");
+  console.log("🚀 QUOTE API HIT (Nodemailer)");
 
-  if (!process.env.RESEND_API_KEY) {
-    console.error("❌ Missing RESEND_API_KEY");
+  if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+    console.error("❌ Missing SMTP credentials in environment variables.");
     return new Response(
-      JSON.stringify({ error: "Missing RESEND_API_KEY. Set it in .env.local and Vercel." }),
+      JSON.stringify({ error: "Email service is not configured. Please check SMTP settings." }),
       { status: 500 }
     );
   }
 
-  const resend = new Resend(process.env.RESEND_API_KEY);
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: parseInt(process.env.SMTP_PORT || "465"),
+    secure: process.env.SMTP_PORT === "465", // true for 465, false for other ports
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+  });
 
   try {
     const body = (await req.json()) as Partial<QuotePayload> & {
@@ -182,17 +182,20 @@ export async function POST(req: Request) {
 
     const projectTypeLabel = payload.serviceType === "rentals" ? "Rental" : "Installation";
     const subject = `New Quote Request — ${payload.company} — ${projectTypeLabel}`;
+    
+    // We send FROM the authenticated SMTP user so the host doesn't reject it as spoofing
+    const fromAddress = process.env.SMTP_USER;
 
     const [adminResult, customerResult] = await Promise.allSettled([
-      resend.emails.send({
-        from: `${BRAND_NAME} Quotes <${FROM_EMAIL}>`,
+      transporter.sendMail({
+        from: `${BRAND_NAME} Quotes <${fromAddress}>`,
         to: SALES_EMAIL,
         replyTo: payload.email,
         subject,
         html: buildAdminHtml(payload),
       }),
-      resend.emails.send({
-        from: `${BRAND_NAME} Quotes <${FROM_EMAIL}>`,
+      transporter.sendMail({
+        from: `${BRAND_NAME} Quotes <${fromAddress}>`,
         to: payload.email,
         subject: `We've received your quote request — ${BRAND_NAME}`,
         html: buildCustomerHtml(payload),
@@ -202,18 +205,16 @@ export async function POST(req: Request) {
     console.log("📨 ADMIN RESULT:", adminResult);
     console.log("📨 CUSTOMER RESULT:", customerResult);
 
-    if (adminResult.status === "rejected" || (adminResult.status === "fulfilled" && adminResult.value.error)) {
-      const errorDetail = adminResult.status === "fulfilled" ? adminResult.value.error : adminResult.reason;
-      console.error("❌ Failed to send admin quote email:", errorDetail);
+    if (adminResult.status === "rejected") {
+      console.error("❌ Failed to send admin quote email:", adminResult.reason);
       return new Response(
         JSON.stringify({ error: "Unable to send quote email. Please try again shortly." }),
         { status: 500 }
       );
     }
 
-    if (customerResult.status === "rejected" || (customerResult.status === "fulfilled" && customerResult.value.error)) {
-      const errorDetail = customerResult.status === "fulfilled" ? customerResult.value.error : customerResult.reason;
-      console.error("⚠️ Failed to send customer confirmation email:", errorDetail);
+    if (customerResult.status === "rejected") {
+      console.error("⚠️ Failed to send customer confirmation email:", customerResult.reason);
     }
 
     console.log("✅ Email process completed");
