@@ -7,12 +7,12 @@ import { useCallback, useEffect, useState } from "react";
 import { useVideoLoading } from "@/lib/contexts/video-loading";
 
 const BANNERS = [
-  "/Banner1.png",
-  "/banner2.png",
-  "/banner3.png",
-  "/banner4.png",
-  "/banner5.png",
-  "/banner6.png",
+  "/banner1.webp",
+  "/banner2.webp",
+  "/banner3.webp",
+  "/banner4.webp",
+  "/banner5.webp",
+  "/banner6.webp",
 ] as const;
 
 const BANNER_DURATION_MS = 10000;
