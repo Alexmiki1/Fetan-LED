@@ -49,7 +49,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/banner:path*",
+        source: "/banner:file(.*)",
         headers: [
           {
             key: "Cache-Control",
