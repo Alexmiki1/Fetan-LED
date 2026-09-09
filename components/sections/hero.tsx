@@ -1,54 +1,80 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
+
 import { useVideoLoading } from "@/lib/contexts/video-loading";
-import { HERO_STATS } from "@/lib/constants/stats";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.15, duration: 0.7 },
-  }),
-};
+const BANNERS = [
+  "/Banner1.png",
+  "/banner2.png",
+  "/banner3.png",
+  "/banner4.png",
+  "/banner5.png",
+  "/banner6.png",
+] as const;
 
+const BANNER_DURATION_MS = 10000;
+const BANNER_DURATION_SEC = BANNER_DURATION_MS / 1000;
+const VIDEO_DURATION_MS = 15000;
 const VIDEO_ID = "2Zvx9EWN2T4";
+const TOTAL_SLIDES = BANNERS.length + 1; // 6 banners + 1 video
+const VIDEO_SLIDE_INDEX = BANNERS.length;
+
+const slideVariants = {
+  enter: { x: "100%", opacity: 0 },
+  center: { x: 0, opacity: 1 },
+  exit: { x: "-100%", opacity: 0 },
+};
 
 export function Hero() {
   const { setHeroVideoReady } = useVideoLoading();
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [videoReady, setVideoReady] = useState(false);
+
+  const isVideoSlide = slideIndex === VIDEO_SLIDE_INDEX;
+
+  const goNext = useCallback(() => {
+    setSlideIndex((prev) => (prev + 1) % TOTAL_SLIDES);
+  }, []);
 
   useEffect(() => {
-    let player: any;
+    const duration = isVideoSlide ? VIDEO_DURATION_MS : BANNER_DURATION_MS;
+    const timer = setTimeout(goNext, duration);
+    return () => clearTimeout(timer);
+  }, [slideIndex, isVideoSlide, goNext]);
+
+  useEffect(() => {
+    setHeroVideoReady(true);
+  }, [setHeroVideoReady]);
+
+  useEffect(() => {
+    let player: { destroy?: () => void } | null = null;
     let cancelled = false;
 
     function initPlayer() {
       if (cancelled) return;
-      const YT = (window as any).YT;
-      if (!YT || !YT.Player) return;
+      const YT = (
+        window as Window & {
+          YT?: { Player: new (...args: unknown[]) => unknown };
+        }
+      ).YT;
+      if (!YT?.Player) return;
 
       player = new YT.Player("hero-youtube-player", {
         events: {
           onReady: () => {
-            // Fallback in case onStateChange never fires (some browsers)
-            setIsPlaying(true);
-            setHeroVideoReady(true);
+            setVideoReady(true);
           },
-          onStateChange: (event: any) => {
-            if (event.data === 1) {
-              setIsPlaying(true);
-              setHeroVideoReady(true);
-            }
+          onStateChange: (event: { data: number }) => {
+            if (event.data === 1) setVideoReady(true);
           },
         },
-      });
+      }) as { destroy?: () => void };
     }
 
-    // Load the YouTube IFrame API script if it isn't already on the page
-    if (!(window as any).YT) {
+    if (!(window as Window & { YT?: unknown }).YT) {
       const existingScript = document.getElementById("youtube-iframe-api");
       if (!existingScript) {
         const tag = document.createElement("script");
@@ -57,29 +83,28 @@ export function Hero() {
         document.head.appendChild(tag);
       }
 
-      const previousCallback = (window as any).onYouTubeIframeAPIReady;
-      (window as any).onYouTubeIframeAPIReady = () => {
-        if (previousCallback) previousCallback();
+      const previousCallback = (
+        window as Window & { onYouTubeIframeAPIReady?: () => void }
+      ).onYouTubeIframeAPIReady;
+
+      (
+        window as Window & { onYouTubeIframeAPIReady?: () => void }
+      ).onYouTubeIframeAPIReady = () => {
+        previousCallback?.();
         initPlayer();
       };
-    } else if ((window as any).YT.Player) {
+    } else {
       initPlayer();
     }
 
-    // Hard fallback: if nothing fires within 4s, just show the iframe anyway
-    const fallback = setTimeout(() => {
-      setIsPlaying(true);
-      setHeroVideoReady(true);
-    }, 4000);
+    const fallback = setTimeout(() => setVideoReady(true), 4000);
 
     return () => {
       cancelled = true;
       clearTimeout(fallback);
-      if (player && typeof player.destroy === "function") {
-        player.destroy();
-      }
+      player?.destroy?.();
     };
-  }, [setHeroVideoReady]);
+  }, []);
 
   return (
     <section
@@ -88,102 +113,92 @@ export function Hero() {
       style={{ background: "#040e1a" }}
       aria-label="Hero"
     >
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <iframe
-          id="hero-youtube-player"
-          suppressHydrationWarning
-          src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&playsinline=1&rel=0&showinfo=0&cc_load_policy=0&color=white&widget_referrer=0&enablejsapi=1&autohide=1`}
-          allow="autoplay; encrypted-media; picture-in-picture"
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%) scale(1.3)",
-            width: "100vw",
-            height: "56.25vw",
-            minHeight: "100vh",
-            minWidth: "177.77vh",
-            border: "none",
-            pointerEvents: "none",
-            opacity: isPlaying ? 1 : 0,
-            transition: "opacity 1.5s ease-in-out",
-          }}
-          tabIndex={-1}
-          aria-hidden="true"
-        />
+      <div className="absolute inset-0 overflow-hidden bg-[#040e1a]">
+        <AnimatePresence initial={false} mode="popLayout">
+          {!isVideoSlide ? (
+            <motion.div
+              key={`banner-${slideIndex}`}
+              className="absolute inset-0 flex items-center justify-center overflow-hidden"
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.85, ease: [0.32, 0.72, 0, 1] }}
+            >
+              <motion.div
+                className="absolute inset-0"
+                initial={{ scale: 1.05 }}
+                animate={{ scale: 0.9 }}
+                transition={{
+                  duration: BANNER_DURATION_SEC,
+                  ease: "linear",
+                }}
+              >
+                <Image
+                  src={BANNERS[slideIndex]}
+                  alt={`FETAN LED banner ${slideIndex + 1}`}
+                  fill
+                  priority={slideIndex === 0}
+                  sizes="100vw"
+                  className="object-contain object-center"
+                />
+              </motion.div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="hero-video"
+              className="absolute inset-0"
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.85, ease: [0.32, 0.72, 0, 1] }}
+            >
+              <iframe
+                id="hero-youtube-player"
+                suppressHydrationWarning
+                src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&playsinline=1&rel=0&showinfo=0&cc_load_policy=0&color=white&widget_referrer=0&enablejsapi=1&autohide=1`}
+                allow="autoplay; encrypted-media; picture-in-picture"
+                className="pointer-events-none absolute left-1/2 top-1/2 min-h-full min-w-full border-0"
+                style={{
+                  width: "100vw",
+                  height: "56.25vw",
+                  minHeight: "100vh",
+                  minWidth: "177.77vh",
+                  transform: "translate(-50%, -50%) scale(1.3)",
+                  opacity: videoReady ? 1 : 0,
+                  transition: "opacity 0.8s ease-in-out",
+                }}
+                tabIndex={-1}
+                aria-hidden="true"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
-      <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#040e1a]/60 to-transparent z-[1]" />
-      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#040e1a]/60 to-transparent z-[1]" />
-      <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#040e1a]/60 to-transparent z-[1]" />
-      <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#040e1a]/60 to-transparent z-[1]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-16 bg-gradient-to-b from-[#040e1a]/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-20 bg-gradient-to-t from-[#040e1a]/50 to-transparent" />
 
-      <div className="absolute inset-0 z-[2] bg-[linear-gradient(165deg,rgba(29,116,255,0.55)_0%,rgba(21,89,204,0.45)_20%,rgba(14,61,140,0.55)_40%,rgba(10,45,102,0.65)_60%,rgba(4,14,26,0.80)_80%,rgba(4,14,26,0.92)_100%)]" />
-
-      <div className="absolute inset-x-0 bottom-0 h-40 z-[3] bg-gradient-to-t from-[#040e1a] to-transparent" />
-
-      <div className="relative z-10 grid min-h-screen grid-cols-1 lg:grid-cols-2" style={{ zIndex: 4 }}>
-        <motion.div
-          custom={0}
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          className="flex flex-col justify-end p-6 sm:p-10 lg:p-12"
-        >
-          <div className="max-w-lg">
-            <h1 className="font-display text-3xl font-bold uppercase leading-none tracking-wide text-white sm:text-4xl md:text-5xl lg:text-6xl">
-              LED Screen Display Sales & Installation
-            </h1>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/70 sm:text-base">
-              Permanent LED solutions engineered for retail, corporate, and outdoor environments. From design to deployment.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-6">
-              <Button asChild>
-                <a href="#products">View Solutions</a>
-              </Button>
-              <div className="flex items-baseline gap-2">
-                <span className="font-display text-3xl font-light text-white/90 sm:text-4xl">
-                  {HERO_STATS.sales.value}
-                </span>
-                <span className="text-xs uppercase tracking-wider text-white/40">
-                  {HERO_STATS.sales.label}
-                </span>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        <div className="hidden lg:block absolute left-1/2 top-1/4 h-1/2 w-px bg-white/10" />
-
-        <motion.div
-          custom={1}
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          className="flex flex-col justify-end p-6 sm:p-10 lg:p-12"
-        >
-          <div className="max-w-lg">
-            <h1 className="font-display text-3xl font-bold uppercase leading-none tracking-wide text-white sm:text-4xl md:text-5xl lg:text-6xl">
-              LED Screen Display Event Rentals
-            </h1>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/70 sm:text-base">
-              Modular rental systems for concerts, conferences, and brand activations. Rapid deployment, stunning results.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-6">
-              <Button asChild>
-                <a href="#contact">Rental Catalog</a>
-              </Button>
-              <div className="flex items-baseline gap-2">
-                <span className="font-display text-3xl font-light text-white/90 sm:text-4xl">
-                  {HERO_STATS.rentals.value}
-                </span>
-                <span className="text-xs uppercase tracking-wider text-white/40">
-                  {HERO_STATS.rentals.label}
-                </span>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+      <div
+        className="absolute bottom-6 left-1/2 z-[5] flex -translate-x-1/2 gap-2"
+        aria-hidden="true"
+      >
+        {Array.from({ length: TOTAL_SLIDES }).map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            onClick={() => setSlideIndex(i)}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              i === slideIndex
+                ? "w-8 bg-white"
+                : "w-1.5 bg-white/35 hover:bg-white/60"
+            }`}
+            aria-label={
+              i < BANNERS.length ? `Go to banner ${i + 1}` : "Go to video"
+            }
+          />
+        ))}
       </div>
     </section>
   );
