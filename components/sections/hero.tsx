@@ -3,8 +3,10 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { useVideoLoading } from "@/lib/contexts/video-loading";
+import { cn } from "@/lib/utils";
 
 const BANNERS = [
   "/banner1.webp",
@@ -16,38 +18,62 @@ const BANNERS = [
 ] as const;
 
 const BANNER_DURATION_MS = 10000;
-const BANNER_DURATION_SEC = BANNER_DURATION_MS / 1000;
 const VIDEO_DURATION_MS = 15000;
+const SLIDE_SPEED_SEC = 1.5;
 const VIDEO_ID = "2Zvx9EWN2T4";
-const TOTAL_SLIDES = BANNERS.length + 1; // 6 banners + 1 video
+const TOTAL_SLIDES = BANNERS.length + 1;
 const VIDEO_SLIDE_INDEX = BANNERS.length;
-
-const slideVariants = {
-  enter: { x: "100%", opacity: 0 },
-  center: { x: 0, opacity: 1 },
-  exit: { x: "-100%", opacity: 0 },
-};
 
 export function Hero() {
   const { setHeroVideoReady } = useVideoLoading();
   const [slideIndex, setSlideIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [videoReady, setVideoReady] = useState(false);
+  const [skipEnter, setSkipEnter] = useState(true);
 
   const isVideoSlide = slideIndex === VIDEO_SLIDE_INDEX;
 
+  const goTo = useCallback(
+    (index: number) => {
+      const next = ((index % TOTAL_SLIDES) + TOTAL_SLIDES) % TOTAL_SLIDES;
+      setDirection(next > slideIndex || (slideIndex === TOTAL_SLIDES - 1 && next === 0) ? 1 : -1);
+      setSkipEnter(false);
+      setSlideIndex(next);
+    },
+    [slideIndex]
+  );
+
   const goNext = useCallback(() => {
+    setDirection(1);
+    setSkipEnter(false);
     setSlideIndex((prev) => (prev + 1) % TOTAL_SLIDES);
   }, []);
 
+  const goPrev = useCallback(() => {
+    setDirection(-1);
+    setSkipEnter(false);
+    setSlideIndex((prev) => (prev - 1 + TOTAL_SLIDES) % TOTAL_SLIDES);
+  }, []);
+
+  // Auto-advance — never pause on hover (that was freezing the slider)
   useEffect(() => {
     const duration = isVideoSlide ? VIDEO_DURATION_MS : BANNER_DURATION_MS;
-    const timer = setTimeout(goNext, duration);
-    return () => clearTimeout(timer);
+    const timer = window.setTimeout(goNext, duration);
+    return () => window.clearTimeout(timer);
   }, [slideIndex, isVideoSlide, goNext]);
 
   useEffect(() => {
     setHeroVideoReady(true);
   }, [setHeroVideoReady]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") goNext();
+      if (e.key === "ArrowLeft") goPrev();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [goNext, goPrev]);
 
   useEffect(() => {
     let player: { destroy?: () => void } | null = null;
@@ -64,9 +90,7 @@ export function Hero() {
 
       player = new YT.Player("hero-youtube-player", {
         events: {
-          onReady: () => {
-            setVideoReady(true);
-          },
+          onReady: () => setVideoReady(true),
           onStateChange: (event: { data: number }) => {
             if (event.data === 1) setVideoReady(true);
           },
@@ -106,54 +130,72 @@ export function Hero() {
     };
   }, []);
 
+  const variants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? "100%" : "-100%",
+    }),
+    center: { x: 0 },
+    exit: (dir: number) => ({
+      x: dir > 0 ? "-100%" : "100%",
+    }),
+  };
+
   return (
     <section
       id="services"
-      className="relative min-h-screen overflow-hidden"
-      style={{ background: "#040e1a" }}
+      className="relative min-h-[100svh] overflow-hidden bg-[#040e1a]"
       aria-label="Hero"
     >
-      <div className="absolute inset-0 overflow-hidden bg-[#040e1a]">
-        <AnimatePresence initial={false} mode="popLayout">
-          {!isVideoSlide ? (
-            <motion.div
-              key={`banner-${slideIndex}`}
-              className="absolute inset-0 flex items-center justify-center overflow-hidden"
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.85, ease: [0.32, 0.72, 0, 1] }}
-            >
-              <motion.div
-                className="absolute inset-0"
-                initial={{ scale: 1.05 }}
-                animate={{ scale: 0.9 }}
-                transition={{
-                  duration: BANNER_DURATION_SEC,
-                  ease: "linear",
-                }}
-              >
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            @keyframes hero-zoom-out {
+              from { transform: scale(1); }
+              to { transform: scale(0.9); }
+            }
+            .hero-zoom-out {
+              animation: hero-zoom-out ${BANNER_DURATION_MS}ms linear forwards;
+              will-change: transform;
+            }
+          `,
+        }}
+      />
+
+      <div className="absolute inset-0">
+        <AnimatePresence initial={false} custom={direction} mode="sync">
+          <motion.div
+            key={isVideoSlide ? "hero-video" : `banner-${slideIndex}`}
+            className="absolute inset-0"
+            custom={direction}
+            variants={variants}
+            initial={skipEnter ? false : "enter"}
+            animate="center"
+            exit="exit"
+            transition={{
+              duration: SLIDE_SPEED_SEC,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.12}
+            onDragEnd={(_, info) => {
+              if (info.offset.x < -80 || info.velocity.x < -400) goNext();
+              else if (info.offset.x > 80 || info.velocity.x > 400) goPrev();
+            }}
+          >
+            {!isVideoSlide ? (
+              <div className="hero-zoom-out absolute inset-0 flex items-center justify-center origin-center">
                 <Image
                   src={BANNERS[slideIndex]}
                   alt={`FETAN LED banner ${slideIndex + 1}`}
                   fill
-                  priority={slideIndex === 0}
+                  priority={slideIndex <= 1}
                   sizes="100vw"
-                  className="object-contain object-center"
+                  className="pointer-events-none select-none object-contain object-center"
+                  draggable={false}
                 />
-              </motion.div>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="hero-video"
-              className="absolute inset-0"
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.85, ease: [0.32, 0.72, 0, 1] }}
-            >
+              </div>
+            ) : (
               <iframe
                 id="hero-youtube-player"
                 suppressHydrationWarning
@@ -165,38 +207,84 @@ export function Hero() {
                   height: "56.25vw",
                   minHeight: "100vh",
                   minWidth: "177.77vh",
-                  transform: "translate(-50%, -50%) scale(1.3)",
+                  transform: "translate(-50%, -50%) scale(1.15)",
                   opacity: videoReady ? 1 : 0,
                   transition: "opacity 0.8s ease-in-out",
                 }}
                 tabIndex={-1}
                 aria-hidden="true"
               />
-            </motion.div>
-          )}
+            )}
+          </motion.div>
         </AnimatePresence>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-16 bg-gradient-to-b from-[#040e1a]/40 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-20 bg-gradient-to-t from-[#040e1a]/50 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-14 bg-gradient-to-b from-[#040e1a]/50 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-14 bg-gradient-to-t from-[#040e1a]/50 to-transparent" />
+
+      <button
+        type="button"
+        onClick={goPrev}
+        aria-label="Previous slide"
+        className="absolute left-3 top-1/2 z-[6] hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/25 text-white backdrop-blur-sm transition hover:bg-black/45 sm:left-6 sm:flex md:left-8"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+      <button
+        type="button"
+        onClick={goNext}
+        aria-label="Next slide"
+        className="absolute right-3 top-1/2 z-[6] hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/25 text-white backdrop-blur-sm transition hover:bg-black/45 sm:right-6 sm:flex md:right-[7%]"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
 
       <div
-        className="absolute bottom-6 left-1/2 z-[5] flex -translate-x-1/2 gap-2"
+        className="absolute right-4 top-1/2 z-[6] flex -translate-y-1/2 flex-col items-center gap-3 sm:right-6 md:right-[5%]"
+        role="tablist"
+        aria-label="Hero slides"
+      >
+        {Array.from({ length: TOTAL_SLIDES }).map((_, i) => {
+          const active = i === slideIndex;
+          return (
+            <button
+              key={i}
+              type="button"
+              role="tab"
+              aria-selected={active}
+              aria-label={i < BANNERS.length ? `Banner ${i + 1}` : "Video"}
+              onClick={() => goTo(i)}
+              className="group relative flex h-4 w-4 items-center justify-center"
+            >
+              <span
+                className={cn(
+                  "rounded-full bg-white transition-all duration-500",
+                  active
+                    ? "h-3 w-3 opacity-100"
+                    : "h-1.5 w-1.5 opacity-70 group-hover:opacity-100"
+                )}
+              />
+              {active && (
+                <span className="absolute inset-0 rounded-full border-2 border-white" />
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      <div
+        className="absolute bottom-5 left-1/2 z-[6] flex -translate-x-1/2 gap-2 sm:hidden"
         aria-hidden="true"
       >
         {Array.from({ length: TOTAL_SLIDES }).map((_, i) => (
           <button
             key={i}
             type="button"
-            onClick={() => setSlideIndex(i)}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              i === slideIndex
-                ? "w-8 bg-white"
-                : "w-1.5 bg-white/35 hover:bg-white/60"
-            }`}
-            aria-label={
-              i < BANNERS.length ? `Go to banner ${i + 1}` : "Go to video"
-            }
+            onClick={() => goTo(i)}
+            className={cn(
+              "h-1.5 rounded-full transition-all duration-300",
+              i === slideIndex ? "w-7 bg-white" : "w-1.5 bg-white/40"
+            )}
           />
         ))}
       </div>
