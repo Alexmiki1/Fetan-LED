@@ -18,20 +18,21 @@ const BANNERS = [
 ] as const;
 
 const BANNER_DURATION_MS = 10000;
-const VIDEO_DURATION_MS = 15000;
+// const VIDEO_DURATION_MS = 15000; // Video slide disabled
 const SLIDE_SPEED_SEC = 1.5;
-const VIDEO_ID = "2Zvx9EWN2T4";
-const TOTAL_SLIDES = BANNERS.length + 1;
-const VIDEO_SLIDE_INDEX = BANNERS.length;
+// const VIDEO_ID = "2Zvx9EWN2T4"; // Video slide disabled
+const TOTAL_SLIDES = BANNERS.length; // Video slide excluded from rotation
+// const VIDEO_SLIDE_INDEX = BANNERS.length; // Video slide disabled
 
 export function Hero() {
   const { setHeroVideoReady } = useVideoLoading();
   const [slideIndex, setSlideIndex] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [videoReady, setVideoReady] = useState(false);
+  // const [videoReady, setVideoReady] = useState(false); // Video slide disabled
   const [skipEnter, setSkipEnter] = useState(true);
 
-  const isVideoSlide = slideIndex === VIDEO_SLIDE_INDEX;
+  // const isVideoSlide = slideIndex === VIDEO_SLIDE_INDEX; // Video slide disabled
+  const isVideoSlide = false; // Video slide disabled
 
   const goTo = useCallback(
     (index: number) => {
@@ -57,7 +58,7 @@ export function Hero() {
 
   // Auto-advance — never pause on hover (that was freezing the slider)
   useEffect(() => {
-    const duration = isVideoSlide ? VIDEO_DURATION_MS : BANNER_DURATION_MS;
+    const duration = BANNER_DURATION_MS; // Video slide disabled — always use banner duration
     const timer = window.setTimeout(goNext, duration);
     return () => window.clearTimeout(timer);
   }, [slideIndex, isVideoSlide, goNext]);
@@ -75,60 +76,61 @@ export function Hero() {
     return () => window.removeEventListener("keydown", onKey);
   }, [goNext, goPrev]);
 
-  useEffect(() => {
-    let player: { destroy?: () => void } | null = null;
-    let cancelled = false;
+  // Video slide disabled — YouTube player init no longer needed
+  // useEffect(() => {
+  //   let player: { destroy?: () => void } | null = null;
+  //   let cancelled = false;
 
-    function initPlayer() {
-      if (cancelled) return;
-      const YT = (
-        window as Window & {
-          YT?: { Player: new (...args: unknown[]) => unknown };
-        }
-      ).YT;
-      if (!YT?.Player) return;
+  //   function initPlayer() {
+  //     if (cancelled) return;
+  //     const YT = (
+  //       window as Window & {
+  //         YT?: { Player: new (...args: unknown[]) => unknown };
+  //       }
+  //     ).YT;
+  //     if (!YT?.Player) return;
 
-      player = new YT.Player("hero-youtube-player", {
-        events: {
-          onReady: () => setVideoReady(true),
-          onStateChange: (event: { data: number }) => {
-            if (event.data === 1) setVideoReady(true);
-          },
-        },
-      }) as { destroy?: () => void };
-    }
+  //     player = new YT.Player("hero-youtube-player", {
+  //       events: {
+  //         onReady: () => setVideoReady(true),
+  //         onStateChange: (event: { data: number }) => {
+  //           if (event.data === 1) setVideoReady(true);
+  //         },
+  //       },
+  //     }) as { destroy?: () => void };
+  //   }
 
-    if (!(window as Window & { YT?: unknown }).YT) {
-      const existingScript = document.getElementById("youtube-iframe-api");
-      if (!existingScript) {
-        const tag = document.createElement("script");
-        tag.id = "youtube-iframe-api";
-        tag.src = "https://www.youtube.com/iframe_api";
-        document.head.appendChild(tag);
-      }
+  //   if (!(window as Window & { YT?: unknown }).YT) {
+  //     const existingScript = document.getElementById("youtube-iframe-api");
+  //     if (!existingScript) {
+  //       const tag = document.createElement("script");
+  //       tag.id = "youtube-iframe-api";
+  //       tag.src = "https://www.youtube.com/iframe_api";
+  //       document.head.appendChild(tag);
+  //     }
 
-      const previousCallback = (
-        window as Window & { onYouTubeIframeAPIReady?: () => void }
-      ).onYouTubeIframeAPIReady;
+  //     const previousCallback = (
+  //       window as Window & { onYouTubeIframeAPIReady?: () => void }
+  //     ).onYouTubeIframeAPIReady;
 
-      (
-        window as Window & { onYouTubeIframeAPIReady?: () => void }
-      ).onYouTubeIframeAPIReady = () => {
-        previousCallback?.();
-        initPlayer();
-      };
-    } else {
-      initPlayer();
-    }
+  //     (
+  //       window as Window & { onYouTubeIframeAPIReady?: () => void }
+  //     ).onYouTubeIframeAPIReady = () => {
+  //       previousCallback?.();
+  //       initPlayer();
+  //     };
+  //   } else {
+  //     initPlayer();
+  //   }
 
-    const fallback = setTimeout(() => setVideoReady(true), 4000);
+  //   const fallback = setTimeout(() => setVideoReady(true), 4000);
 
-    return () => {
-      cancelled = true;
-      clearTimeout(fallback);
-      player?.destroy?.();
-    };
-  }, []);
+  //   return () => {
+  //     cancelled = true;
+  //     clearTimeout(fallback);
+  //     player?.destroy?.();
+  //   };
+  // }, []);
 
   const variants = {
     enter: (dir: number) => ({
@@ -195,26 +197,7 @@ export function Hero() {
                   draggable={false}
                 />
               </div>
-            ) : (
-              <iframe
-                id="hero-youtube-player"
-                suppressHydrationWarning
-                src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&playsinline=1&rel=0&showinfo=0&cc_load_policy=0&color=white&widget_referrer=0&enablejsapi=1&autohide=1`}
-                allow="autoplay; encrypted-media; picture-in-picture"
-                className="pointer-events-none absolute left-1/2 top-1/2 min-h-full min-w-full border-0"
-                style={{
-                  width: "100vw",
-                  height: "56.25vw",
-                  minHeight: "100vh",
-                  minWidth: "177.77vh",
-                  transform: "translate(-50%, -50%) scale(1.15)",
-                  opacity: videoReady ? 1 : 0,
-                  transition: "opacity 0.8s ease-in-out",
-                }}
-                tabIndex={-1}
-                aria-hidden="true"
-              />
-            )}
+            ) : null /* Video slide disabled — iframe removed */}
           </motion.div>
         </AnimatePresence>
       </div>
