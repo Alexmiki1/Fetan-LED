@@ -120,6 +120,19 @@ const PROJECT_DETAILS: Record<
       { label: "Power Connection", value: "Neutrik PowerCON" },
     ],
   },
+  "7": {
+    description: "A high-performance 40 m² Indoor P2.5 LED Video Wall setup tailored for ultra-high-definition visual experiences. Built to capture attention with pixel-perfect accuracy, this installation sets a new standard for high-end indoor digital displays with seamless 8K content capability.",
+    challenge: "Achieving zero visible seams across a massive 40 m² canvas while maintaining ultra-high-definition clarity for 8K content playback and ensuring flicker-free performance for live broadcasting.",
+    solution: "We deployed ultra-dense P2.5 pixel pitch modules with advanced driver ICs for high refresh rates. Custom structural alignment ensured zero visible panel borders, while high-bandwidth processing infrastructure enabled smooth 8K video decoding and playback.",
+    specs: [
+      { label: "Pixel Pitch", value: "P2.5 mm" },
+      { label: "Display Size", value: "40 m²" },
+      { label: "Content Capability", value: "8K Support" },
+      { label: "Refresh Rate", value: "High (Flicker-Free)" },
+      { label: "Installation", value: "Zero Visible Seams" },
+      { label: "Ideal For", value: "Live Broadcasting" },
+    ],
+  },
 };
 
 export default async function ProjectPage({ params }: PageProps) {

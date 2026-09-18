@@ -93,6 +93,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: COMPANY_NAME }],
   icons: {
+    icon: "/fetan-favicon.png",
     apple: "/logo-v2.png",
   },
   openGraph: {
@@ -171,6 +172,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${barlowCondensed.variable} h-full scroll-smooth antialiased`}
     >
       <head>
+        <link rel="icon" href="/fetan-favicon.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
