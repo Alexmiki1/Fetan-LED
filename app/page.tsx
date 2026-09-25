@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { Hero } from "@/components/sections/hero";
 import { Statistics } from "@/components/sections/statistics";
 import { MarqueeText } from "@/components/MarqueeText";
+import { FAQ } from "@/components/sections/faq";
 
 const ProjectGallery = lazy(() =>
   import("@/components/sections/project-gallery").then((mod) => ({ default: mod.ProjectGallery }))
@@ -47,6 +48,8 @@ export default function Home() {
           <QuoteForm />
         </Suspense>
       </div>
+
+      <FAQ />
     </>
   );
 }
