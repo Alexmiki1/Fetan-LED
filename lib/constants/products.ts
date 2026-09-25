@@ -160,5 +160,65 @@ export const PRODUCTS: Product[] = [
       { label: "Operating Life", value: ">100,000 Hours" },
       { label: "Cabinet Housing", value: "Waterproof Steel/Aluminium" }
     ]
+  },
+  {
+    id: "smarthd-65-dual-os",
+    name: "SmartHD 65″ Dual-OS Touch 4K Signage",
+    subtitle: "Interactive floor-standing digital signage",
+    image: "/images/products/smarthd_65_dual_os.png",
+    description: "A premium interactive floor kiosk pairing a 4K UHD panel with a switchable Windows + Android dual system, 10-point infrared touch and tempered safety glass — engineered for retail, hospitality and corporate spaces. Features razor-sharp 4K UHD imagery on a slim, all-metal floor-standing body with castor wheels for mobility.",
+    features: [
+      "4K UHD panel with 3840×2160 resolution and 10-bit color",
+      "Dual OS: Windows 10 (OPS i7) and Android 14, switchable",
+      "10-point infrared touch with ±2 mm accuracy, driver-free",
+      "3 mm fully-tempered explosion-proof front surface glass",
+      "Remote CMS publishing over Wi-Fi, LAN or 4G from phone or PC"
+    ],
+    specs: [
+      { label: "Screen Size", value: "65 inch" },
+      { label: "Resolution", value: "4K UHD 3840 × 2160" },
+      { label: "Brightness", value: "350 cd/m²" },
+      { label: "Contrast Ratio", value: "5000:1 (dynamic)" },
+      { label: "Color Depth", value: "10-bit, 1.07 billion colors" },
+      { label: "Viewing Angle", value: "178° / 178° (H/V)" },
+      { label: "Refresh Rate", value: "60 Hz" },
+      { label: "Panel Lifetime", value: "≥ 50,000 hours" },
+      { label: "Touch Points", value: "10-point multi-touch" },
+      { label: "Windows Platform", value: "Intel Core i7 (6th Gen), 8 GB DDR4, 512 GB SSD" },
+      { label: "Android Platform", value: "Android 14, 4 GB + 64 GB" },
+      { label: "Overall Size", value: "871.5 × 2051.5 mm" },
+      { label: "Net Weight", value: "≈ 62 kg" },
+      { label: "Power Consumption", value: "≤ 150 W" }
+    ]
+  },
+  {
+    id: "smarthd-55-dual-os",
+    name: "SmartHD 55″ Dual-OS Touch 4K Signage",
+    subtitle: "Interactive floor-standing digital signage",
+    image: "/images/products/smarthd_65_dual_os.png",
+    description: "A premium interactive floor kiosk pairing a 4K UHD panel with a switchable Windows + Android dual system, 10-point infrared touch and tempered safety glass — engineered for retail, hospitality and corporate spaces. Features razor-sharp 4K UHD imagery on a slim, all-metal floor-standing body with castor wheels for mobility.",
+    features: [
+      "4K UHD panel with 3840×2160 resolution and 10-bit color",
+      "Dual OS: Windows 10 (OPS i7) and Android 14, switchable",
+      "10-point infrared touch with ±2 mm accuracy, driver-free",
+      "3 mm fully-tempered explosion-proof front surface glass",
+      "Remote CMS publishing over Wi-Fi, LAN or 4G from phone or PC"
+    ],
+    specs: [
+      { label: "Screen Size", value: "55 inch" },
+      { label: "Resolution", value: "4K UHD 3840 × 2160" },
+      { label: "Brightness", value: "350 cd/m²" },
+      { label: "Contrast Ratio", value: "5000:1 (dynamic)" },
+      { label: "Color Depth", value: "10-bit, 1.07 billion colors" },
+      { label: "Viewing Angle", value: "178° / 178° (H/V)" },
+      { label: "Refresh Rate", value: "60 Hz" },
+      { label: "Panel Lifetime", value: "≥ 50,000 hours" },
+      { label: "Touch Points", value: "10-point multi-touch" },
+      { label: "Windows Platform", value: "Intel Core i7 (6th Gen), 8 GB DDR4, 512 GB SSD" },
+      { label: "Android Platform", value: "Android 14, 4 GB + 64 GB" },
+      { label: "Overall Size", value: "758 × 1900 mm" },
+      { label: "Net Weight", value: "43.4 kg" },
+      { label: "Power Consumption", value: "≤ 120 W" }
+    ]
   }
 ];
