@@ -6,7 +6,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { LoadingScreen } from "@/components/layout/loading-screen";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { VideoLoadingProvider } from "@/lib/contexts/video-loading";
-import { COMPANY_NAME, COMPANY_TAGLINE, COMPANY_EMAIL } from "@/lib/constants/navigation";
+import { COMPANY_NAME, COMPANY_SITE_NAME, COMPANY_TAGLINE, COMPANY_EMAIL } from "@/lib/constants/navigation";
 
 import "./globals.css";
 
@@ -670,6 +670,7 @@ export const metadata: Metadata = {
     "What is the difference between indoor and outdoor LED screens",
   ],
   authors: [{ name: COMPANY_NAME }],
+  applicationName: COMPANY_SITE_NAME,
   icons: {
     icon: "/fetan-favicon.png",
     apple: "/logo-v2.png",
@@ -677,16 +678,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: COMPANY_NAME,
+    siteName: COMPANY_SITE_NAME,
     title: `${COMPANY_NAME} | LED Screen Display Sales & Rental in Addis Ababa, Ethiopia`,
     description:
-      "Fetan LED is Ethiopia's leading LED screen display company in Addis Ababa, offering LED screen sales, rental, and installation for events, advertising, and permanent indoor/outdoor displays. Fast quotes, reliable service.",
+      "Fetan LED is Ethiopia's leading LED screen display company in Addis Ababa, offering LED screen sales, rental, and installation services for events, advertising, and permanent indoor/outdoor displays. Fast quotes, reliable service.",
     images: [
       {
         url: "/logo-v2.png",
         width: 800,
         height: 600,
-        alt: "Fetan LED Logo",
+        alt: "FetanLed Logo",
       },
     ],
   },
@@ -704,16 +705,18 @@ export const metadata: Metadata = {
   other: {
     "geo.region": "ET-AA",
     "geo.placename": "Addis Ababa, Ethiopia",
+    "apple-mobile-web-app-title": COMPANY_SITE_NAME,
   },
 };
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: COMPANY_NAME,
+  name: COMPANY_SITE_NAME,
+  alternateName: ["FETAN LED", "Fetan LED", "FetanLed"],
   image: "https://fetanled.com/logo-v2.png",
   description:
-    "Fetan LED provides LED screen display sales, rental, and installation services in Addis Ababa, Ethiopia, including indoor, outdoor, and event display solutions.",
+    "FetanLed provides LED screen display sales, rental, and installation services in Addis Ababa, Ethiopia, including indoor, outdoor, and event display solutions.",
   address: {
     "@type": "PostalAddress",
     streetAddress: "Haile Gebre Silase St",
@@ -722,11 +725,34 @@ const localBusinessSchema = {
   },
   telephone: "+251913001010",
   email: COMPANY_EMAIL,
-  url: "https://fetanled.com",
+  url: "https://www.fetanled.com",
   areaServed: {
     "@type": "City",
     name: "Addis Ababa",
   },
+  sameAs: [
+    "https://linkedin.com/company/fetanled",
+    "https://fb.me/FetanLED",
+  ],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: COMPANY_SITE_NAME,
+  alternateName: ["FETAN LED", "Fetan LED"],
+  url: "https://www.fetanled.com/",
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: COMPANY_SITE_NAME,
+  alternateName: ["FETAN LED", "Fetan LED"],
+  url: "https://www.fetanled.com/",
+  logo: "https://www.fetanled.com/logo-v2.png",
+  email: COMPANY_EMAIL,
+  telephone: "+251913001010",
   sameAs: [
     "https://linkedin.com/company/fetanled",
     "https://fb.me/FetanLED",
@@ -765,7 +791,13 @@ export default function RootLayout({
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              websiteSchema,
+              organizationSchema,
+              localBusinessSchema,
+            ]),
+          }}
         />
       </head>
       <body className="min-h-full bg-[#040e1a] font-sans text-white">

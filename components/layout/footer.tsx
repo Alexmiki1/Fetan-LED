@@ -16,6 +16,7 @@ const FOOTER_LINKS = {
   ],
   resources: [
     { label: "About Us", href: "/about" },
+    { label: "FAQ", href: "/faq" },
     { label: "LED Products", href: "/#products" },
     { label: "Case Studies", href: "/#projects" },
     { label: "Support", href: "/contact" },
