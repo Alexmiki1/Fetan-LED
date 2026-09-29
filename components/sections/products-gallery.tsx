@@ -8,6 +8,7 @@ import { X, CheckCircle, Cpu, MessageSquare, ChevronDown } from "lucide-react";
 
 import { SectionHeading } from "@/components/shared/section-heading";
 import { Button } from "@/components/ui/button";
+import { ProductPrices } from "@/components/sections/product-prices";
 import { PRODUCTS } from "@/lib/constants/products";
 import type { Product } from "@/types";
 
@@ -403,6 +404,8 @@ export function ProductsGallery() {
             ))}
           </div>
         </div>
+
+        <ProductPrices />
 
         {/* See More toggle */}
         {!showAll && remainingProducts.length > 0 && (
