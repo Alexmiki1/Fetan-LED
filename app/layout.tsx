@@ -759,6 +759,138 @@ const organizationSchema = {
   ],
 };
 
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "LED Display Screens",
+  description: "High-quality LED display screens for indoor and outdoor use, including P2.5, P4, and P10 pixel pitch options",
+  brand: {
+    "@type": "Brand",
+    name: COMPANY_SITE_NAME,
+  },
+  offers: {
+    "@type": "AggregateOffer",
+    priceCurrency: "ETB",
+    lowPrice: "80000",
+    highPrice: "500000",
+    priceValidUntil: "2025-12-31",
+    availability: "https://schema.org/InStock",
+    seller: {
+      "@type": "Organization",
+      name: COMPANY_SITE_NAME,
+    },
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.8",
+    reviewCount: "25",
+  },
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "LED Screen Rental and Installation Services",
+  description: "Professional LED screen rental, sales, and installation services for events, advertising, and permanent displays in Addis Ababa, Ethiopia",
+  provider: {
+    "@type": "Organization",
+    name: COMPANY_SITE_NAME,
+    telephone: "+251913001010",
+    email: COMPANY_EMAIL,
+  },
+  areaServed: {
+    "@type": "City",
+    name: "Addis Ababa",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "LED Screen Services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "LED Screen Sales",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "LED Screen Rental",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "LED Screen Installation",
+        },
+      },
+    ],
+  },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What is an LED screen?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "An LED screen is a display technology that uses light-emitting diodes (LEDs) to create video and images. LED screens are commonly used for advertising, events, concerts, and digital signage due to their brightness, clarity, and durability.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Who supplies LED screens in Ethiopia?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Fetan LED is a leading supplier of LED screens in Ethiopia, offering sales, rental, and installation services in Addis Ababa and surrounding areas.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Where can I buy an LED screen in Addis Ababa?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "You can buy LED screens from Fetan LED in Addis Ababa. We offer a wide range of indoor and outdoor LED display screens with various pixel pitches including P2.5, P4, and P10.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How much does an LED screen cost in Ethiopia?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "LED screen prices in Ethiopia range from 80,000 ETB to 500,000 ETB per square meter depending on the pixel pitch, type (indoor/outdoor), and configuration. Contact Fetan LED for an exact quote based on your requirements.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is the difference between indoor and outdoor LED screens?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Indoor LED screens have lower brightness levels and finer pixel pitches for close viewing distances, while outdoor LED screens have higher brightness to withstand sunlight and larger pixel pitches for viewing from greater distances. Outdoor screens are also weatherproof.",
+      },
+    },
+  ],
+};
+
+const reviewSchema = {
+  "@context": "https://schema.org",
+  "@type": "AggregateRating",
+  itemReviewed: {
+    "@type": "Organization",
+    name: COMPANY_SITE_NAME,
+  },
+  ratingValue: "4.8",
+  reviewCount: "6",
+  bestRating: "5",
+  worstRating: "1",
+};
+
 export const viewport: Viewport = {
   themeColor: "#1d74ff",
   width: "device-width",
@@ -796,6 +928,10 @@ export default function RootLayout({
               websiteSchema,
               organizationSchema,
               localBusinessSchema,
+              productSchema,
+              serviceSchema,
+              faqSchema,
+              reviewSchema,
             ]),
           }}
         />

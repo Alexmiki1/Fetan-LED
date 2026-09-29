@@ -3,6 +3,7 @@ import { Hero } from "@/components/sections/hero";
 import { Statistics } from "@/components/sections/statistics";
 import { MarqueeText } from "@/components/MarqueeText";
 import { FAQ } from "@/components/sections/faq";
+import { Testimonials } from "@/components/sections/testimonials";
 import { HOME_FAQS } from "@/lib/constants/faq";
 
 const ProjectGallery = lazy(() =>
@@ -50,6 +51,7 @@ export default function Home() {
         </Suspense>
       </div>
 
+      <Testimonials />
       <FAQ items={HOME_FAQS} showViewAll />
     </>
   );
