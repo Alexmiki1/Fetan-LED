@@ -62,7 +62,7 @@ export function ProductPrices() {
             </div>
 
             <p className="mt-5 font-display text-xl font-bold tracking-wide text-white sm:text-2xl">
-              {formatEtbRange(item.priceFrom, item.priceTo)}
+              {formatEtbRange(item.priceFrom, item.priceTo, item.unit)}
             </p>
           </motion.article>
         ))}

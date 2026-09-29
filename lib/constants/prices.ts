@@ -66,7 +66,7 @@ export const PRODUCT_PRICES: PriceItem[] = [
   },
 ];
 
-export function formatEtbRange(from: number, to: number): string {
+export function formatEtbRange(from: number, to: number, unit: string = "ETB"): string {
   const fmt = (n: number) => n.toLocaleString("en-US");
-  return `${fmt(from)} – ${fmt(to)} ETB`;
+  return `${fmt(from)} – ${fmt(to)} ${unit}/m²`;
 }
