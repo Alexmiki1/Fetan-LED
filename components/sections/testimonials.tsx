@@ -27,8 +27,7 @@ export function Testimonials() {
         <p className="mt-3 max-w-2xl mx-auto text-sm leading-relaxed text-white/80 sm:text-base">
           Trusted by leading organizations across Ethiopia for LED screen solutions
         </p>
-      </div>
-        <div className="flex items-center gap-2">
+        <div className="mt-4 flex items-center justify-center gap-2">
           <div className="flex">
             {[...Array(5)].map((_, i) => (
               <svg
