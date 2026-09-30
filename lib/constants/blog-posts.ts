@@ -147,7 +147,7 @@ Whether you're planning a large-scale outdoor billboard or an elegant indoor dis
 
 For expert guidance on selecting the right LED screen for your project in Ethiopia, contact Fetan LED for professional consultation and installation services.
     `,
-    publishedAt: "2024-09-29",
+    publishedAt: "2026-03-15",
     author: "Fetan LED Team",
     category: "Technology",
     tags: ["LED screen", "display technology", "indoor LED", "outdoor LED", "pixel pitch"],
@@ -375,7 +375,7 @@ Fetan LED has established itself as a trusted supplier in Ethiopia, offering qua
 
 For expert guidance on selecting the right LED screen supplier in Ethiopia, reach out to Fetan LED for professional consultation and support.
     `,
-    publishedAt: "2024-09-29",
+    publishedAt: "2026-05-10",
     author: "Fetan LED Team",
     category: "Business",
     tags: ["LED supplier", "Ethiopia", "Addis Ababa", "LED screen sales", "LED screen installation"],
@@ -624,7 +624,7 @@ Fetan LED offers competitive pricing on quality LED screens with transparent pri
 
 For accurate pricing and professional consultation on LED screens in Ethiopia, reach out to Fetan LED for expert guidance and customized solutions.
     `,
-    publishedAt: "2024-09-29",
+    publishedAt: "2026-06-22",
     author: "Fetan LED Team",
     category: "Pricing",
     tags: ["LED screen price", "Ethiopia", "LED screen cost", "pricing guide", "budget"],
@@ -975,7 +975,7 @@ Fetan LED offers both indoor and outdoor LED screen solutions with expert consul
 
 For expert advice on selecting between indoor and outdoor LED screens in Ethiopia, reach out to Fetan LED for professional consultation and support.
     `,
-    publishedAt: "2024-09-29",
+    publishedAt: "2026-08-05",
     author: "Fetan LED Team",
     category: "Technology",
     tags: ["indoor LED", "outdoor LED", "LED screen comparison", "display technology", "LED screen selection"],
@@ -1308,7 +1308,7 @@ For expert guidance on selecting the right pixel pitch for your LED screen proje
 
 For professional advice on pixel pitch selection and LED screen specifications in Ethiopia, reach out to Fetan LED for expert consultation and support.
     `,
-    publishedAt: "2024-09-29",
+    publishedAt: "2026-09-18",
     author: "Fetan LED Team",
     category: "Technology",
     tags: ["pixel pitch", "LED resolution", "viewing distance", "LED screen specifications", "display technology"],
