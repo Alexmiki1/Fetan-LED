@@ -10,12 +10,13 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative mt-20 border-t border-white/10 pt-16 sm:mt-24 sm:pt-20"
+      className="relative mt-20 border-t border-white/10 pt-16 sm:mt-24 sm:pt-20 text-white"
+      style={{ backgroundColor: "#1d74ff" }}
       aria-labelledby="testimonials-heading"
     >
       <div className="mb-10 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white">
             Client Success Stories
           </p>
           <h3
