@@ -28,13 +28,13 @@ export function BlogClient({ posts }: BlogClientProps) {
               transition={{ duration: 0.5 }}
               className="max-w-3xl"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-blue">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white">
                 Knowledge Hub
               </p>
               <h1 className="mt-4 font-display text-4xl font-bold uppercase tracking-wide text-white sm:text-5xl lg:text-6xl">
                 LED Screen Blog
               </h1>
-              <p className="mt-4 text-lg leading-relaxed text-white/60 sm:text-xl">
+              <p className="mt-4 text-lg leading-relaxed text-white sm:text-xl">
                 Expert insights, guides, and best practices for LED screen technology in Ethiopia
               </p>
             </motion.div>
@@ -57,10 +57,10 @@ export function BlogClient({ posts }: BlogClientProps) {
                     <div className="flex flex-1 flex-col p-6">
                       {/* Category and Date */}
                       <div className="mb-4 flex items-center gap-3">
-                        <span className="rounded-full border border-brand-blue/30 bg-brand-blue/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-brand-blue">
+                        <span className="rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-white">
                           {post.category}
                         </span>
-                        <span className="text-xs text-white/40">
+                        <span className="text-xs text-white">
                           {new Date(post.publishedAt).toLocaleDateString("en-US", {
                             month: "short",
                             day: "numeric",
@@ -70,21 +70,21 @@ export function BlogClient({ posts }: BlogClientProps) {
                       </div>
 
                       {/* Title */}
-                      <h2 className="mb-3 font-display text-xl font-bold uppercase tracking-wide text-white group-hover:text-brand-blue transition-colors">
+                      <h2 className="mb-3 font-display text-xl font-bold uppercase tracking-wide text-white group-hover:text-white transition-colors">
                         {post.title}
                       </h2>
 
                       {/* Excerpt */}
-                      <p className="mb-4 flex-1 text-sm leading-relaxed text-white/60">
+                      <p className="mb-4 flex-1 text-sm leading-relaxed text-white">
                         {post.excerpt}
                       </p>
 
                       {/* Meta */}
                       <div className="flex items-center justify-between border-t border-white/10 pt-4">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs text-white/40">{post.author}</span>
+                          <span className="text-xs text-white">{post.author}</span>
                         </div>
-                        <span className="text-xs text-white/40">
+                        <span className="text-xs text-white">
                           {post.readTime} min read
                         </span>
                       </div>
@@ -94,7 +94,7 @@ export function BlogClient({ posts }: BlogClientProps) {
                         {post.tags.slice(0, 3).map((tag) => (
                           <span
                             key={tag}
-                            className="text-[10px] uppercase tracking-wider text-white/30"
+                            className="text-[10px] uppercase tracking-wider text-white"
                           >
                             #{tag}
                           </span>
