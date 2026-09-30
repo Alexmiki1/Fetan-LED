@@ -118,9 +118,6 @@ export function Testimonials() {
         ))}
       </div>
 
-      <p className="mt-6 text-center text-xs text-white/40 sm:text-left">
-        Verified client testimonials from completed projects in Ethiopia
-      </p>
     </section>
   );
 }
