@@ -52,7 +52,9 @@ export default function Home() {
       </div>
 
       <Testimonials />
-      <FAQ items={HOME_FAQS} showViewAll />
+      <div className="bg-[#040e1a]">
+        <FAQ items={HOME_FAQS} showViewAll />
+      </div>
     </>
   );
 }

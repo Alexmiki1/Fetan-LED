@@ -10,25 +10,24 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative mt-20 border-t border-white/10 pt-16 sm:mt-24 sm:pt-20 text-white"
+      className="relative border-t border-white/10 pt-16 sm:pt-20 text-white"
       style={{ backgroundColor: "#1d74ff" }}
       aria-labelledby="testimonials-heading"
     >
-      <div className="mb-10 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white">
-            Client Success Stories
-          </p>
-          <h3
-            id="testimonials-heading"
-            className="mt-2 font-display text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl"
-          >
-            What Our Clients Say
-          </h3>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/60 sm:text-base">
-            Trusted by leading organizations across Ethiopia for LED screen solutions
-          </p>
-        </div>
+      <div className="mb-10 mx-auto max-w-4xl text-center sm:mb-12">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white">
+          Client Success Stories
+        </p>
+        <h3
+          id="testimonials-heading"
+          className="mt-2 font-display text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl"
+        >
+          What Our Clients Say
+        </h3>
+        <p className="mt-3 max-w-2xl mx-auto text-sm leading-relaxed text-white/80 sm:text-base">
+          Trusted by leading organizations across Ethiopia for LED screen solutions
+        </p>
+      </div>
         <div className="flex items-center gap-2">
           <div className="flex">
             {[...Array(5)].map((_, i) => (
